@@ -23,9 +23,10 @@ CREATE TABLE usuario (
   apellido VARCHAR(20) NOT NULL,
   id INT PRIMARY KEY,
   condicion rol NOT NULL,
-  username VARCHAR(30) NOT NULL,
+  username VARCHAR(30) NOT NULL UNIQUE,
   carrera INT REFERENCES carreras(id),
-  password TEXT NOT NULL
+  password TEXT NOT NULL,
+  perfil text
 );
 ALTER TABLE carreras
 ADD COLUMN director INT REFERENCES usuario(id);
