@@ -16,9 +16,8 @@ export async function parse_and_export_html(){
         .pipe(dest('../public/dist/'));
 }
 
-
 export async function parse_and_export_fonts(){
-    return src('./src/fonts/**/*')
+    return src('./src/fonts/**/*', {encoding: false})
         .pipe(dest('../public/dist/fonts'));
 }
 
