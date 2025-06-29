@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.large-button{
+    color: $base-foreground-color;
+    background-color: $color-4;
+
+    width: 60vw;
+    height: 6vh;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    margin-top: 3vh;
+
+    font-size: clamp(1em, 1.75vw, 1.8em);
+    font-family: minecraft-p;
+
+    cursor: pointer;
+
+    text-shadow: 1.5px 1.5px 0px $base-background-color;
+
+    //PC
+    @media (min-width: 768px){
+        width: 35vw;
+        text-shadow: 2px 2px 0px $base-background-color;
+    }
+
+    &:hover{
+        background-color: $color-2;
+    }
+}
