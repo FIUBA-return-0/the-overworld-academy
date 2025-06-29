@@ -16,6 +16,11 @@ export async function parse_and_export_html(){
         .pipe(dest('../public/dist/'));
 }
 
+export async function parse_and_export_fonts(){
+    return src('./src/fonts/**/*', {encoding: false})
+        .pipe(dest('../public/dist/fonts'));
+}
+
 export async function parse_and_export_scss(){
     return src('./src/scss/**/*.scss')
         .pipe(sass())
@@ -68,6 +73,7 @@ export async function watch_build(){
     await parse_and_export_html();
     await parse_and_export_scss();
     await parse_and_export_js();
+    await parse_and_export_fonts();
     
     watch_html();
     watch_scss();
@@ -80,6 +86,7 @@ async function no_watch_build(){
     await parse_and_export_scss();
     await parse_and_export_js();
     await optimize_and_export_images();
+    await parse_and_export_fonts();
 }
 
 export default no_watch_build;
