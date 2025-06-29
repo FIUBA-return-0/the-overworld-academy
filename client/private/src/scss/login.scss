@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+.login-page{
+    background-image: url('./img/dirt.png');
+    background-repeat: repeat;
+
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: calc(var(--vh, 1vh) * 100);
+
+    h1{
+        font-size: clamp(1.25em, 5vw, 4em);
+        font-family: minecraft-p;
+        letter-spacing: 2px;
+    }
+
+    .login-wrapper{
+        display: flex;
+        justify-content: left;
+        flex-direction: column;
+
+        p{
+            margin-top: 3vh;
+            font-size: clamp(1em, 1.75vw, 2em);
+            font-family: minecraft-p;
+            color: $color-5;
+            text-shadow: 1.5px 1.5px 0px #000;
+        }
+    }
+}
