@@ -4,6 +4,8 @@ const app = express()
 const PORT = process.env.PORT
 const router = require("./routes/index.js")
 
+app.use(express.json())
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
