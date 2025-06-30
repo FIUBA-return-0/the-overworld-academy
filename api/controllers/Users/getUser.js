@@ -10,7 +10,7 @@ const getUser = async (req,res,next) => {
 
     const resultado = await db.query(query, [id])
     
-    return resultado
+    return resultado.rows
 
 }
 

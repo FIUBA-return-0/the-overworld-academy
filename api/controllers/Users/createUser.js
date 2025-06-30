@@ -1,7 +1,6 @@
 const db  = require('../../db.js') 
 
 const createUser = async (body) => {
-    console.log(body);
     
     const {
         nombre,
