@@ -6,12 +6,8 @@ const getAllUsers = async (rol) => {
         WHERE u.condicion = $1;
     `
     const values = [rol]
-    try {
-        const res = await db.query(query, values)
-        return res.rows
-    } catch (error) {
-        return { "content": error.detail }
-    }
+    const res = await db.query(query, values)
+    return res.rows
 }
 
 
