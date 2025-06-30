@@ -10,7 +10,7 @@ const getAllUsers = async (rol) => {
         const res = await db.query(query, values)
         return res.rows
     } catch (error) {
-        return { "error": error.detail }
+        return { "content": error.detail }
     }
 }
 
