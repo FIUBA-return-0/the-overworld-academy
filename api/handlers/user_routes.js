@@ -16,10 +16,10 @@ router.post("/", validateCreateUser,async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const user = await getUser(req)
-    if (user.rowCount == 0) {
-        res.send(404).json({"error":"no se encontro el usuario"})
+    if (user.rowCount === 0) {
+        res.status(404).json({"error":"el usuario no existe"})
     } else {
-        res.send(200).json(user.rows[0])
+        res.status(200).json(user.rows[0])
     }
 })
 
