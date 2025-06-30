@@ -1,3 +1,11 @@
+
+/**
+ * realiza validaciones sobre un body vacio, faltante en un contenido o campo con longitud mayor a la permitida
+ * @param {object} req 
+ * @param {object} res 
+ * @param {object} next 
+ * @returns undefined. Error 400 en caso de incumplir
+ */
 const validateCreateDegree = (req, res, next) => {
     if (!req.body) {
         return res.status(400).json({ error: "No se recibió body en la solicitud" });
