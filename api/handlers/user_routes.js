@@ -17,8 +17,8 @@ router.post("/", validateCreateUser,async (req, res) => {
 })
 
 router.get("/", validateSentCondition,async (req, res) => {
-    const { condition } = req.query
-    const result = await getAllUsers(condition)
+    const { rol } = req.query
+    const result = await getAllUsers(rol)
     if (!result.length) {
         res.status(404).json({"error":"no se encontro el/los usuario/s buscado/s"})
     } else {
