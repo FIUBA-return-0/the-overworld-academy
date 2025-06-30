@@ -1,18 +1,17 @@
 const db  = require('../../db.js') 
 
 const createUser = async (body) => {
-    console.log(body);
     
     const {
         nombre,
         apellido,
         id,
-        condicion,
+        rol,
         username,
         carrera,
         password
     } = body
-    const values = [nombre, apellido, id, condicion, username,carrera,password]
+    const values = [nombre, apellido, id, rol, username,carrera,password]
     const query = `
         INSERT INTO usuario (nombre,apellido,id,condicion,username,carrera,password)
         VALUES($1,$2,$3,$4,$5,$6,$7)
