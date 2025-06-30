@@ -5,16 +5,16 @@ const createUser = async (body) => {
     const {
         nombre,
         apellido,
-        id,
         rol,
         username,
-        carrera,
         password
     } = body
-    const values = [nombre, apellido, id, rol, username,carrera,password]
+    const values = [nombre, apellido, rol, username, password]
+
+    
     const query = `
-        INSERT INTO usuario (nombre,apellido,id,condicion,username,carrera,password)
-        VALUES($1,$2,$3,$4,$5,$6,$7)
+        INSERT INTO usuario (nombre,apellido,condicion,username,password)
+        VALUES($1,$2,$3,$4,$5)
     `;
     try {
         const res = await db.query(query, values)

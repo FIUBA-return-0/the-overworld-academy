@@ -7,11 +7,11 @@ const getAllUsers = require("../controllers/Users/getAllUsers.js")
 
 router.post("/", validateCreateUser,async (req, res) => { 
     const createdRes = await createUser(req.body)
-
+    
     if (!createdRes.status) {
-        res.status(200).json(createdRes)
+        res.status(200).json(createdRes.res)
     } else {
-        res.status(400).json(createdRes.error)
+        res.status(500).json(createdRes.error)
     }
 
 })
@@ -20,7 +20,7 @@ router.get("/", validateSentCondition,async (req, res) => {
     const { rol } = req.query
     const result = await getAllUsers(rol)
     if (!result.length) {
-        res.status(404).json({"error":"no se encontro el/los usuario/s buscado/s"})
+        res.status(500).json({"error":"no se encontro el/los usuario/s buscado/s"})
     } else {
         res.status(200).json(result)
     }
@@ -29,7 +29,7 @@ router.get("/", validateSentCondition,async (req, res) => {
 router.get("/:id", async (req, res) => {
     const user = await getUser(req)
     if (!user.length) {
-        res.status(404).json({"error":"el usuario no existe"})
+        res.status(500).json({"error":"el usuario no existe"})
     } else {
         res.status(200).json(user)
     }
