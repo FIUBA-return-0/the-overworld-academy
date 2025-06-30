@@ -5,10 +5,11 @@
     background-color: $base-background-color;
 
     border: 1.5px solid $base-foreground-color;
+    border-radius: 0;
 
     width: 60vw;
-    height: 7.5vh;
-    line-height: 7.5vh;
+    height: 5vh;
+    line-height: 5vh;
 
 
     padding-inline: 10px;
@@ -19,6 +20,8 @@
     //PC
     @media (min-width: 768px){
         width: 35vw;
+        height: 7.5vh;
+        line-height: 7.5vh;
     }
 
     &:focus{
