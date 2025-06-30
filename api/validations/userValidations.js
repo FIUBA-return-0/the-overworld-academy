@@ -1,7 +1,7 @@
 const validateCreateUser = (req,res,next) => {
 
     if (!req.body) {
-        res.status(400).json({"error":"no se envio informacion"})
+        return res.status(400).json({"error":"no se envio informacion"})
     }    
     const { nombre, apellido, rol, password } = req.body
 
