@@ -5,7 +5,6 @@ const getAllDegrees = require('../controllers/Degrees/getAllDegrees.js')
 const validateCreateDegree = require('../validations/degreeValidations.js');
 const validateId = require("../validations/idValidation.js");
 const getDegree = require("../controllers/Degrees/getDegree.js");
-
 router.post('/', validateCreateDegree, async (req, res) => {
     const result = await createDegree(req.body)
 
