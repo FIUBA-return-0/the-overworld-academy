@@ -5,9 +5,9 @@
     background-color: $color-4;
     width: 60vw;
 
-    height: 7.5vh;
+    height: 5vh;
+    line-height: 5vh;
     margin-top: 3vh;
-    line-height: 7.5vh;
 
     font-size: clamp(1em, 1.5vw, 1.8em);
     font-family: minecraft-p;
@@ -18,12 +18,15 @@
     border-style: outset;
     border-color: black;
     border-width: 1.5px;
+    border-radius: 0;
 
     //PC
     @media (min-width: 768px){
         width: 35vw;
         text-shadow: 2px 2px 0px $base-background-color;
         border-width: 2px;
+        line-height: 7.5vh;
+        height: 7.5vh;
     }
 
     &:hover{
