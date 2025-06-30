@@ -5,15 +5,11 @@ const getUser = require("../controllers/Users/getUser.js")
 const { validateCreateUser,validateSentCondition } = require("../validations/userValidations.js")
 const getAllUsers = require("../controllers/Users/getAllUsers.js")
 
-router.post("/", validateCreateUser,async (req, res) => { 
-    const createdRes = await createUser(req.body)
+router.post("/", validateCreateUser, async (req, res) => { 
     
-    if (!createdRes.status) {
-        res.status(200).json(createdRes.res)
-    } else {
-        res.status(500).json(createdRes.error)
-    }
-
+    const createdRes = await createUser(req.body)
+    let status = !createdRes.status ? 200 : 500
+    res.status(status).json(createdRes.content)
 })
 
 router.get("/", validateSentCondition,async (req, res) => {
