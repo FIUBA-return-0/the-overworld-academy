@@ -1,5 +1,9 @@
 const db  = require('../../db.js') 
-
+/**
+ *  realiza la query a la base de datos para insertar un usuario con los datos brindados
+ * @param {object} body debe contener nombre, apellido, rol,username,password
+ * @returns devuelve un objeto que representa la entrada completa del nuevo usuario
+ */
 const createUser = async (body) => {
     
     const {
