@@ -15,6 +15,7 @@ router.post("/", validateCreateUser, async (req, res) => {
 router.get("/", validateSentCondition,async (req, res) => {
     const { rol } = req.query
     const result = await getAllUsers(rol)
+    
     if (!result.length) {
         res.status(500).json({"error":"no se encontro el/los usuario/s buscado/s"})
     } else {
@@ -24,7 +25,8 @@ router.get("/", validateSentCondition,async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     const user = await getUser(req)
-    if (!user.length) {
+    
+    if (!user) {
         res.status(500).json({"error":"el usuario no existe"})
     } else {
         res.status(200).json(user)

@@ -1,6 +1,12 @@
 const db = require("../../db.js")
 
-const getUser = async (req,res,next) => {
+/**
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ * @returns devuelve un objeto que representa al usuario, un objeto vacio o undefined indica que no se encontro el usuario
+ */
+const getUser = async (req,res) => {
     const { id } = req.params
     
     const query = `
@@ -10,7 +16,8 @@ const getUser = async (req,res,next) => {
 
     const resultado = await db.query(query, [id])
     
-    return resultado.rows
+    return resultado.rows[0]
+
 
 }
 
