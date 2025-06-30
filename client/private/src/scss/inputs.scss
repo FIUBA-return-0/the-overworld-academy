@@ -7,12 +7,13 @@
     border: 1.5px solid $base-foreground-color;
 
     width: 60vw;
-    height: 6vh;
-    line-height: 6vh;
+    height: 7.5vh;
+    line-height: 7.5vh;
+
 
     padding-inline: 10px;
 
-    font-size: clamp(1em, 1.75vw, 2em);
+    font-size: clamp(1em, 1.5vw, 2em);
     font-family: minecraft-p;
 
     //PC

@@ -3,26 +3,32 @@
 .large-button{
     color: $base-foreground-color;
     background-color: $color-4;
-
     width: 60vw;
-    height: 6vh;
+
+    height: 7.5vh;
     margin-top: 3vh;
-    line-height: 6vh;
+    line-height: 7.5vh;
 
-    font-size: clamp(1em, 1.75vw, 1.8em);
+    font-size: clamp(1em, 1.5vw, 1.8em);
     font-family: minecraft-p;
-
     cursor: pointer;
 
     text-shadow: 1.5px 1.5px 0px $base-background-color;
+    text-decoration: none;
+    border-style: outset;
+    border-color: black;
+    border-width: 1.5px;
 
     //PC
     @media (min-width: 768px){
         width: 35vw;
         text-shadow: 2px 2px 0px $base-background-color;
+        border-width: 2px;
     }
 
     &:hover{
         background-color: $color-2;
+        // Color nuevo
+        color: $color-6;
     }
 }

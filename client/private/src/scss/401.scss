@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+.error-wrapper{
+    text-align: center;
+    margin-top: 3vh;
+    font-family: minecraft-p;
+    text-shadow: 1.5px 1.5px 0px $base-background-color;
+    
+    .titulo{
+    line-height: 2em;
+    color: $color-5;
+    font-size: 1.2em;
+    }
+
+    .subtitulo{
+    line-height: 1.5em;
+    color: $base-foreground-color;
+    font-size: 1.2em;
+    }
+}
