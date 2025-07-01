@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+.login-wrapper-logo{
+    position: relative;
+    width: 90vw; //mobile
+    
+    img{
+        width: 100%;
+    }
+    .login-amarillo-texto-wrapper{
+        width: 75vw;
+        position: absolute;
+        z-index: 1;
+        bottom: -100%;
+        right: -4%;
+        transform: rotate(-16deg);
+        
+    
+        .login-amarillo-texto{
+            font-size: clamp(1em, 1.5vw, 2em);
+            font-family: minecraft-p;
+            margin-left: 50%;
+            margin-top: 100%;
+            text-shadow: 1.5px 1.5px 0px $base-background-color;
+            color: $color-8;
+            text-align: center;
+        }
+    }
+
+    @media(min-width: 768px){
+        .login-amarillo-texto-wrapper{
+            .login-amarillo-texto{
+            text-shadow: 2px 2px 0px $base-background-color;
+            }
+        }
+        width: 60vw; //PC
+    }
+    
+}
