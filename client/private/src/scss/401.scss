@@ -2,19 +2,17 @@
 
 .error-wrapper{
     text-align: center;
-    margin-top: 3vh;
     font-family: minecraft-p;
     text-shadow: 1.5px 1.5px 0px $base-background-color;
     
-    .titulo{
-    line-height: 2em;
-    color: $color-5;
-    font-size: 1.2em;
+    .error-titulo{
+        font-size: clamp(1em, 1.5vw, 2em);
+        color: $color-5;
     }
-
-    .subtitulo{
-    line-height: 1.5em;
-    color: $base-foreground-color;
-    font-size: 1.2em;
+    
+    .error-subtitulo{
+        margin-top: 3vh;
+        font-size: clamp(1em, 1.5vw, 2em);
+        color: $base-foreground-color;
     }
 }
