@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: overworld_postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: facundo
+      POSTGRES_USER: facundo
+      POSTGRES_DB: overworldacademy
+    volumes:
+      - ./.volumes/postgres/data:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
