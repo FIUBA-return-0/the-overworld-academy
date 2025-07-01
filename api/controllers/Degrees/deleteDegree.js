@@ -1,5 +1,11 @@
 const db = require('../../db.js')
 
+/**
+ * Elimina de la base de datos el objeto con el id enviado
+ * @param {object} req 
+ * @returns devuelve undefined si no se encontró la carrera, o el id si se eliminó exitosamente.
+ */
+
 const deleteDegree = async (req, res) => {
     const { id } = req.params
 
