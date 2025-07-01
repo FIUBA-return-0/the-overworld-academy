@@ -1,6 +1,6 @@
 @use 'variables' as *;
 
-.login-page{
+.auth-page{
     background-image: url('./img/dirt.png');
     background-repeat: repeat;
 
@@ -11,7 +11,7 @@
         width: 90vw; //mobile
     }
 
-    .login-wrapper{
+    .auth-wrapper{
         display: flex;
         justify-content: left;
         flex-direction: column;
