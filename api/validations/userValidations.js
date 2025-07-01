@@ -1,4 +1,11 @@
-const validateCreateUser = (req,res,next) => {
+/**
+ * realiza las validaciones sobre un body vacio, con algun faltante o longitud mayor a la esperada
+ * @param {object} req 
+ * @param {object} res 
+ * @param {object} next 
+ * @returns undefined. error 400 si no cumple
+ */
+const validateCreateUser = (req, res, next) => {
 
     if (!req.body) {
         return res.status(400).json({"error":"no se envio informacion"})
@@ -17,7 +24,13 @@ const validateCreateUser = (req,res,next) => {
     }
     next()
 }
-
+/**
+ * chequea si el rol enviado es profesor,alumno o director.
+ * @param {object} req 
+ * @param {object} res 
+ * @param {object} next 
+ * @returns undefined. Tira error 400 de lo contrario
+ */
 const validateSentCondition = (req, res, next) => {
     const {rol} = req.query
     if (rol != 'alumno' && rol != 'profesor' && rol != 'director') {

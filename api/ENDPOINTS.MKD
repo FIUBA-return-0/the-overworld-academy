@@ -1,0 +1,295 @@
+# API endpoints
+
+### 👤 USUARIO:
+
+---
+
+### GET `/usuario/{id}`
+
+busca un usuario con el id enviado
+
+- request : _params_ id del usuario a buscar
+
+- responses:
+
+<p style="color:green">successful<p/>
+
+```json
+{
+  "nombre": "john",
+  "apellido": "doe",
+  "id": 1,
+  "condicion": "alumno",
+  "username": "jondoe123",
+  "carrera": null,
+  "password": "$2a$12$fR5D7eJ9kL1mNoPqRsTuUvW",
+  "perfil": "https://shorturl.at/FBGei"
+}
+```
+
+<p style="color:red">error<p/>
+
+```json
+{
+  "error": "error message"
+}
+```
+
+- status codes:
+
+200: OK
+
+404: not found
+
+### GET`/usuario/?rol={rol}`
+
+busca _todos_ los usuarios de cierto rol
+
+- request: _query_ rol debe ser alumno, profesor o director
+- responses:
+
+<p style="color:green">successful<p/>
+
+```json
+[
+  {
+    "nombre": "john",
+    "apellido": "doe",
+    "id": 1,
+    "condicion": "alumno",
+    "username": "jondoe123",
+    "carrera": null,
+    "password": "$2a$12$fR5D7eJ9kL1mNoPqRsTuUvW",
+    "perfil": "https://shorturl.at/FBGei"
+  },
+  {
+    "nombre": "jane",
+    "apellido": "doe",
+    "id": 2,
+    "condicion": "alumno",
+    "username": "janedoe123",
+    "carrera": null,
+    "password": "$2a$12$fR5dsD7eJ9kL1mNoPqRsTuUvW",
+    "perfil": "https://shorturl.at/FBGei"
+  }
+]
+```
+
+<p style="color:red">error<p/>
+
+```json
+// usuarios no encontrados:
+{
+    "error": "no se encontro el/los usuario/s buscado/s"
+}
+// parametros invalidos:
+{
+    "error": "la condicion debe ser valida"
+}
+```
+
+- status codes:
+
+  200: OK
+
+  500: internal server error - error de base de datos/ usuarios no encontrados
+
+  400: bad request - error en los datos enviados
+
+### POST`/usuario`
+
+- request: _body_:
+
+```json
+{
+  "nombre": "nombre",
+  "apellido": "apellido",
+  "rol": "alumno",
+  "username": "nombreapellido",
+  "password": "fR5D7eJ9kL1mNoPqRsTuUvW",
+  "perfil": "https://shorturl.at/FBGei"
+}
+```
+
+- responses:
+
+<p style="color:green">successful<p/>
+
+```json
+{
+  "nombre": "nombre",
+  "apellido": "apellido",
+  "id": 3,
+  "condicion": "alumno",
+  "username": "nombreapellido",
+  "carrera": null,
+  "password": "fR5D7eJ9kL1mNoPqRsTuUvW",
+  "perfil": "https://shorturl.at/FBGei"
+}
+```
+
+<p style="color:red">error<p/>
+
+```json
+// error en la base de datos
+{
+    "error":"error message"
+}
+
+// body vacio
+{
+    "error": "no se envio informacion"
+}
+
+// rol invalido
+{
+    "error": "un usuario solo puede ser alumno, profesor o director"
+}
+
+// faltante en algun campo
+{
+    "error": "Algun contenido esta vacio, por favor revisa tus entradas"
+}
+
+// nombre o apellidos muy largos
+{
+    "error": "Nombre o apellido mas largo de lo permitido."
+}
+```
+
+- status codes:
+
+200: OK
+
+500: internal server error - error en la base de datos
+
+400: bad request - error en los datos recibidos
+
+### 📚 CARRERAS:
+
+---
+
+### GET`/carrera`
+
+devuelve todas las carreras
+
+- request: None
+- response:
+<p style="color:green">successful<p/>
+
+```json
+[
+  {
+    "id": 2,
+    "nombre": "titulo de carrera1",
+    "description": "descripcion carrera",
+    "duracion": 2640,
+    "sede": "central",
+    "director": null
+  },
+  {
+    "id": 3,
+    "nombre": "carrera numero 2",
+    "description": "descripcion de la carrera",
+    "duracion": 2640,
+    "sede": "central",
+    "director": null
+  }
+]
+```
+
+<p style="color:red">error<p/>
+
+```json
+{
+  "error": "no hay carreras disponibles"
+}
+```
+
+- status codes:
+
+200: OK
+
+404: not found - no hay carreras disponibles
+
+### GET`/carrera/{id}`
+
+devuelve la carrera solicitada por id
+
+- request: _params_ id a buscar
+- responses:
+
+<p style="color:green">successful<p/>
+
+```json
+{
+  "id": 6,
+  "nombre": "titulo de la carrera",
+  "description": "descripcion de la carrera",
+  "duracion": 2640,
+  "sede": "sede central",
+  "director": null
+}
+```
+
+<p style="color:red">error<p/>
+
+```json
+// no se encuentra
+{
+  "error": "La carrera no existe"
+}
+
+// id invalido
+{
+    "error": "El id enviado debe ser mayor que 0"
+}
+```
+
+- status code:
+
+200: OK
+
+400: Bad request - id invalido
+
+404: not found - no existe la carrera
+
+### POST`/carrera`
+
+crea una carrera
+
+- request: _body_
+
+```json
+{
+    {
+    "nombre":"titulo de la carrera",
+    "description": "descripcion de la carrera",
+    "duracion": 1000,
+    "sede": "nombre de la sede"
+}
+}
+```
+
+- reponses:
+
+<p style="color:green">successful<p/>
+
+```json
+{
+  "id": 6,
+  "nombre": "titulo de la carrera",
+  "description": "descripcion de la carrera",
+  "duracion": 1000,
+  "sede": "nombre de la sede",
+  "director": null
+}
+```
+
+- status codes:
+
+201: CREATED
+
+400: bad request - error en el envio de datos
+
+500: internal server error - error en la base de datos
