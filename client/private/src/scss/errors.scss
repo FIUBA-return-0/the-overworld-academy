@@ -1,18 +1,25 @@
 @use 'variables' as *;
+.error-page{
+    background-image: url('./img/dirt.png');
+    background-repeat: repeat;
 
-.error-wrapper{
-    text-align: center;
-    font-family: minecraft-p;
-    text-shadow: 1.5px 1.5px 0px $base-background-color;
-    
-    .error-titulo{
-        font-size: clamp(1em, 1.5vw, 2em);
-        color: $color-5;
-    }
-    
-    .error-subtitulo{
-        margin-top: 3vh;
-        font-size: clamp(1em, 1.5vw, 2em);
-        color: $base-foreground-color;
+    width: calc(100vw - var(--scrollbar-width, 0));
+    min-height: calc(var(--vh, 1vh) * 100);
+
+    .error-wrapper{
+        text-align: center;
+        font-family: minecraft-p;
+        text-shadow: 1.5px 1.5px 0px $base-background-color;
+        
+        .error-titulo{
+            font-size: clamp(1em, 1.5vw, 2em);
+            color: $color-5;
+        }
+        
+        .error-subtitulo{
+            margin-top: 3vh;
+            font-size: clamp(1em, 1.5vw, 2em);
+            color: $base-foreground-color;
+        }
     }
 }

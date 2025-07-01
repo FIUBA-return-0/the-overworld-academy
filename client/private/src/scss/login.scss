@@ -5,7 +5,7 @@
     background-repeat: repeat;
 
     width: calc(100vw - var(--scrollbar-width, 0));
-    height: calc(var(--vh, 1vh) * 100);
+    min-height: calc(var(--vh, 1vh) * 100);
 
     img{
         width: 90vw; //mobile
