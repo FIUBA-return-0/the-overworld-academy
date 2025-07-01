@@ -5,6 +5,7 @@ const getAllDegrees = require('../controllers/Degrees/getAllDegrees.js')
 const validateCreateDegree = require('../validations/degreeValidations.js');
 const validateId = require("../validations/idValidation.js");
 const getDegree = require("../controllers/Degrees/getDegree.js");
+const deleteDegree = require("../controllers/Degrees/deleteDegree.js")
 
 
 router.post('/', validateCreateDegree, async (req, res) => {
@@ -35,4 +36,13 @@ router.get('/:id', validateId, async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    const result = await deleteDegree(req)
+
+    if (!result){
+        res.status(404).json({"error":"No se puede eliminar una carrera que no existe"})
+    } else {
+        res.status(200).json(result)
+    }
+})
 module.exports = router
