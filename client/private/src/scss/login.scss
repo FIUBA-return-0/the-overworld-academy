@@ -7,10 +7,8 @@
     width: calc(100vw - var(--scrollbar-width, 0));
     height: calc(var(--vh, 1vh) * 100);
 
-    h1{
-        font-size: clamp(1.25em, 3vw, 4em);
-        font-family: minecraft-p;
-        letter-spacing: 2px;
+    img{
+        width: 90vw; //mobile
     }
 
     .login-wrapper{
@@ -24,6 +22,17 @@
             font-family: minecraft-p;
             color: $color-5;
             text-shadow: 1.5px 1.5px 0px #000;
+        }
+
+        a{
+            text-decoration: underline;
+            color: $color-7;
+        }
+    }
+
+    @media(min-width: 768px){
+        img{
+            width: 60vw; //PC
         }
     }
 }
