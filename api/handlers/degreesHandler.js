@@ -10,7 +10,7 @@ const getDegree = require("../controllers/Degrees/getDegree.js");
 router.post('/', validateCreateDegree, async (req, res) => {
     const result = await createDegree(req.body)
     
-    let status = !result.status? 200 : 500
+    let status = !result.status? 201 : 500
     res.status(status).json(result.content)
 })
 
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
     const result = await getAllDegrees();
     
     if (!result.length) {
-        res.status(404).json({"error":"no se encontro la/s carrera/s buscada/s"})
+        res.status(404).json({"error":"no hay carreras disponibles"})
     } else {
         res.status(200).json(result)
     }
