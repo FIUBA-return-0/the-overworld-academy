@@ -25,5 +25,10 @@
             color: $color-5;
             text-shadow: 1.5px 1.5px 0px #000;
         }
+
+        a{
+            text-decoration: underline;
+            color: $color-7;
+        }
     }
 }
