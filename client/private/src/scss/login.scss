@@ -4,8 +4,8 @@
     0%{
         transform: scale(1) rotate(-12.5deg) translate(50%, 50%);
     }
-    50%{
-        transform: scale(1.08) rotate(-12.5deg) translate(50%, 50%);
+    25%{
+        transform: scale(1.03) rotate(-12.5deg) translate(50%, 50%);
     }
     100%{
         transform: scale(1) rotate(-12.5deg) translate(50%, 50%);
@@ -34,9 +34,9 @@
         right: 21%;
 
         animation-name: amarillo-texto;
-        animation-duration: 1.5s;
+        animation-duration: .5s;
         animation-iteration-count: infinite;
-        animation-fill-mode: both;
+        animation-fill-mode: forwards;
     }
 
     @media(min-width: 768px){
