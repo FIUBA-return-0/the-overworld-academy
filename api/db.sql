@@ -1,11 +1,11 @@
--- drop type rol cascade;
--- drop type aprobado cascade;
--- drop table carreras cascade;
--- drop table usuario cascade;
--- drop table materias cascade;
--- drop table notas;
--- drop table correlativas;
--- drop table inscripciones;
+drop type if exists rol cascade;
+drop type if exists aprobado cascade;
+drop table if exists carreras cascade;
+drop table if exists usuario cascade;
+drop table if exists materias cascade;
+drop table if exists notas;
+drop table if exists correlativas;
+drop table if exists inscripciones;
 -- Los comandos deben ser corridos exacatamente en el orden planteado
 create type rol as enum ('alumno', 'profesor', 'director');
 create type aprobado as enum ('cursando', 'aprobado');
