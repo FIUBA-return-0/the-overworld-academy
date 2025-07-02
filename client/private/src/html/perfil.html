@@ -14,7 +14,7 @@
         </div>
     </nav>
 
-    <section id="easteregg-1" class="hidden">
+    <section id="easteregg-1" class="hidden" onclick="document.getElementById('easteregg-1').classList.add('hidden');">
         <div id="easteregg-1-img"></div>
     </section>
 
@@ -36,7 +36,7 @@
                 <textarea class="large-input" type="text"></textarea>
                 <button class="large-button sound-button">Editar perfil</button>
                 <button class="large-button sound-button">Cambiar contrasenia</button>
-                <button id="borrar-cuenta" class="large-button sound-button red-button">Bajarme de la carrera</button>
+                <button class="large-button sound-button red-button" onclick="document.getElementById('easteregg-1').classList.remove('hidden'); window.scrollTo(0, 0);">Bajarme de la carrera</button>
             </div>
         </div>
     </section>
