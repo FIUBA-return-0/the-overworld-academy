@@ -1,0 +1,41 @@
+# Como levantar el backend
+
+(y no morir en el intento)
+
+1. copiar el codigo de ejemplo en [.env.example](./.env.example) a .env
+
+   > si queres correr la api **localmente**, cambia `DB_HOST=localhost`
+
+   > si usas docker debe ser `DB_HOST=db`
+
+2. correr make run-backend esto va a correr docker compose up levantando base de datos **y** nodemon.
+
+<p style="color:red">⚠️ atencion!!<p/>
+
+- si es la primera vez que corres el contenedor,hace:
+
+```
+docker compose up --build
+```
+
+- si actualizaste dependencias (cambió package.json), _siempre_ hace:
+
+```
+docker compose up --build
+```
+
+- Si modificaste la estructura de la base de datos, tenés que ejecutar manualmente el archivo `db.sql` para aplicar los cambios en la base.
+
+# FAQ
+
+- que pasa si quiero instalar una dependencia mientras corro el contendor?
+
+no pasa nada, podes correr `docker compose exec api npm install \<dependencia>`.
+
+- como puedo correr un comando dentro del contenedor?
+
+podes abrir una consola con `docker compose exec api bash`. si queres parar nodemon para liberar la terminal deberias detener el contenedor ya que este es el proceso principal.
+
+- puedo resetear el servidor solo sin detener el contenedor entero?
+
+si, podes correr `docker compose restart \<servicio>` para resetear un solo servicio.

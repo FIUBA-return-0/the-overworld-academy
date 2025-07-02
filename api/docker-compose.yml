@@ -1,15 +1,28 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16
-    container_name: overworld_postgres
+  api:
+    build: .
     ports:
-      - "5433:5432"
-    environment:
-      POSTGRES_PASSWORD: facundo
-      POSTGRES_USER: facundo
-      POSTGRES_DB: overworldacademy
+      - "3000:3000"
+    env_file:
+      - .env
     volumes:
-      - ./.volumes/postgres/data:/var/lib/postgresql/data
-      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+      - .:/api
+      - /api/node_modules
+    depends_on:
+      - db
+    command: ["npm", "run", "start"]
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
