@@ -17,14 +17,6 @@
         justify-content: left;
         flex-direction: column;
 
-        p{
-            margin-top: 3vh;
-            font-size: clamp(.8em, 1.5vw, 2em);
-            font-family: minecraft-p;
-            color: $color-5;
-            text-shadow: 1.5px 1.5px 0px #000;
-        }
-
         a{
             text-decoration: underline;
             color: $color-7;

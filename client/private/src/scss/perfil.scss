@@ -1,0 +1,106 @@
+@use 'variables' as *;
+
+.perfil-page{
+    width: calc(100vw - var(--scrollbar-width, 0));
+    min-height: calc(var(--vh, 1vh) * 100);
+
+    background-color: $color-9;
+    background-image: url('/img/background-1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+    background-position-y: 1.5vh;
+    position: relative;
+
+    .perfil-data{
+        width: calc(100vw - var(--scrollbar-width, 0));
+        min-height: calc(var(--vh, 1vh) * 92.5); // mobile only; height - mobile nav
+
+        .perfil-p-wrapper{
+            .perfil-p{
+                border-radius: 50%;
+                border: 1.5px solid white;
+                height: 50vh;
+                max-height: 50vw;
+            }
+        }
+        
+        .perfil-text-data-box{
+            border-radius: 10px;
+            border: 1.5px solid white;
+        }
+
+        @media(min-width: 768px){
+            min-height: calc(var(--vh, 1vh) * 90); //PC only; height - PC nav
+            position: relative;
+            display: flex;
+            justify-content: right;
+            align-items: center;
+
+            //PC only
+            .perfil-p-wrapper{
+                .perfil-p{
+                    z-index: 1;
+                    position:fixed;
+                    display: block;
+                    top: 30vh;
+                    left: 2.5vw;
+                }
+            }
+
+            .perfil-text-data-box{
+                width: 75vw;
+                min-height: 100vh;
+                margin-right: 2.5vw;
+                margin-top: 2.5vw;
+                margin-bottom: 2.5vw;
+                background-color: rgba($color: $color-10, $alpha: 0.9);
+                
+                display: flex;
+                justify-content: center;
+                align-items: top;
+                
+                .perfil-text-data-box-wrapper{
+                    margin-top: 2.5vw;
+                    display: flex;
+                    flex-direction: column;
+
+                    textarea{
+                        padding-top: 1vh;
+                        line-height: 1.25;
+                        min-height: 15vh;
+                        resize: vertical;
+                    }
+
+                    button:last-child{
+                        margin-bottom: 2.5vw;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#easteregg-1{
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: calc((var(--vh, 1vh) * 100));
+    background-color: rgba($color: $color-10, $alpha: 0.9);
+    z-index: 9;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    #easteregg-1-img{
+        position: absolute;
+        top: 2.5vw;
+        left: 2.5vw;
+        width: 95vw;
+        height: calc((var(--vh, 1vh) * 100) - 5vw);
+
+        z-index: 10;
+        background-image: url('/img/background-2.png');
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}

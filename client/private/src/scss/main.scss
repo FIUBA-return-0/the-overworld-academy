@@ -49,3 +49,17 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     flex-direction: column;
 }
+
+.minecraft-p{
+    margin-top: 3vh;
+    font-size: clamp(.8em, 1.5vw, 2em);
+    font-family: minecraft-p;
+    color: $color-5;
+    text-shadow: 1.5px 1.5px 0px #000;
+}
+
+.hidden{
+    display: none;
+    width: 0;
+    height: 0;
+}

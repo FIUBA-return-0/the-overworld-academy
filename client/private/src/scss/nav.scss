@@ -1,0 +1,34 @@
+@use 'variables' as *;
+
+nav{
+    position: static;
+    border-bottom: 1px solid white;
+    background-color: $color-10;
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: 7.5vh; //mobile only
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    .nav-left{
+        width: 100%; height: 100%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        
+        .nav-img-logo{
+            max-width: 95%; //mobile only
+            margin-left: 4vw;
+        }
+    }
+
+    @media(min-width: 768px){
+        height: 10vh; //PC
+        .nav-left{
+            .nav-img-logo{
+                max-width: 60%;
+                margin-left: 2vw;
+            }
+        }
+    }
+}
