@@ -31,7 +31,14 @@
 
     &:hover{
         background-color: $color-2;
-        // Color nuevo
         color: $color-6;
+    }
+}
+
+.red-button{
+    background-color: red;
+
+    &:hover{
+        background-color: #e50914;
     }
 }
