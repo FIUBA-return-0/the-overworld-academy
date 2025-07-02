@@ -1,5 +1,17 @@
 @use 'variables' as *;
 
+@keyframes amarillo-texto {
+    0%{
+        transform: scale(1) rotate(-12.5deg) translate(50%, 50%);
+    }
+    50%{
+        transform: scale(1.08) rotate(-12.5deg) translate(50%, 50%);
+    }
+    100%{
+        transform: scale(1) rotate(-12.5deg) translate(50%, 50%);
+    }
+}
+
 .login-wrapper-logo{
     position: relative;
     width: 90vw; //mobile
@@ -7,33 +19,40 @@
     img{
         width: 100%;
     }
-    .login-amarillo-texto-wrapper{
-        width: 75vw;
+
+    .login-amarillo-texto{
+        font-size: clamp(.5em, 1.5vw, 2em);
+        font-family: minecraft-p;
+        text-shadow: 1.5px 1.5px 0px $base-background-color;
+        color: $color-8;
+        text-align: center;
+
         position: absolute;
-        z-index: 1;
-        bottom: -100%;
-        right: -4%;
-        transform: rotate(-16deg);
-        
-    
-        .login-amarillo-texto{
-            font-size: clamp(1em, 1.5vw, 2em);
-            font-family: minecraft-p;
-            margin-left: 50%;
-            margin-top: 100%;
-            text-shadow: 1.5px 1.5px 0px $base-background-color;
-            color: $color-8;
-            text-align: center;
-        }
+        transform-origin: right center;
+        width: 40%; //mobile
+        bottom: 0;
+        right: 21%;
+
+        animation-name: amarillo-texto;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: both;
     }
 
     @media(min-width: 768px){
-        .login-amarillo-texto-wrapper{
-            .login-amarillo-texto{
+        .login-amarillo-texto{
+            width: 60%;
+            bottom: 10%;
+            right: 12.5%;
             text-shadow: 2px 2px 0px $base-background-color;
-            }
         }
-        width: 60vw; //PC
+
+        img{
+            margin-bottom: 0;
+        }
+
+        width: 55vw; //PC
+        margin-bottom: 3vh;
     }
     
 }
