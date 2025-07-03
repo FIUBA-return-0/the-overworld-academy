@@ -12,6 +12,10 @@
         filter: brightness(.8);
     }
 
+    .subtitulo-imagen{
+        width: 70vw; //mobile
+    }
+
     .auth-wrapper{
         display: flex;
         justify-content: left;
@@ -26,7 +30,10 @@
     @media(min-width: 768px){
         img{
             width: 55vw; //PC
-            margin-bottom: 3vh;
+        }
+        
+        .subtitulo-imagen{
+            width: 22.5vw;
         }
     }
 }
