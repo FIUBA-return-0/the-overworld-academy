@@ -13,6 +13,7 @@
     position: relative;
 
     .perfil-data{
+        //shared
         width: calc(100vw - var(--scrollbar-width, 0));
         min-height: calc(var(--vh, 1vh) * 92.5); // mobile only; height - mobile nav
 
@@ -28,8 +29,47 @@
         .perfil-text-data-box{
             border-radius: 10px;
             border: 1.5px solid white;
+            background-color: rgba($color: $color-10, $alpha: 0.9);
         }
 
+        .perfil-text-data-box-wrapper{
+            display: flex;
+            flex-direction: column;
+
+            textarea{
+                padding-top: 1vh;
+                line-height: 1.25;
+                min-height: 15vh;
+                resize: vertical;
+            }
+        }
+
+        //mobile only
+        @media(max-width: 768px){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .perfil-p-wrapper{
+                z-index: 2;
+                margin-top: 3vh;
+                margin-bottom: -6vh;
+            }
+
+            .perfil-text-data-box{
+                padding-top: 6vh;
+                padding-bottom: 3vh;
+                width: 90vw;
+                margin-bottom: 3vh;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        //PC only
         @media(min-width: 768px){
             min-height: calc(var(--vh, 1vh) * 90); //PC only; height - PC nav
             position: relative;
@@ -37,7 +77,6 @@
             justify-content: right;
             align-items: center;
 
-            //PC only
             .perfil-p-wrapper{
                 .perfil-p{
                     z-index: 1;
@@ -54,23 +93,13 @@
                 margin-right: 2.5vw;
                 margin-top: 2.5vw;
                 margin-bottom: 2.5vw;
-                background-color: rgba($color: $color-10, $alpha: 0.9);
-                
+
                 display: flex;
                 justify-content: center;
                 align-items: top;
                 
                 .perfil-text-data-box-wrapper{
                     margin-top: 2.5vw;
-                    display: flex;
-                    flex-direction: column;
-
-                    textarea{
-                        padding-top: 1vh;
-                        line-height: 1.25;
-                        min-height: 15vh;
-                        resize: vertical;
-                    }
 
                     button:last-child{
                         margin-bottom: 2.5vw;
