@@ -21,6 +21,7 @@ nav{
             margin-left: 4vw;
         }
     }
+
     .nav-right{
         width: 100%; height: 100%;
         display: flex;
@@ -29,15 +30,16 @@ nav{
         gap: 2.5vw;
         padding-right: 3vw;
 
-        .user-icon {
+        .icon {
             cursor: pointer;
-            height: 100%;
+            height: 75%;
 
-        &.active {
-            border-bottom: 4px solid $color-11;
+            &.active {
+                border-bottom: 4px solid $color-11;
             }
         }
     }
+    
     @media(min-width: 768px){
         height: 10vh; //PC
         .nav-left{
