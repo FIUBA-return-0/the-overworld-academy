@@ -10,12 +10,17 @@ for (const e of buttons) {
         sound.play()
             .then(() => {
                 sound.onended = () => {
-                    window.location.href = destino;
+                    if (destino){
+                        window.location.href = destino;
+                    }
                 };
             })
             .catch((err) => {
                 console.error("No se pudo reproducir el sonido", err);
                 window.location.href = destino;
+                if (destino){
+                        window.location.href = destino;
+                    }
             });
     });
 }

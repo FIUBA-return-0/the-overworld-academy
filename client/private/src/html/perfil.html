@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil · The Overworld Academy</title>
-
     <link rel="stylesheet" href="./main.css">
 </head>
+
 <body class="perfil-page">
     <nav>
         <div class="nav-left">
             <img class="nav-img-logo" src="/img/the-overworld-academy-logo.png" alt="Nuestro logo">
         </div>
+        <div class="nav-right">
+            <img class="user-icon active" src="/img/user-logo.svg" alt="Perfil">
+            <img class="materias-icon" src="/img/materias-logo.svg" alt="Materias"> 
+            <img class="logout-icon" src="/img/logout-logo.svg" alt="Salir">  
+        </div> 
     </nav>
 
     <section id="easteregg-1" class="hidden" onclick="document.getElementById('easteregg-1').classList.add('hidden');">
@@ -32,7 +37,7 @@
                 <input class="large-input" type="text">
                 <p class="minecraft-p">Carrera</p>
                 <input class="large-input" type="text">
-                <p class="minecraft-p">Bio</p>
+                <p class="minecraft-p">Descripcion</p>
                 <textarea class="large-input" type="text"></textarea>
                 <button class="large-button sound-button">Editar perfil</button>
                 <button class="large-button sound-button">Cambiar contrasenia</button>
@@ -40,7 +45,6 @@
             </div>
         </div>
     </section>
-    
     <script src="./main.js"></script>
 </body>
 </html>
