@@ -6,7 +6,6 @@ function habilitarEditarCampos(){
     if (modo === "editar"){
     document.getElementById("apellido").disabled = false;
     document.getElementById("nombre").disabled = false;
-    document.getElementById("carrera").disabled = false;
     document.getElementById("biografia").disabled = false;
     
     boton.textContent = "Guardar cambios";
@@ -16,7 +15,6 @@ function habilitarEditarCampos(){
     else{
     document.getElementById("apellido").disabled = true;
     document.getElementById("nombre").disabled = true;
-    document.getElementById("carrera").disabled = true;
     document.getElementById("biografia").disabled = true;
     
     boton.textContent = "Editar perfil";
