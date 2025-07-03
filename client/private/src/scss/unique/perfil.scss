@@ -1,4 +1,4 @@
-@use 'variables' as *;
+@use '../variables' as *;
 
 .perfil-page{
     width: calc(100vw - var(--scrollbar-width, 0));

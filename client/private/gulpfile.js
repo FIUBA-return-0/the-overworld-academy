@@ -8,6 +8,7 @@ import cleanCSS from 'gulp-clean-css';
 import autoprefixer from 'gulp-autoprefixer';
 import terser from 'gulp-terser';
 import imagemin from 'gulp-imagemin';
+import newer from 'gulp-newer';
 import optipng from 'imagemin-optipng';
 
 export async function parse_and_export_html(){
@@ -16,36 +17,49 @@ export async function parse_and_export_html(){
         .pipe(dest('../public/dist/'));
 }
 
-export async function parse_and_export_fonts(){
+export async function export_fonts(){
     return src('./src/fonts/**/*', {encoding: false})
-        .pipe(dest('../public/dist/fonts'));
+        .pipe(newer('../public/dist/fonts/'))
+        .pipe(dest('../public/dist/fonts/'));
 }
 
-export async function parse_and_export_sounds(){
+export async function export_sounds(){
     return src('./src/sounds/**/*', {encoding: false})
-        .pipe(dest('../public/dist/sounds'));
+        .pipe(newer('../public/dist/sounds/'))    
+        .pipe(dest('../public/dist/sounds/'));
 }
 
 export async function parse_and_export_scss(){
-    return src('./src/scss/**/*.scss')
+    src('./src/scss/shared/*.scss')
         .pipe(sass())
         .pipe(autoprefixer())
         .pipe(concat('main.css'))
         .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(dest('../public/dist/'));
+    
+    return src('./src/scss/unique/*.scss')
+        .pipe(sass())
+        .pipe(autoprefixer())
+        .pipe(cleanCSS({compatibility: 'ie8'}))
+        .pipe(dest('../public/dist/'));
 }
 
 export async function parse_and_export_js(){
-    return src('./src/js/**/*.js')
+    src('./src/js/shared/*.js')
         .pipe(concat('main.js'))
+        .pipe(terser())
+        .pipe(dest('../public/dist/'));
+    
+    return src('./src/js/unique/*.js')
         .pipe(terser())
         .pipe(dest('../public/dist/'));
 }
 
 export async function optimize_and_export_images(){
     return src('./src/img/**', {encoding: false})
+        .pipe(newer('../public/dist/img/'))
         .pipe(imagemin([
-            optipng()
+            optipng({optimizationLevel: 5})
         ]))
         .pipe(dest('../public/dist/img/'))
 }
@@ -74,26 +88,41 @@ async function watch_images(){
     });
 }
 
+async function watch_fonts(){
+    watch('./src/fonts/**', async function fonts(){
+        return await export_fonts();
+    });
+}
+
+async function watch_sounds(){
+    watch('./src/sounds/**', async function sounds(){
+        return await export_sounds();
+    });
+}
+
 export async function watch_build(){
-    await parse_and_export_html();
-    await parse_and_export_scss();
-    await parse_and_export_js();
-    await parse_and_export_fonts();
-    await parse_and_export_sounds();
+    parse_and_export_html();
+    parse_and_export_scss();
+    parse_and_export_js();
+    export_fonts();
+    export_sounds();
+    optimize_and_export_images();
     
     watch_html();
     watch_scss();
-    watch_images();
     watch_js();
+    watch_images();
+    watch_fonts();
+    watch_sounds();
 }
 
 async function no_watch_build(){
     await parse_and_export_html();
     await parse_and_export_scss();
     await parse_and_export_js();
+    await export_fonts();
+    await export_sounds();
     await optimize_and_export_images();
-    await parse_and_export_fonts();
-    await parse_and_export_sounds();
 }
 
 export default no_watch_build;

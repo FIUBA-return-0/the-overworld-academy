@@ -1,4 +1,5 @@
-@use 'variables' as *;
+@use '../variables' as *;
+
 .error-page{
     background-image: url('./img/dirt.png');
     background-repeat: repeat;
