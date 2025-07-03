@@ -21,7 +21,23 @@ nav{
             margin-left: 4vw;
         }
     }
+    .nav-right{
+        width: 100%; height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 2.5vw;
+        padding-right: 3vw;
 
+        .user-icon {
+            cursor: progress;
+            height: 100%;
+
+        &.active {
+            border-bottom: 4px solid $color-11;
+            }
+        }
+    }
     @media(min-width: 768px){
         height: 10vh; //PC
         .nav-left{

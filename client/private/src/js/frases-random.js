@@ -1,4 +1,4 @@
-const frases_menu = ["la clase mas fria del año",
+const frases_menu = ["la clase mas fria del anio",
     "Nico Riedel la cabra <3",
     "commits atomicos!",
     "playadino matecino",
@@ -9,15 +9,23 @@ const frases_menu = ["la clase mas fria del año",
     "en 3 canciones volvemos",
     "a todos les fue mal por SQL",
     "aguante el cuervo!!",
-    "rm -rf /",
     "aceptenme el pr",
-    "y las notas??",
-    "maniana no hay clase =)",
-    "maniana si hay clase =(",
+    "cuando suben las notas?",
     "I use arch btw",
-    "arregle los conflictos (que yo mismo genere por accidente)",
     "me cambie a admin. de empresas!"
 ];
 
-const fraseAleatoria = frases_menu[Math.floor(Math.random() * frases_menu.length)];
-document.querySelector(".login-amarillo-texto").textContent = fraseAleatoria;
+// agrego un feature nuevo para que no se repitan las frases 
+const ultimaFrase = localStorage.getItem("ultimaFrase");
+let fraseAleatoria = ultimaFrase;
+
+while (fraseAleatoria === ultimaFrase) {
+  fraseAleatoria = frases_menu[Math.floor(Math.random() * frases_menu.length)];
+}
+
+const elemento = document.querySelector(".login-amarillo-texto");
+if (elemento) {
+  elemento.textContent = fraseAleatoria;
+}
+
+localStorage.setItem("ultimaFrase", fraseAleatoria);
