@@ -26,4 +26,8 @@
     &:focus{
         outline: none;
     }
+
+    &:disabled {
+        color: #888888;
+    }
 }
