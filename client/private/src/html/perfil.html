@@ -31,19 +31,26 @@
         </div>
         <div class="perfil-text-data-box">
             <div class="perfil-text-data-box-wrapper">
+
                 <p class="minecraft-p">Usuario</p>
-                <input class="large-input" type="text">
+                <input class="large-input" type="text" id="usuario" disabled placeholder="bzmijak">
+
                 <p class="minecraft-p">Apellido</p>
-                <input class="large-input" type="text">
+                <input class="large-input" type="text" id="apellido" disabled>
+
                 <p class="minecraft-p">Nombre</p>
-                <input class="large-input" type="text">
+                <input class="large-input" type="text" id="nombre" disabled>
+
                 <p class="minecraft-p">Padron</p>
-                <input class="large-input" type="text">
+                <input class="large-input" type="text" id="padron" disabled placeholder="113221">
+
                 <p class="minecraft-p">Carrera</p>
-                <input class="large-input" type="text">
-                <p class="minecraft-p">Descripcion</p>
-                <textarea class="large-input" type="text"></textarea>
-                <button class="large-button sound-button">Editar perfil</button>
+                <input class="large-input" type="text" id="carrera" disabled placeholder="Ingenieria Informatica">
+
+                <p class="minecraft-p">Biografia</p>
+                <textarea class="large-input" type="text" id="biografia" disabled></textarea>
+
+                <button class="large-button sound-button" id="editar-perfil">Editar perfil</button>
                 <button class="large-button sound-button">Cambiar contrasenia</button>
                 <button class="large-button sound-button red-button" onclick="document.getElementById('easteregg-1').classList.remove('hidden'); window.scrollTo(0, 0);">Bajarme de la carrera</button>
             </div>
@@ -52,5 +59,6 @@
 
     <script src="./main.js"></script>
     <script src="./imagenesRandom.js"></script>
+    <script src="./editarPerfil.js"></script>
 </body>
 </html>
