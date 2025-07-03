@@ -18,8 +18,8 @@ CREATE TABLE carreras (
   sede VARCHAR(40) NOT NULL
 );
 CREATE TABLE usuario (
-  nombre VARCHAR(50) NOT NULL,
-  apellido VARCHAR(20) NOT NULL,
+  nombre VARCHAR(50),
+  apellido VARCHAR(20),
   id SERIAL PRIMARY KEY,
   condicion rol NOT NULL,
   username VARCHAR(30) NOT NULL UNIQUE,
