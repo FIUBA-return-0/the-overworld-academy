@@ -12,7 +12,8 @@ const frases_menu = ["la clase mas fria del anio",
     "aceptenme el pr",
     "cuando suben las notas?",
     "I use arch btw",
-    "me cambie a admin. de empresas!"
+    "me cambie a admin. de empresas!",
+    "intro al desarrollo personal!"
 ];
 
 // agrego un feature nuevo para que no se repitan las frases 
