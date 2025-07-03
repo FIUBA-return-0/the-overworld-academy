@@ -7,19 +7,39 @@
     
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./auth.css">
+    <link rel="stylesheet" href="./register.css">
 </head>
 
-<body class="auth-page flex-c-c">
+<body class="auth-page register-page flex-c-c">
     <a href="index.html">
-    <img src="/img/the-overworld-academy-logo.png" alt="Nuestro Logo">
+    <img class="titulo-imagen" src="/img/the-overworld-academy-logo.png" alt="Nuestro Logo">
     </a>
+    <img class="subtitulo-imagen" src="/img/signup.png" alt="Registrarse">
+
     <div class="auth-wrapper">
         <p class="minecraft-p">Usuario</p>
         <input class="large-input" type="text" required maxlength="30">
+
         <p class="minecraft-p">Contrasenia</p>
         <input class="large-input" type="text" style="-webkit-text-security: square;" required>
+
         <p class="minecraft-p">Repetir contrasenia</p>
         <input class="large-input" type="text" style="-webkit-text-security: square;" required>
+
+        <p class="minecraft-p">Apellido</p>
+        <input class="large-input" type="text" required maxlength="30">
+
+        <p class="minecraft-p">Nombre</p>
+        <input class="large-input" type="text" required maxlength="30">
+
+        <p class="minecraft-p">Carrera</p>
+        <select class="large-input" type="text" required>
+            <option></option>
+            <option>Minecraft SpeedRuns</option>
+            <option>Abrir cajitas de csgo</option>
+            <option>Le edito, lo mareo, le vuelve a editar</option>
+        </select>
+
         <button class="large-button sound-button" data-href="index.html">Crear Cuenta</button>
     </div>
     <script src="./main.js"></script>
