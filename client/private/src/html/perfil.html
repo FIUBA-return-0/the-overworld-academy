@@ -21,7 +21,7 @@
         </div> 
     </nav>
 
-    <section id="easteregg-1" class="hidden" onclick="document.getElementById('easteregg-1').classList.add('hidden');">
+    <section id="easteregg-1" class="hidden" onclick="sound2.pause();document.getElementById('easteregg-1').classList.add('hidden'); window.scrollTo(0, 10000);">
         <div id="easteregg-1-img"></div>
     </section>
 
@@ -51,8 +51,8 @@
                 <textarea class="large-input" type="text" id="biografia" disabled></textarea>
 
                 <button class="large-button sound-button" id="editar-perfil">Editar perfil</button>
-                <button class="large-button sound-button">Cambiar contrasenia</button>
-                <button class="large-button sound-button red-button" onclick="document.getElementById('easteregg-1').classList.remove('hidden'); window.scrollTo(0, 0);">Bajarme de la carrera</button>
+                <button class="large-button sound-button">Cambiar contrasenia</button> 
+                <button class="large-button sound-button red-button" onclick="document.getElementById('easteregg-1').classList.remove('hidden');sound2.play(); window.scrollTo(0, 0);">Bajarme de la carrera</button>
             </div>
         </div>
     </section>
