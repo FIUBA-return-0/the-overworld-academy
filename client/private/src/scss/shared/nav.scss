@@ -37,6 +37,16 @@ nav{
             &.active {
                 border-bottom: 4px solid $color-11;
             }
+
+            &.active:hover{
+                cursor: not-allowed;
+                transform: none;
+            }
+            
+            &:hover{
+                cursor: pointer;
+                transform: scale(1.025);
+            }
         }
     }
     
