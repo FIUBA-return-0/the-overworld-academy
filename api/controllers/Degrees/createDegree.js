@@ -4,9 +4,7 @@ const db = require('../../db.js')
  * @param {object} body debe tener nombre,description,duracion,sede
  * @returns un objeto con la primer key "status" si esta es 1, el campo content es la informacion de la carrera, de lo contrario es el mensaje de error
  */
-const createDegree = async (req, body) => {
-
-    const { id } = req.params
+const createDegree = async (body) => {
 
     const {
         nombre,
@@ -14,12 +12,10 @@ const createDegree = async (req, body) => {
         duracion,
         sede
     } = body
-
-    const values = [ id, nombre, description, duracion, sede ]
+    const values = [ nombre, description, duracion, sede]
     const query = `
-        UPDATE INTO carreras (nombre,description,duracion,sede)
-        VALUES($2,$3,$4,$5)
-        WHERE id = $1
+        INSERT INTO carreras (nombre,description,duracion,sede)
+        VALUES($1,$2,$3,$4)
         RETURNING *
     `;
     try {
