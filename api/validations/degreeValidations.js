@@ -6,7 +6,7 @@
  * @param {object} next 
  * @returns undefined. Error 400 en caso de incumplir
  */
-const validateCreateDegree = (req, res, next) => {
+const validateDegreeValues = (req, res, next) => {
     if (!req.body) {
         return res.status(400).json({ error: "No se recibió body en la solicitud" });
     }
@@ -24,4 +24,5 @@ const validateCreateDegree = (req, res, next) => {
     next();
 };
 
-module.exports = validateCreateDegree
+
+module.exports = validateDegreeValues

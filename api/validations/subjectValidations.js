@@ -6,7 +6,7 @@ const db = require('../db.js')
  * @param {object} next 
  * @returns undefined. Error 400 en caso de incumplir
  */
-const validateCreateSubject = (req, res, next) => {
+const validateSubjectValues = (req, res, next) => {
     if (!req.body) {
         return res.status(400).json({ error: "No se recibió body en la solicitud" });
     }
@@ -56,4 +56,4 @@ const validateDegreeId = async (req, res, next) => {
     next();
 }
 
-module.exports = (validateCreateSubject, validateTeacherId, validateDegreeId)
+module.exports = (validateSubjectValues, validateTeacherId, validateDegreeId)
