@@ -1,11 +1,11 @@
 const frases_menu = [
-	"la clase mas fria del anio",
-	"Nico Riedel la cabra <3",
+	"la clase mas fria del anio <span class='emoji-font'>🥶</span>",
+	"Nico Riedel la cabraa <span class='emoji-font'>🐐🐐</span>",
 	"commits atomicos!",
 	"playadino matecino",
 	"tung tung tung tung sahur",
 	"aguante Linux!",
-	"el que sabe, sabe...",
+	"el que sabe, sabe…",
 	"windows???",
 	"en 3 canciones volvemos",
 	"a todos les fue mal por SQL",
@@ -13,8 +13,11 @@ const frases_menu = [
 	"aceptenme el pr",
 	"cuando suben las notas?",
 	"I use arch btw",
-	"me cambie a admin. de empresas!",
-	"intro al desarrollo personal!"
+	"me cambie a admin. de empresas en la UADE <span class='emoji-font'>🫣</span>",
+	"intro al desarrollo personal!",
+	"Geronimo Gran Hermano 2027",
+	"si, Mauricio? <span class='emoji-font'>🤨</span>",
+	"el comandante."
 ];
 
 // agrego un feature nuevo para que no se repitan las frases 
@@ -27,7 +30,7 @@ while (fraseAleatoria === ultimaFrase) {
 
 const elemento = document.querySelector(".login-amarillo-texto");
 if (elemento) {
-	elemento.textContent = fraseAleatoria;
+	elemento.innerHTML = fraseAleatoria;
 }
 
 localStorage.setItem("ultimaFrase", fraseAleatoria);
