@@ -2,13 +2,14 @@ const { Router } = require("express");
 const router = Router()
 const createSubject  = require('../controllers/Subjects/createSubject.js')
 const getSubject = require("../controllers/Subjects/getSubject.js")
-const validateCreateSubject = require("../validations/subjectValidations.js")
+const validateSubjectValues = require("../validations/subjectValidations.js")
 const validateTeacherId = require("../validations/subjectValidations.js")
 const ValidateDegreeId = require("../validations/subjectValidations.js")
 const getAllSubjects = require("../controllers/Subjects/getAllSubjects")
-const deleteSubject = require("../controllers/Subjects/deleteSubject.js")
+const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
+const updateSubject = require("../controllers/Subjects/updateSubject.js");
 
-router.post("/", validateCreateSubject, validateTeacherId, ValidateDegreeId, async (req, res) => { 
+router.post("/", validateSubjectValues, validateTeacherId, ValidateDegreeId, async (req, res) => { 
     const result = await createSubject(req.body)
     let status = !result.status ? 201 : 500
     res.status(status).json(result.content)
@@ -44,5 +45,18 @@ router.delete('/:id', async (req, res) => {
         res.status(200).json(result)
     }
 })
+
+router.put('/:id', validateSubjectValues, validateTeacherId, ValidateDegreeId, async (req, res) => {
+    const { id } = req.params
+    const result = await updateSubject(req.body, id)
+    
+    if (!result) {
+        res.status(404).json({"error":"La materia no existe"})
+    } else {
+        res.status(200).json(result)
+    }
+
+})
+
 
 module.exports = router
