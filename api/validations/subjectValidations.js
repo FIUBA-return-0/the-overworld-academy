@@ -1,4 +1,4 @@
-
+const db = require('../db.js')
 /**
  * realiza validaciones sobre un body vacio, faltante en un contenido o campo con longitud mayor a la permitida
  * @param {object} req 
@@ -24,4 +24,36 @@ const validateCreateSubject = (req, res, next) => {
     next();
 };
 
-module.exports = validateCreateSubject
+const validateTeacherId = async (req, res, next) => {
+    const { profesor } = req.body;
+
+    const result = await db.query(`
+        SELECT * FROM usuario WHERE id = $1
+        `,
+        [profesor]
+    );
+
+    if (result.rowCount === 0) {
+        return res.status(400).json({ error: "El profesor no existe" });
+    }
+
+    next();
+}
+
+const validateDegreeId = async (req, res, next) => {
+    const { carrera } = req.body;
+
+    const result = await db.query(`
+        SELECT * FROM carreras WHERE id = $1
+        `,
+        [carrera]
+    );
+
+    if (result.rowCount === 0) {
+        return res.status(400).json({ error: "La carrera no existe" });
+    }
+
+    next();
+}
+
+module.exports = (validateCreateSubject, validateTeacherId, validateDegreeId)
