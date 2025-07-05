@@ -1,0 +1,37 @@
+@use '../variables' as *;
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: calc((var(--vh, 1vh) * 100));
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-contenido {
+    background-color: $color-10;
+    padding: 2vw;
+    width: 500px;
+    border-radius: 10px;
+    border: 1.5px solid white;
+    text-align: center;
+    font-family: minecraft-p;
+    font-size: 20px;
+    //mobile only
+    @media(max-width: 768px){
+        width: 90vw;
+        height: 15vh;
+
+  }
+}
+
+.modal-botones {
+    display: flex;
+    gap: 1.5vw;
+    justify-content: center;
+}
