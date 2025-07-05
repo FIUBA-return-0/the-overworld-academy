@@ -51,14 +51,13 @@
             }
 
             &:hover{
-                filter:grayscale(40%);
                 transform: scale(1.05) rotate(-.25deg);
                 cursor: pointer;
             }
         }
 
         .materia-inscripto{
-            background-color: rgba($color: $color-1, $alpha: 0.75);
+            background-color: rgba($color: $color-1, $alpha: 0.8);
             border: 5px double $color-1;
 
             .materia-card-img{
