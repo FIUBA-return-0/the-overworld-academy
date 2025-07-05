@@ -16,17 +16,17 @@
 .modal-contenido {
     background-color: $color-10;
     padding: 2vw;
-    width: 500px;
+    width: 40vw;
     border-radius: 10px;
     border: 1.5px solid white;
     text-align: center;
     font-family: minecraft-p;
     font-size: 20px;
+    
     //mobile only
     @media(max-width: 768px){
+        padding: 2.5vh;
         width: 90vw;
-        height: 15vh;
-
   }
 }
 
