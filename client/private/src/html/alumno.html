@@ -6,7 +6,7 @@
     <title>Materias · The Overworld Academy</title>
     
     <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./materias.css">
+    <link rel="stylesheet" href="./alumno.css">
 </head>
 
 <body class="materias-page flex-c-c">
@@ -17,9 +17,19 @@
         <div class="nav-right">
             <img class="icon" src="/img/user-logo.svg" alt="Perfil">
             <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
-            <img class="icon" src="/img/logout-logo.svg" alt="Salir">  
+            <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
         </div> 
     </nav>
+
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+            <p>Estas seguro de que queres salir?</p>
+            <div class="modal-botones">
+                <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+                <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
     <h1 class="materias-title">Propuesta: Técnicatura Universitaria en Tácticas Especiales de Rush</h1>
 
@@ -32,6 +42,7 @@
                 <p class="materia-card-description">Luego de terminar esta materia no vas a poder pegar ningún tiro fuera de la cabeza, puro headshot</p>
             </div>
         </div>
+
         <div class="materia-card materia-inscripto flex-c-c">
             <img class="materia-card-img" src="https://skinsmonkey.com/blog/wp-content/uploads/sites/2/csgo-bomb-code-ingame.jpg" alt="Logo materia">
             <div class="materia-card-text-wrapper">
@@ -40,6 +51,7 @@
                 <p class="materia-card-description">Se te pasa el tiempo cubriendo B y derrepente explotaste? no más.</p>
             </div>
         </div>
+
         <div class="materia-card flex-c-c">
             <img class="materia-card-img" src="https://i.imgflip.com/1ixrwd.jpg" alt="Logo materia">
             <div class="materia-card-text-wrapper">
@@ -49,5 +61,7 @@
             </div>
         </div>
     </div>
+
+    <script src="/main.js"></script>
 </body>
 </html>

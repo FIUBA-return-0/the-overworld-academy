@@ -21,6 +21,16 @@
         </div> 
     </nav>
 
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+        <p>Estas seguro de que queres salir?</p>
+        <div class="modal-botones">
+            <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+            <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <section id="easteregg-1" class="hidden" onclick="sound2.pause();document.getElementById('easteregg-1').classList.add('hidden'); window.scrollTo(0, 10000);">
         <div id="easteregg-1-img"></div>
     </section>
@@ -57,16 +67,6 @@
         </div>
     </section>
     
-    <div id="modal-opcion" class="modal hidden">
-        <div class="modal-contenido">
-        <p>Estas seguro de que queres salir?</p>
-        <div class="modal-botones">
-            <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
-            <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
     <script src="./main.js"></script>
     <script src="./imagenesRandom.js"></script>
     <script src="./editarPerfil.js"></script>
