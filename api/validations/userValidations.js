@@ -45,10 +45,16 @@ const validateChangeCondition = async (req, res, next) => {
 
     const result = await db.query('SELECT condicion FROM usuario WHERE id = $1', [id]);
 
-    const condicion = result.rows[0].condicion
+    const condicionOriginal = result.rows[0].condicion
+    const condicionNueva = req.body.rol
 
-    if (condicion !== 'alumno') {
-        return res.status(400).json({ error: "Solo se puede actualizar el estado de un alumno." });
+    if (condicionNueva !== condicionOriginal) {
+        if (condicionOriginal !== 'alumno'){
+            return res.status(400).json({ error: "Solo se puede actualizar el estado de un alumno." });
+        }
+        if (condicionNueva === 'alumno') {
+            return res.status(400).json({ error: "No se puede cambiar el rol hacia alumno."})
+        }
     }
 
     next()
