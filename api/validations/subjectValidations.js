@@ -42,7 +42,6 @@ const validateTeacherId = async (req, res, next) => {
 
 const validateDegreeId = async (req, res, next) => {
     const { carrera } = req.body;
-
     const result = await db.query(`
         SELECT * FROM carreras WHERE id = $1
         `,

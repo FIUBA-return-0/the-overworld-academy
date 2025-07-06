@@ -1,3 +1,5 @@
+const db = require('../db.js')
+
 /**
  * realiza las validaciones sobre un body vacio, con algun faltante o longitud mayor a la esperada
  * @param {object} req 
@@ -38,4 +40,24 @@ const validateSentCondition = (req, res, next) => {
     }
     next()
 }
-module.exports = {validateCreateUser,validateSentCondition}
+const validateChangeCondition = async (req, res, next) => {
+    const { id } = req.params;
+
+    const result = await db.query('SELECT condicion FROM usuario WHERE id = $1', [id]);
+
+    const condicionOriginal = result.rows[0].condicion
+    const condicionNueva = req.body.rol
+
+    if (condicionNueva !== condicionOriginal) {
+        if (condicionOriginal !== 'alumno'){
+            return res.status(400).json({ error: "Solo se puede actualizar el estado de un alumno." });
+        }
+        if (condicionNueva === 'alumno') {
+            return res.status(400).json({ error: "No se puede cambiar el rol hacia alumno."})
+        }
+    }
+
+    next()
+
+}
+module.exports = {validateCreateUser,validateSentCondition,validateChangeCondition}
