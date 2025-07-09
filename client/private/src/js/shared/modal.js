@@ -1,6 +1,7 @@
 // desoculta modal
 const botonSalir = document.getElementById("boton-salir");
 
+
 if (botonSalir !== null){
   botonSalir.addEventListener("click", function(){
 	document.getElementById("modal-opcion").classList.remove("hidden");
