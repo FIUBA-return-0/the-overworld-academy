@@ -6,7 +6,7 @@ const db = require('../../db.js')
  * @returns devuelve undefined si no se encontró la carrera, o el id si se eliminó exitosamente.
  */
 
-const deleteDegree = async (req, res) => {
+const deleteDegree = async (req) => {
     const { id } = req.params
 
     const query = `
