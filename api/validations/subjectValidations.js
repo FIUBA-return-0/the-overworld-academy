@@ -1,58 +1,86 @@
-const db = require('../db.js')
+const db = require("../db.js");
 /**
  * realiza validaciones sobre un body vacio, faltante en un contenido o campo con longitud mayor a la permitida
- * @param {object} req 
- * @param {object} res 
- * @param {object} next 
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
  * @returns undefined. Error 400 en caso de incumplir
  */
 const validateSubjectValues = (req, res, next) => {
-    if (!req.body) {
-        return res.status(400).json({ error: "No se recibió body en la solicitud" });
-    }
+  if (!req.body) {
+    return res
+      .status(400)
+      .json({ error: "No se recibió body en la solicitud" });
+  }
 
-    const { profesor, nombre, carga_horaria, carrera } = req.body;
+  const { profesor, nombre, carga_horaria, carrera } = req.body;
 
-    if (!profesor || !nombre || !carga_horaria || !carrera) {
-        return res.status(400).json({ error: "Algún contenido está vacío, por favor revisa tus entradas" });
-    }
+  if (!profesor || !nombre || !carga_horaria || !carrera) {
+    return res
+      .status(400)
+      .json({
+        error: "Algún contenido está vacío, por favor revisa tus entradas",
+      });
+  }
 
-    if (nombre.length > 50) {
-        return res.status(400).json({ error: "Nombre más largo de lo permitido." });
-    }
+  if (nombre.length > 50) {
+    return res.status(400).json({ error: "Nombre más largo de lo permitido." });
+  }
 
-    next();
+  next();
+};
+
+const validateQueryParams = async (req, res, next) => {
+  const { id, carrera } = req.query;
+
+  if (!id && !carrera) {
+    return res
+      .status(400)
+      .json({ error: "Debe enviar una carrera o una materia." });
+  }
+  if ((!id && isNaN(carrera)) || (!carrera && isNaN(id))) {
+    return res
+      .status(400)
+      .json({ error: "El parámetro enviado debe ser un id existente." });
+  }
+  next();
 };
 
 const validateTeacherId = async (req, res, next) => {
-    const { profesor } = req.body;
+  const { profesor } = req.body;
 
-    const result = await db.query(`
+  const result = await db.query(
+    `
         SELECT * FROM usuario WHERE id = $1
         `,
-        [profesor]
-    );
+    [profesor]
+  );
 
-    if (result.rowCount === 0) {
-        return res.status(400).json({ error: "El profesor no existe" });
-    }
+  if (result.rowCount === 0) {
+    return res.status(400).json({ error: "El profesor no existe" });
+  }
 
-    next();
-}
+  next();
+};
 
 const validateDegreeId = async (req, res, next) => {
-    const { carrera } = req.body;
-    const result = await db.query(`
+  const { carrera } = req.body;
+  const result = await db.query(
+    `
         SELECT * FROM carreras WHERE id = $1
         `,
-        [carrera]
-    );
+    [carrera]
+  );
 
-    if (result.rowCount === 0) {
-        return res.status(400).json({ error: "La carrera no existe" });
-    }
+  if (result.rowCount === 0) {
+    return res.status(400).json({ error: "La carrera no existe" });
+  }
 
-    next();
-}
+  next();
+};
 
-module.exports = (validateSubjectValues, validateTeacherId, validateDegreeId)
+module.exports =
+  (validateSubjectValues,
+  validateTeacherId,
+  validateDegreeId,
+  validateQueryParams);
