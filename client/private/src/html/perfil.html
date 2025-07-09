@@ -7,6 +7,7 @@
     
     <link rel="stylesheet" href="./main.css">
     <link rel="stylesheet" href="./perfil.css">
+    <link rel="stylesheet" href="./cambiar-pp.css">
 </head>
 
 <body class="perfil-page">
@@ -31,13 +32,34 @@
         </div>
     </div>
 
+    <div id="modal-cambiar-foto" class="modal hidden">
+        <div class="salir-pp" onclick="document.getElementById('modal-cambiar-foto').classList.add('hidden');"></div>
+        <div class="modal-contenido">
+            <p class="minecraft-p">Seleccionar foto de perfil</p>
+            <div class="modal-fotos">
+                <!-- Aca van las fotos defaults -->
+                <img src="/img/pp1.svg">
+                <img src="/img/pp2.png">
+                <img src="/img/pp3.png">
+                <img src="/img/pp4.png">
+                <img src="/img/pp5.png">
+                <img src="/img/pp6.png">
+                <img src="/img/pp7.png">
+                <img src="/img/pp8.png">
+                <img src="/img/pp9.png">
+                <img src="/img/pp10.png">
+                <!-- Aca van las fotos defaults -->
+            </div>
+        </div>
+    </div>
+
     <section id="easteregg-1" class="hidden" onclick="sound2.pause();document.getElementById('easteregg-1').classList.add('hidden'); window.scrollTo(0, 10000);">
         <div id="easteregg-1-img"></div>
     </section>
 
     <section class="perfil-data">
         <div class="perfil-p-wrapper">
-            <img class="perfil-p" src="/img/default-profile-image.svg" alt="Foto de perfil">
+            <img class="perfil-p" id="foto-perfil" src="/img/pp1.svg" alt="Foto de perfil" onclick="abrirModalFoto()">
         </div>
         <div class="perfil-text-data-box">
             <div class="perfil-text-data-box-wrapper">
@@ -70,6 +92,7 @@
     <script src="./main.js"></script>
     <script src="./imagenesRandom.js"></script>
     <script src="./editarPerfil.js"></script>
+    <script src="./cambiarImagen.js"></script>
 
 </body>
 </html>
