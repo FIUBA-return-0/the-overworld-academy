@@ -6,11 +6,11 @@ const db = require('../../db.js')
  * @returns devuelve undefined si no se encontró la materia, o el id si se eliminó exitosamente.
  */
 
-const deleteSubject = async (req, res) => {
+const deleteSubject = async (req) => {
     const { id } = req.params
 
     const query = `
-        DELETE FROM carreras 
+        DELETE FROM materias 
         WHERE id = $1
     `
     const result = await db.query(query, [id])
