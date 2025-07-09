@@ -25,7 +25,7 @@ CREATE TABLE usuario (
   username VARCHAR(30) NOT NULL UNIQUE,
   carrera INT REFERENCES carreras(id),
   password TEXT NOT NULL,
-  perfil text,
+  foto text,
   bio text
 );
 ALTER TABLE carreras
