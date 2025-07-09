@@ -22,7 +22,7 @@
     height: calc((var(--vh, 1vh) * 100));
 }
 
-.modal-contenido {    
+.modal-contenido-pp {    
     z-index: 101;
     display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@
     aspect-ratio: 1;
     object-fit: cover;
     cursor: pointer;
-
+    transition: .25s;
 
   &:hover {
         transform: rotate(-10deg) scale(1.1);
