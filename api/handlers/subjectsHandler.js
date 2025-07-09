@@ -1,62 +1,63 @@
 const { Router } = require("express");
-const router = Router()
-const createSubject  = require('../controllers/Subjects/createSubject.js')
-const getSubject = require("../controllers/Subjects/getSubject.js")
-const validateSubjectValues = require("../validations/subjectValidations.js")
-const validateTeacherId = require("../validations/subjectValidations.js")
-const ValidateDegreeId = require("../validations/subjectValidations.js")
-const getAllSubjects = require("../controllers/Subjects/getAllSubjects")
+const router = Router();
+const createSubject = require("../controllers/Subjects/createSubject.js");
+const getSubject = require("../controllers/Subjects/getSubject.js");
+const validateSubjectValues = require("../validations/subjectValidations.js");
+const validateTeacherId = require("../validations/subjectValidations.js");
+const ValidateDegreeId = require("../validations/subjectValidations.js");
+const ValidateQueryParams = require("../validations/subjectValidations.js");
 const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
 
-router.post("/", validateSubjectValues, validateTeacherId, ValidateDegreeId, async (req, res) => { 
-    const result = await createSubject(req.body)
-    let status = !result.status ? 201 : 500
-    res.status(status).json(result.content)
-})
+router.post(
+  "/",
+  validateSubjectValues,
+  validateTeacherId,
+  ValidateDegreeId,
+  async (req, res) => {
+    const result = await createSubject(req.body);
+    let status = !result.status ? 201 : 500;
+    res.status(status).json(result.content);
+  }
+);
 
-router.get('/', async (req, res) => {
-    
-    const result = await getAllSubjects();
-    
-    if (!result.length) {
-        res.status(404).json({"error":"no hay materias disponibles"})
-    } else {
-        res.status(200).json(result)
-    }
-})
+router.get("/", ValidateQueryParams, async (req, res) => {
+  const result = await getSubject(req.query);
 
-router.get("/:id", async (req, res) => {
-    const user = await getSubject(req)
-    
-    if (!user) {
-        res.status(404).json({"error":"la materia no existe"})
-    } else {
-        res.status(200).json(user)
-    }
-})
+  if (!result.length) {
+    res.status(404).json({ error: "no se encontro la materia" });
+  } else {
+    res.status(200).json(req.query.id ? result[0] : result);
+  }
+});
 
-router.delete('/:id', async (req, res) => {
-    const result = await deleteSubject(req)
+router.delete("/:id", async (req, res) => {
+  const result = await deleteSubject(req);
 
-    if (!result){
-        res.status(404).json({"error":"No se puede eliminar una materia que no existe"})
-    } else {
-        res.status(200).json(result)
-    }
-})
+  if (!result) {
+    res
+      .status(404)
+      .json({ error: "No se puede eliminar una materia que no existe" });
+  } else {
+    res.status(200).json(result);
+  }
+});
 
-router.put('/:id', validateSubjectValues, validateTeacherId, ValidateDegreeId, async (req, res) => {
-    const { id } = req.params
-    const result = await updateSubject(req.body, id)
-    
+router.put(
+  "/:id",
+  validateSubjectValues,
+  validateTeacherId,
+  ValidateDegreeId,
+  async (req, res) => {
+    const { id } = req.params;
+    const result = await updateSubject(req.body, id);
+
     if (!result) {
-        res.status(404).json({"error":"La materia no existe"})
+      res.status(404).json({ error: "La materia no existe" });
     } else {
-        res.status(200).json(result)
+      res.status(200).json(result);
     }
+  }
+);
 
-})
-
-
-module.exports = router
+module.exports = router;

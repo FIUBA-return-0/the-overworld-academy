@@ -1,18 +1,10 @@
-const db = require('../../db.js')
-
+const db = require("../../db.js");
 
 const updateDegree = async (body, id) => {
+  const { nombre, description, duracion, sede } = body;
 
-
-    const {
-        nombre,
-        description,
-        duracion,
-        sede
-    } = body
-
-    const values = [ nombre, description, duracion, sede, id ]
-    const query = `
+  const values = [nombre, description, duracion, sede, id];
+  const query = `
         UPDATE carreras
         SET nombre = $1,
         description = $2,
@@ -21,8 +13,8 @@ const updateDegree = async (body, id) => {
         WHERE id = $5
         RETURNING *
     `;
-    const res = await db.query(query, values)
-    return res.rows[0]
-}
+  const res = await db.query(query, values);
+  return res.rows[0];
+};
 
-module.exports = updateDegree
+module.exports = updateDegree;
