@@ -1,33 +1,31 @@
-const db  = require('../../db.js') 
+const db = require("../../db.js");
 /**
  *  realiza la query a la base de datos para insertar un usuario con los datos brindados
- * @param {object} body debe contener nombre, apellido, rol,username,password
- * @returns devuelve un objeto con una key status, si es 1 el campo content tiene el mensaje de error y si es 0 tiene la informacion del usuario creado
+ * @param {object} data debe contener nombre, apellido, rol,username,password,carrera
+ * @returns devuelve un objeto con una key status, si es 1 el campo content tiene el mensaje de error y si es 0 tiene el id del usuario creado
  */
-const createUser = async (body) => {
-    
-    const {
-        nombre,
-        apellido,
-        rol,
-        username,
-        password
-    } = body
-    const values = [nombre, apellido, rol, username, password]
+const createUser = async ({
+  nombre,
+  apellido,
+  rol,
+  username,
+  password,
+  carrera,
+}) => {
+  const values = [nombre, apellido, rol, username, password, carrera];
 
-    
-    const query = `
-        INSERT INTO usuario (nombre,apellido,condicion,username,password)
-        VALUES($1,$2,$3,$4,$5)
-        RETURNING *
+  const query = `
+        INSERT INTO usuario (nombre,apellido,condicion,username,password,carrera)
+        VALUES($1,$2,$3,$4,$5,$6)
+        RETURNING id;
     `;
-    try {
-        const content = await db.query(query, values)
-        
-        return {"status":0,"content":content.rows[0]}
-    } catch (error) {
-        return {"status":1,"content":error.detail}
-    }
-}
+  try {
+    const content = await db.query(query, values);
 
-module.exports = createUser
+    return { status: 0, content: content.rows[0] };
+  } catch (error) {
+    return { status: 1, content: error.detail };
+  }
+};
+
+module.exports = createUser;
