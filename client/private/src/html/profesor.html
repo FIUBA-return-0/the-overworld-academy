@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesor · The Overworld Academy</title>
+    
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./profesor.css">
+</head>
+
+<body class="profesor-page flex-c-c">
+    <nav>
+        <div class="nav-left">
+            <img class="nav-img-logo" src="/img/the-overworld-academy-logo.png" alt="Nuestro logo">
+        </div>
+        <div class="nav-right">
+            <img class="icon" src="/img/user-logo.svg" alt="Perfil">
+            <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
+            <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
+        </div> 
+    </nav>
+
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+            <p class="minecraft-p">Estas seguro de que queres salir?</p>
+            <div class="modal-botones">
+                <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+                <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="materias-title">Propuesta: Técnicatura Universitaria en Tácticas Especiales de Rush</h1>
+
+    <section class="profesor-cartelera flex-c-c">
+        <p class="minecraft-p">Cartelera de la materia</p>
+        <textarea id="cartelera" class="large-input" type="text"></textarea>
+        <button class="large-button sound-button">Editar</button>
+    </section>
+    
+    <div class="notas-table-wrapper flex-c-c">
+        <p class="minecraft-p">Notas alumnos</p>
+        <table class="notas-table">
+            <tr>
+                <th>Apellido y nombre</th>
+                <th>Padrón</th>
+                <th class="table-nota">TP1</th>
+                <th class="table-nota">TP2</th>
+                <th class="table-nota">P1</th>
+                <th class="table-nota">P2</th>
+            </tr>
+            <tr>
+                <th>Lattandi, Facundo</th>
+                <th>113931</th>
+                <th class="table-nota">9</th>
+                <th class="table-nota">10</th>
+                <th class="table-nota">9</th>
+                <th class="table-nota">8</th>
+            </tr>
+            <tr>
+                <th>Zmijak, Bernardo</th>
+                <th>113932</th>
+                <th class="table-nota">10</th>
+                <th class="table-nota">7</th>
+                <th class="table-nota">4</th>
+                <th class="table-nota">6</th>
+            </tr>
+        </table>
+        <button class="large-button sound-button">Editar</button>
+    </div>
+
+    <script src="/main.js"></script>
+</body>
