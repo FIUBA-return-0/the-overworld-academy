@@ -39,16 +39,19 @@ CREATE TABLE materias (
 );
 --! auxiliares:
 CREATE TABLE notas (
+  id serial primary key,
   alumno SERIAL REFERENCES usuario(id),
   materia SERIAL REFERENCES materias(id),
   description VARCHAR(20) NOT NULL,
   nota INT NOT NULL
 );
 CREATE TABLE correlativas (
+  id serial primary key,
   materia SERIAL REFERENCES materias(id),
   materia_necesaria SERIAL REFERENCES materias(id)
 );
 CREATE TABLE inscripciones (
+  id serial primary key,
   alumno SERIAL REFERENCES usuario(id),
   materia SERIAL REFERENCES materias(id),
   condicion aprobado NOT NULL
