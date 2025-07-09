@@ -20,6 +20,9 @@ imagenes.forEach(img=>{
 
         document.getElementById("foto-perfil").setAttribute("src", nuevaImagen);
         document.getElementById("modal-cambiar-foto").classList.add('hidden');
+        
+        // localStorage 
+        localStorage.setItem("imagenPerfil", nuevaImagen);
 
         imagenes.forEach(img => {
             if (img.getAttribute("src") === nuevaImagen){
@@ -30,4 +33,12 @@ imagenes.forEach(img=>{
             }
         });
     });
+});
+
+// recargar pagina permite mantener la imagen
+window.addEventListener("DOMContentLoaded", () => {
+    const imagenGuardada = localStorage.getItem("imagenPerfil");
+    if (imagenGuardada) {
+        document.getElementById("foto-perfil").setAttribute("src", imagenGuardada);
+    }
 });
