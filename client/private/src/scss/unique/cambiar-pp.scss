@@ -1,0 +1,79 @@
+@use '../variables' as *;
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: calc((var(--vh, 1vh) * 100));
+    background-color: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.salir-pp{
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - var(--scrollbar-width, 0));
+    height: calc((var(--vh, 1vh) * 100));
+}
+
+.modal-contenido {    
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: $color-10;
+    padding: 2vw;
+    width: 60vw;
+
+    border-radius: 10px;
+    border: 1.5px solid white;
+    text-align: center;
+       
+    .p{
+        margin-top: 0;
+        color: white;
+    }
+
+    //mobile only
+    @media(max-width: 768px){
+        padding: 2.5vh;
+        width: 90vw;
+  }
+}
+
+.modal-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20vh, 1fr));
+    gap: 1.5vw;
+    justify-items: center;
+    margin-top: 5vh;
+
+    // mobile
+    @media(max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3vh;
+    
+  }
+}
+
+.modal-fotos img {
+    border: 2px solid white;
+    width: 20vh;
+    height: 20vh;
+    border-radius: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    cursor: pointer;
+
+
+  &:hover {
+        transform: rotate(-10deg) scale(1.1);
+        border: 2px solid $color-11;
+    } 
+}
