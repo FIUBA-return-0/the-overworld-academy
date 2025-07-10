@@ -1,0 +1,39 @@
+const { Router } = require("express");
+const router = Router();
+const getGrade = require("../controllers/Grades/getGrades");
+const postGrade = require("../controllers/Grades/postGrade");
+const updateGrade = require("../controllers/Grades/updateGrade");
+
+router.get("/", async (req, res) => {
+  const result = await getGrade(req.body);
+
+  if (!result.length) {
+    res.status(400).json({
+      error: "no se encontro la nota",
+    });
+  } else {
+    res.status(200).json(result);
+  }
+});
+
+router.post("/", async (req, res) => {
+  const result = await postGrade(req.body);
+  if (!result.status) {
+    const created = await getGrade(req.body);
+    res.status(201).json(created[0]);
+  } else {
+    res.status(400).json({ error: result.content });
+  }
+});
+
+router.put("/", async (req, res) => {
+  const result = await updateGrade(req.body);
+  if (!result.status) {
+    const created = await getGrade(req.body);
+    res.status(201).json(created[0]);
+  } else {
+    res.status(400).json({ error: result.content });
+  }
+});
+
+module.exports = router;
