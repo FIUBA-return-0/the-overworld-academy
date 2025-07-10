@@ -2,18 +2,14 @@ const { Router } = require("express");
 const router = Router();
 const createSubject = require("../controllers/Subjects/createSubject.js");
 const getSubject = require("../controllers/Subjects/getSubject.js");
-const validateSubjectValues = require("../validations/subjectValidations.js");
-const validateTeacherId = require("../validations/subjectValidations.js");
-const ValidateDegreeId = require("../validations/subjectValidations.js");
-const ValidateQueryParams = require("../validations/subjectValidations.js");
+const { validateSubjectValues, validateEmptyEntriesS, validateQueryParams } = require("../validations/subjectValidations.js");
 const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
 
 router.post(
   "/",
   validateSubjectValues,
-  validateTeacherId,
-  ValidateDegreeId,
+  validateEmptyEntriesS,
   async (req, res) => {
     const result = await createSubject(req.body);
     let status = !result.status ? 201 : 500;
@@ -21,7 +17,7 @@ router.post(
   }
 );
 
-router.get("/", ValidateQueryParams, async (req, res) => {
+router.get("/", validateQueryParams, async (req, res) => {
   const result = await getSubject(req.query);
 
   if (!result.length) {
@@ -43,11 +39,9 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put(
+router.patch(
   "/:id",
   validateSubjectValues,
-  validateTeacherId,
-  ValidateDegreeId,
   async (req, res) => {
     const { id } = req.params;
     const result = await updateSubject(req.body, id);
