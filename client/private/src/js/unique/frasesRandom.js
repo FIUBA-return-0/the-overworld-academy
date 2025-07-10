@@ -17,7 +17,9 @@ const frases_menu = [
 	"intro al desarrollo personal!",
 	"Geronimo Gran Hermano 2027",
 	"si, Mauricio? <span class='emoji-font'>🤨</span>",
-	"el comandante."
+	"el comandante.",
+	"lo viejo funciona",
+	"maaaamaaaaa, cortaste toda la loozz!!"
 ];
 
 // agrego un feature nuevo para que no se repitan las frases 
