@@ -7,12 +7,12 @@ const updateSubject = async (body, id) => {
     for (const campo of keys) {
         const valor = body[campo];
         await db.query(
-            `UPDATE materia SET ${campo} = $1 WHERE id = $2`,
+            `UPDATE materias SET ${campo} = $1 WHERE id = $2`,
             [valor, id]
         );
     }
 
-    const result = await db.query(`SELECT * FROM materia WHERE id = $1`, [id]);
+    const result = await db.query(`SELECT * FROM materias WHERE id = $1`, [id]);
     return result.rows[0];
 };
 

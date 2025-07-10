@@ -13,7 +13,7 @@ const validateDegreeValues = (req, res, next) => {
 
     const { nombre, sede } = req.body;
 
-    if (nombre.length > 50 || sede.length > 40) {
+    if ((nombre && nombre.length > 50) || (sede && sede.length > 40)) {
         return res.status(400).json({ error: "Nombre o sede más largo de lo permitido." });
     }
 

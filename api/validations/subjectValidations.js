@@ -12,7 +12,7 @@ const validateSubjectValues = (req, res, next) => {
 
   const nombre = req.body
 
-  if (nombre.length > 50) {
+  if ((nombre && nombre.length > 50)) {
       return res.status(400).json({ error: "Nombre más largo de lo permitido." });
   }
 

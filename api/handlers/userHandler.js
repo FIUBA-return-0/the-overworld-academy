@@ -14,8 +14,6 @@ const updateUser = require("../controllers/Users/updateUser.js");
 router.post("/", validateUserValues,validateEmptyEntriesU, async (req, res) => {
   const result = await createUser(req.body);
   const created = await getUser(result.content);
-  console.log(result)
-  console.log(created)
   let status = !result.status ? 201 : 500;
   res.status(status).json(created);
 });
