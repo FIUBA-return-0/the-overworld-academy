@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver materia · The Overworld Academy</title>
+    
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/ver-materia.css">
+</head>
+<body class="ver-materia-page flex-c-c">
+    <nav>
+        <div class="nav-left">
+            <img class="nav-img-logo" src="/img/the-overworld-academy-logo.png" alt="Nuestro logo">
+        </div>
+        <div class="nav-right">
+            <img class="icon" src="/img/user-logo.svg" alt="Perfil">
+            <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
+            <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
+        </div> 
+    </nav>
+
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+            <p class="minecraft-p">Estas seguro de que queres salir?</p>
+            <div class="modal-botones">
+                <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+                <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="info-materia" class="flex-c-c">
+        <h1 class="materias-title">Plantar la bomba sin morir en el intento</h1>
+        <h2 class="materia-catedra">Cátedra: Nico Riedel <span class="emoji-font">🐐</span></h2>
+        <p class="minecraft-p">Cartelera de la materia</p>
+        <p id="cartelera">Recu: 20250715T090000-03</p>
+        <p class="minecraft-p">Notas</p>
+        <div id="notas">
+            <p id="promedio-materia" class="materia-nota">Promedio materia: 7</p>
+            <p id="promedio-parciales" class="materia-nota">Promedio parciales: 7</p>
+            <p id="promedio-TPs" class="materia-nota">Promedio TPs: 7</p>
+            <p id="nota-TP1" class="materia-nota">Nota TP1: 7</p>
+            <p id="nota-TP2" class="materia-nota">Nota TP2: 7</p>
+            <p id="nota-P1" class="materia-nota">Nota P1: 7</p>
+            <p id="nota-P2" class="materia-nota">Nota P2: 7</p>
+        </div>
+    </section>
+
+    <script src="/main.js"></script>
+</body>
+</html>

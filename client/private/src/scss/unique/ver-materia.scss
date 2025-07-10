@@ -1,0 +1,72 @@
+@use '../variables.scss' as *;
+
+.ver-materia-page{
+    background-color: $color-9;
+
+    #info-materia{
+        margin-block: 3vh;
+        .materia-catedra{
+            font-size: clamp(.7em, 1.75vw, 1.8em);
+            font-family: 'Lexend Deca', Rubik;
+            font-weight: 500;
+        }
+
+        #cartelera{
+            font-family: Rubik;
+            margin-top: 1vh;
+            border: 2px solid white;
+            text-align: justify;
+            font-size: clamp(.7em, 1.25vw, 1.8em);
+            background-color: $color-10;
+        }
+        
+        #notas{
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            flex-direction: column;
+            border: 2px solid white;
+            background-color: $color-10;
+            margin-top: 1vh;
+            gap: 1vh;
+
+            .materia-nota{
+                font-family: Rubik;
+                text-align: justify;
+                font-size: clamp(.7em, 1.25vw, 1.8em);
+            }
+        }
+    }
+
+    //PC only
+    @media(min-width: 768px){
+        #info-materia{
+            #cartelera{
+                width: 60vw;
+                min-height: 20vh;
+                padding: 1.5vw;
+            }
+            #notas{
+                margin-top: 1vh;
+                padding: 2vw;
+                min-width: 25vw;
+            }
+        }
+    }
+
+    //mobile only 
+    @media(max-width: 768px){
+        #info-materia{
+            #cartelera{
+                width: 85vw;
+                min-height: 20vh;
+                padding: 1.5vw;
+            }
+            #notas{
+                width: 85vw;
+                margin-top: 1vh;
+                padding: 2.5vw;
+            }
+        }
+    }
+}
