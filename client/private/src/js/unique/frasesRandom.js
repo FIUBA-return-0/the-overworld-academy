@@ -19,7 +19,8 @@ const frases_menu = [
 	"si, Mauricio? <span class='emoji-font'>🤨</span>",
 	"el comandante.",
 	"lo viejo funciona",
-	"maaaamaaaaa, cortaste toda la loozz!!"
+	"maaaamaaaaa, cortaste toda la looz!!",
+	"fix: arreglo lo que yo mismo rompi",
 ];
 
 // agrego un feature nuevo para que no se repitan las frases 
