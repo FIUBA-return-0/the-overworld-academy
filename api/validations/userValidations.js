@@ -12,21 +12,21 @@ const validateUserValues = (req, res, next) => {
     if (!req.body) {
         return res.status(400).json({"error":"no se envio informacion"})
     }    
-    const { nombre, apellido, rol} = req.body
+    const { nombre, apellido, condicion } = req.body
 
-    if (nombre.length > 50 || apellido.length >20) {
+    if ((nombre && nombre.length > 50) || (apellido && apellido.length >20)) {
         return res.status(400).json({ "error": "Nombre o apellido mas largo de lo permitido." })
     }
-    if (rol != "alumno" && rol != "profesor" && rol != "director") {
+    if (condicion && condicion != "alumno" && condicion != "profesor" && condicion != "director") {
         return res.status(400).json({"error":"un usuario solo puede ser alumno, profesor o director"})
     }
     next()
 }
 
 const validateEmptyEntriesU = (req, res, next) => {
-    const { nombre, apellido, rol, password } = req.body
+    const { nombre, apellido, condicion, password } = req.body
 
-    if (!nombre || !apellido || !rol || !password) {
+    if (!nombre || !apellido || !condicion || !password) {
         return res.status(400).json({"error":"Algun contenido esta vacio, por favor revisa tus entradas"})
     }
     next()
@@ -51,9 +51,9 @@ const validateChangeCondition = async (req, res, next) => {
     const result = await db.query('SELECT condicion FROM usuario WHERE id = $1', [id]);
 
     const condicionOriginal = result.rows[0].condicion
-    const condicionNueva = req.body.rol
+    const condicionNueva = req.body.condicion
 
-    if (condicionNueva !== condicionOriginal) {
+    if (condicionNueva && condicionNueva !== condicionOriginal) {
         if (condicionOriginal !== 'alumno'){
             return res.status(400).json({ error: "Solo se puede actualizar el estado de un alumno." });
         }
