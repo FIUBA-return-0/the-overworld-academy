@@ -3,14 +3,15 @@ const router = Router();
 const createUser = require("../controllers/Users/createUser.js");
 const getUser = require("../controllers/Users/getUser.js");
 const {
-  validateCreateUser,
+  validateUserValues,
+  validateEmptyEntriesU,
   validateSentCondition,
   validateChangeCondition,
 } = require("../validations/userValidations.js");
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
 
-router.post("/", validateCreateUser, async (req, res) => {
+router.post("/", validateUserValues,validateEmptyEntriesU, async (req, res) => {
   const result = await createUser(req.body);
   const created = await getUser(result.content);
   let status = !result.status ? 201 : 500;
@@ -40,9 +41,9 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put(
+router.patch(
   "/:id",
-  validateCreateUser,
+  validateUserValues,
   validateChangeCondition,
   async (req, res) => {
     const { id } = req.params;
