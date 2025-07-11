@@ -13,7 +13,6 @@ const getDegree = async ({ id }) => {
     `;
 
   const resultado = await db.query(query, [id]);
-  console.log(resultado)
 
   return resultado.rows[0];
 };
