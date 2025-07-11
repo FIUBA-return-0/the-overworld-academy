@@ -1,0 +1,72 @@
+@use '../variables.scss' as *;
+
+.materia-card{
+    border: 1.5px solid white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-color: rgba($color: #444, $alpha: 0.75);
+
+    .materia-card-img{
+        object-fit: cover;
+        object-position: center;
+
+        border-right: 1.5px solid white;
+    }
+
+    .materia-card-text-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+
+        .materia-card-title{
+            font-family: Rubik;
+            font-weight: 500;
+            font-size: clamp(.9em, 1.5vw, 1.75em);
+        }
+        
+        .materia-card-profesor{
+            font-family: Rubik;
+            font-weight: 400;
+            font-size: clamp(.9em, 1.25vw, 1.65em);
+        }
+
+        .materia-card-description{
+            text-align: justify;
+            font-family: Rubik;
+            font-weight: 200;
+            font-size: clamp(.7em, 1.2vw, 1.5em);
+        }
+    }
+
+    &:hover{
+        transform: scale(1.05) rotate(-.25deg);
+        cursor: pointer;
+    }
+}
+
+//PC only
+@media(min-width: 768px){
+    .materia-card{
+        min-height: 25vh;
+        width: 60vw;
+        overflow: hidden;
+
+        .materia-card-img{
+            width: 35%;
+            height: 100%;
+        }
+
+        .materia-card-text-wrapper{
+            padding-inline: 2vw;
+            gap: 1vh;
+
+            .materia-card-profesor{
+                margin-top: -2.5vh;
+            }
+        }
+    }
+}
