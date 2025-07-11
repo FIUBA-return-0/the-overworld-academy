@@ -1,0 +1,19 @@
+@use '../variables.scss' as *;
+
+footer{
+    background-color: black;
+    color: white;
+    font-family: minecraft-p;
+
+    padding-block: 6vh;
+    margin-top: 6vh;
+
+    width: calc(100vw - var(--scrollbar-width, 0));
+    font-weight: 200;
+    font-size: clamp(.7em, 1.2vw, 1.5em);
+    border-top: 1px solid white;
+
+    a{
+        color: $color-2;
+    }
+}
