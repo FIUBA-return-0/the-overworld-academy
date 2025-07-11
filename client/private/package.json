@@ -15,8 +15,5 @@
     "gulp-terser": "2.1.0",
     "imagemin-optipng": "8.0.0",
     "sass": "1.89.2"
-  },
-  "dependencies": {
-    "jsonwebtoken": "^9.0.2"
   }
 }

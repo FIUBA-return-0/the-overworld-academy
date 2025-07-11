@@ -14,7 +14,6 @@ const authMiddleware = require("../utils/authMiddleware.js");
 
 router.post(
   "/",
-  authMiddleware,
   validateUserValues,
   validateEmptyEntriesU,
   async (req, res) => {
