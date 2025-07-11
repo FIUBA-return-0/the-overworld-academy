@@ -1,10 +1,10 @@
 @use '../variables.scss' as *;
 
-footer{
+.footer{
     background-color: black;
     color: white;
     font-family: minecraft-p;
-
+    text-align: center;
     padding-block: 6vh;
     margin-top: 6vh;
 
