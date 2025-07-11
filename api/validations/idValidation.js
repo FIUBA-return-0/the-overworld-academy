@@ -8,9 +8,9 @@
  */
 const validateId = async (req, res, next) => {
 
-    const { id } = await req.params;
+    const { carrera } = await req.body;
 
-    if(!id || id <= 0){
+    if(!carrera || carrera <= 0 || isNaN(carrera)){
         return res.status(400).json({error: 'El id enviado debe ser mayor que 0'})
     }
     next()

@@ -18,7 +18,7 @@ const getUser = async ({ id }) => {
             u.foto,
             u.bio
         from usuario u
-        join carreras c 
+        left join carreras c 
         on u.carrera = c.id
         where u.id = $1
     `;

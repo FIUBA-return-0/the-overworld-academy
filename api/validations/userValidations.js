@@ -17,16 +17,16 @@ const validateUserValues = (req, res, next) => {
     if ((nombre && nombre.length > 50) || (apellido && apellido.length >20)) {
         return res.status(400).json({ "error": "Nombre o apellido mas largo de lo permitido." })
     }
-    if (condicion && condicion != "alumno" && condicion != "profesor" && condicion != "director") {
+    if (condicion && condicion != "alumno" && condicion != "profesor") {
         return res.status(400).json({"error":"un usuario solo puede ser alumno, profesor o director"})
     }
     next()
 }
 
 const validateEmptyEntriesU = (req, res, next) => {
-    const { nombre, apellido, condicion, password } = req.body
+    const { nombre, apellido, password , carrera} = req.body
 
-    if (!nombre || !apellido || !condicion || !password) {
+    if (!nombre || !apellido || !password || !carrera) {
         return res.status(400).json({"error":"Algun contenido esta vacio, por favor revisa tus entradas"})
     }
     next()
