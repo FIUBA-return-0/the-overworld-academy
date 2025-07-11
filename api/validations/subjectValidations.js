@@ -28,7 +28,7 @@ const validateEmptyEntriesS = (req, res, next) => {
   next()
 }
 
-const validateQueryParams = async (req, res, next) => {
+const validateQueryParamsS = async (req, res, next) => {
   const { id, carrera } = req.query;
 
   if (!id && !carrera) {
@@ -46,4 +46,4 @@ const validateQueryParams = async (req, res, next) => {
 module.exports =
   { validateSubjectValues,
   validateEmptyEntriesS,
-  validateQueryParams }
+  validateQueryParamsS }

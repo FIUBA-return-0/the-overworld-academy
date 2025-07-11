@@ -2,7 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const createSubject = require("../controllers/Subjects/createSubject.js");
 const getSubject = require("../controllers/Subjects/getSubject.js");
-const { validateSubjectValues, validateEmptyEntriesS, validateQueryParams } = require("../validations/subjectValidations.js");
+const { validateSubjectValues, validateEmptyEntriesS, validateQueryParamsS } = require("../validations/subjectValidations.js");
 const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
 
@@ -17,7 +17,7 @@ router.post(
   }
 );
 
-router.get("/", validateQueryParams, async (req, res) => {
+router.get("/", validateQueryParamsS, async (req, res) => {
   const result = await getSubject(req.query);
 
   if (!result.length) {

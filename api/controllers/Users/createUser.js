@@ -10,12 +10,14 @@ const createUser = async ({
   username,
   password,
   carrera,
+  foto,
+  bio
 }) => {
-  const values = [nombre, apellido, username, password, carrera];
+  const values = [nombre, apellido, username, password, carrera, foto, bio];
 
   const query = `
-        INSERT INTO usuario (nombre,apellido,condicion,username,password,carrera)
-        VALUES($1,$2,'alumno',$3,$4,$5)
+        INSERT INTO usuario (nombre,apellido,condicion,username,password,carrera,foto,bio)
+        VALUES($1,$2,'alumno',$3,$4,$5,$6,$7)
         RETURNING id;
     `;
   try {
