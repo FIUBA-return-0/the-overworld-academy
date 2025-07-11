@@ -10,18 +10,24 @@ const {
 } = require("../validations/userValidations.js");
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
-const authMiddleware = require("../utils/authMiddleware.js");
+const bcrypt = require("bcryptjs");
 
 router.post(
   "/",
   validateUserValues,
   validateEmptyEntriesU,
   async (req, res) => {
+    const salt = await bcrypt.genSalt(12);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    req.body.password = hash;
     const result = await createUser(req.body);
 
-    const created = await getUser(result.content);
-    let status = !result.status ? 201 : 500;
-    res.status(status).json(created);
+    if (!result.status) {
+      const created = await getUser(result.content);
+      res.status(201).json(created);
+    } else {
+      res.status(500).json(result.content);
+    }
   }
 );
 
