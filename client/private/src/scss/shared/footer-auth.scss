@@ -1,0 +1,21 @@
+@use '../variables' as *;
+
+.footer-auth{
+    letter-spacing: 1.1px;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    bottom: 2vh;
+    width: 100%;
+    padding: 0 2vh;
+    white-space: nowrap;
+    margin-top: 3vh;
+    font-size: clamp(.8em, 1.3vw, 2em);
+    font-family: minecraft-p;
+    
+    p{
+        color: $color-5;
+        font-size: clamp(.8em, 1.3vw, 2em);
+    }
+}
+
