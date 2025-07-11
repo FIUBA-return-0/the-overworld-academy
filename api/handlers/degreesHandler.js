@@ -11,8 +11,6 @@ const updateDegree = require("../controllers/Degrees/updateDegree.js");
 router.post("/", validateDegreeValues, validateEmptyEntriesD, async (req, res) => {
   const result = await createDegree(req.body);
   const created = await getDegree(result.content);
-  console.log(result)
-  console.log(created)
   let status = !result.status ? 201 : 500;
   res.status(status).json(created);
 });

@@ -12,6 +12,7 @@ const validateId = require("../validations/idValidation.js")
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
 const bcrypt = require("bcryptjs");
+const deleteUser = require("../controllers/Users/deleteUser.js");
 
 router.post(
   "/",
@@ -72,5 +73,18 @@ router.patch(
     }
   }
 );
+
+router.delete("/:id", async (req, res) => {
+  const result = await deleteUser(req.params);
+
+  if (!result) {
+    res
+      .status(404)
+      .json({ error: "No se puede eliminar un alumno que no existe" });
+  } else {
+    res.status(200).json(result);
+  }
+});
+
 
 module.exports = router;
