@@ -24,9 +24,9 @@ const validateUserValues = (req, res, next) => {
 }
 
 const validateEmptyEntriesU = (req, res, next) => {
-    const { nombre, apellido, password } = req.body
+    const { nombre, apellido, password , carrera} = req.body
 
-    if (!nombre || !apellido || !password) {
+    if (!nombre || !apellido || !password || !carrera) {
         return res.status(400).json({"error":"Algun contenido esta vacio, por favor revisa tus entradas"})
     }
     next()
