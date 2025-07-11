@@ -8,11 +8,13 @@ const {
   validateSentCondition,
   validateChangeCondition,
 } = require("../validations/userValidations.js");
-const validateId = require("../validations/idValidation.js")
+const validateId = require("../validations/idValidation.js");
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
 const bcrypt = require("bcryptjs");
 const deleteUser = require("../controllers/Users/deleteUser.js");
+const authMiddleware = require("../utils/authMiddleware.js");
+const { authProfesor, authSameUser } = require("../utils/authRoles");
 
 router.post(
   "/",
@@ -29,27 +31,42 @@ router.post(
       const { id, nombre, apellido, condicion, username, carrera, foto, bio } =
         await getUser(result.content);
 
-      res.status(201).json({ id, nombre, apellido, condicion, username, carrera, foto, bio });
+      res.status(201).json({
+        id,
+        nombre,
+        apellido,
+        condicion,
+        username,
+        carrera,
+        foto,
+        bio,
+      });
     } else {
       res.status(500).json(result.content);
     }
   }
-); 
+);
 
-router.get("/", validateSentCondition, async (req, res) => {
-  const { rol } = req.query;
-  const result = await getAllUsers(rol);
+router.get(
+  "/",
+  authMiddleware,
+  authProfesor,
+  validateSentCondition,
+  async (req, res) => {
+    const { rol } = req.query;
+    const result = await getAllUsers(rol);
 
-  if (!result.length) {
-    res
-      .status(404)
-      .json({ error: "no se encontro el/los usuario/s buscado/s" });
-  } else {
-    res.status(200).json(result);
+    if (!result.length) {
+      res
+        .status(404)
+        .json({ error: "no se encontro el/los usuario/s buscado/s" });
+    } else {
+      res.status(200).json(result);
+    }
   }
-});
+);
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", authMiddleware, authSameUser, async (req, res) => {
   const user = await getUser(req.params);
 
   if (!user) {
@@ -61,6 +78,8 @@ router.get("/:id", async (req, res) => {
 
 router.patch(
   "/:id",
+  authMiddleware,
+  authSameUser,
   validateUserValues,
   validateChangeCondition,
   async (req, res) => {
@@ -87,6 +106,5 @@ router.delete("/:id", async (req, res) => {
     res.status(200).json(result);
   }
 });
-
 
 module.exports = router;

@@ -3,8 +3,10 @@ const router = Router();
 const getGrade = require("../controllers/Grades/getGrades");
 const postGrade = require("../controllers/Grades/postGrade");
 const updateGrade = require("../controllers/Grades/updateGrade");
+const authMiddleware = require("../utils/authMiddleware");
+const { authProfesor } = require("../utils/authRoles.js");
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   const result = await getGrade(req.body);
 
   if (!result.length) {
@@ -16,7 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, authProfesor, async (req, res) => {
   const result = await postGrade(req.body);
   if (!result.status) {
     const created = await getGrade(req.body);
@@ -26,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/", async (req, res) => {
+router.put("/", authMiddleware, authProfesor, async (req, res) => {
   const result = await updateGrade(req.body);
   if (!result.status) {
     const created = await getGrade(req.body);

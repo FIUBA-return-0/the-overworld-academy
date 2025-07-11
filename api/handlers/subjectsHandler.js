@@ -2,12 +2,20 @@ const { Router } = require("express");
 const router = Router();
 const createSubject = require("../controllers/Subjects/createSubject.js");
 const getSubject = require("../controllers/Subjects/getSubject.js");
-const { validateSubjectValues, validateEmptyEntriesS, validateQueryParamsS } = require("../validations/subjectValidations.js");
+const {
+  validateSubjectValues,
+  validateEmptyEntriesS,
+  validateQueryParamsS,
+} = require("../validations/subjectValidations.js");
 const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
+const authMiddleware = require("../utils/authMiddleware.js");
+const { authDirector, authDirectorProfesor } = require("../utils/authRoles");
 
 router.post(
   "/",
+  authMiddleware,
+  authDirector,
   validateSubjectValues,
   validateEmptyEntriesS,
   async (req, res) => {
@@ -17,7 +25,7 @@ router.post(
   }
 );
 
-router.get("/", validateQueryParamsS, async (req, res) => {
+router.get("/", authMiddleware, validateQueryParamsS, async (req, res) => {
   const result = await getSubject(req.query);
 
   if (!result.length) {
@@ -27,7 +35,7 @@ router.get("/", validateQueryParamsS, async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authMiddleware, authDirector, async (req, res) => {
   const result = await deleteSubject(req);
 
   if (!result) {
@@ -41,6 +49,8 @@ router.delete("/:id", async (req, res) => {
 
 router.patch(
   "/:id",
+  authMiddleware,
+  authDirectorProfesor,
   validateSubjectValues,
   async (req, res) => {
     const { id } = req.params;
