@@ -14,4 +14,12 @@ const validateQueryParamsI = async (req, res, next) => {
     next();
 }
 
-module.exports = validateQueryParamsI
+const validateStudentCondition = async (req, res, next) => {
+  const { condicion } = req.query;
+  if(condicion!='aprobado' || condicion!='cursando'){
+    return res
+    .status(400)
+    .json({ error: "El parámetro enviado debe ser aprobado o cursando."})
+  }
+}
+module.exports = {validateQueryParamsI, validateStudentCondition}

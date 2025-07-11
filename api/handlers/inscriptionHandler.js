@@ -4,7 +4,7 @@ const deleteInscription = require("../controllers/Inscriptions/deleteInscription
 const postInscription = require("../controllers/Inscriptions/postInscription");
 const getInscription = require("../controllers/Inscriptions/getInscription");
 const updateInscription = require("../controllers/Inscriptions/updateInscription");
-const validateQueryParamsI = require("../validations/inscriptionValidations");
+const {validateQueryParamsI, validateStudentCondition} = require("../validations/inscriptionValidations");
 const router = Router();
 
 router.get("/", validateQueryParamsI, async (req, res) => {
@@ -17,7 +17,7 @@ router.get("/", validateQueryParamsI, async (req, res) => {
   }
 });
 
-router.patch("/", async (req, res) => {
+router.patch("/", validateStudentCondition, async (req, res) => {
   const result = await updateInscription(req.query);
   if (!result.status) {
     const updated = await getInscription(result.content);
