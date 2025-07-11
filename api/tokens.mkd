@@ -1,0 +1,29 @@
+> sin tokens
+
+- login
+- create user
+- get all degrees : solo traer nombre
+- getUser
+
+> con tokens propio
+
+- getUser
+- updateUser ( solo los campos que se pueden modificar) salvo con
+
+> con token alumno
+
+- todo salvo getAllInscriptions que tambien puede acceder el profesor
+
+  > con token director
+
+- get All subject ( crear )
+- todo lo de subject
+
+  > con token profesor
+
+- todo lo q sea grades
+- update subject ( cartelera)
+
+  > con cualq token valido
+
+- get degree

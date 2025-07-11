@@ -1,16 +1,15 @@
-const express = require('express')
-require('dotenv').config()
-const app = express()
-const PORT = process.env.PORT
-const router = require("./routes/index.js")
+const express = require("express");
+require("dotenv").config();
+const app = express();
+const PORT = process.env.PORT;
+const router = require("./routes/index.js");
 
-app.use(express.json())
-
+app.use(express.json());
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
-})
+  console.log(`Example app listening on port ${PORT}`);
+});
 
-app.use('/', router)
+app.use("/", router);
 
-module.exports = app
+module.exports = app;

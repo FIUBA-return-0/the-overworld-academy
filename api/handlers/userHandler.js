@@ -10,13 +10,20 @@ const {
 } = require("../validations/userValidations.js");
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
+const authMiddleware = require("../utils/authMiddleware.js");
 
-router.post("/", validateUserValues,validateEmptyEntriesU, async (req, res) => {
-  const result = await createUser(req.body);
-  const created = await getUser(result.content);
-  let status = !result.status ? 201 : 500;
-  res.status(status).json(created);
-});
+router.post(
+  "/",
+  validateUserValues,
+  validateEmptyEntriesU,
+  async (req, res) => {
+    const result = await createUser(req.body);
+
+    const created = await getUser(result.content);
+    let status = !result.status ? 201 : 500;
+    res.status(status).json(created);
+  }
+);
 
 router.get("/", validateSentCondition, async (req, res) => {
   const { rol } = req.query;
