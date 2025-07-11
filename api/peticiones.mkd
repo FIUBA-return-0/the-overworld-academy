@@ -1,0 +1,40 @@
+> profesor
+
+- -get Subject ()
+- -updateSubject
+- -getGrade (materia)
+- -updateGrade ([materias]) hay que iterar en el back
+
+> perfil
+
+- info user - getUser
+- modificar info user - updateuser
+- dar de baja - deleeteUser,deleteGrades,deleteInscription
+
+> alumno
+
+- mostrar materias( todas y resaltar las que esta inscripto(cursando))
+- carrera
+
+> materia (pov alumno)
+
+- info de la materia (menos los inscriptos)
+- notas en la mateeria
+
+> director
+
+- traer carrera ( donde el director sea el usuario)
+- modificar carrera
+
+> modificar materia (pov director)
+
+- modificar usuario (promover a profe, con un id enviado)
+- modificar materia (bio,nombre,foto etc)
+
+> login
+
+- pedir token
+
+> register
+
+- pedir carreras
