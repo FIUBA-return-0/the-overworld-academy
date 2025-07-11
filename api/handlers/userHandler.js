@@ -8,6 +8,7 @@ const {
   validateSentCondition,
   validateChangeCondition,
 } = require("../validations/userValidations.js");
+const validateId = require("../validations/idValidation.js")
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
 const bcrypt = require("bcryptjs");
@@ -16,6 +17,7 @@ router.post(
   "/",
   validateUserValues,
   validateEmptyEntriesU,
+  validateId,
   async (req, res) => {
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(req.body.password, salt);
