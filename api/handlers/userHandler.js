@@ -26,13 +26,15 @@ router.post(
     const result = await createUser(req.body);
 
     if (!result.status) {
-      const created = await getUser(result.content);
-      res.status(201).json(created);
+      const { id, nombre, apellido, condicion, username, carrera, foto, bio } =
+        await getUser(result.content);
+
+      res.status(201).json({ id, nombre, apellido, condicion, username, carrera, foto, bio });
     } else {
       res.status(500).json(result.content);
     }
   }
-);
+); 
 
 router.get("/", validateSentCondition, async (req, res) => {
   const { rol } = req.query;

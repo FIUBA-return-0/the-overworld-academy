@@ -4,9 +4,10 @@ const deleteInscription = require("../controllers/Inscriptions/deleteInscription
 const postInscription = require("../controllers/Inscriptions/postInscription");
 const getInscription = require("../controllers/Inscriptions/getInscription");
 const updateInscription = require("../controllers/Inscriptions/updateInscription");
+const validateQueryParamsI = require("../validations/inscriptionValidations");
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", validateQueryParamsI, async (req, res) => {
   const result = await getAllInscriptions(req.query);
 
   if (!result.length) {
