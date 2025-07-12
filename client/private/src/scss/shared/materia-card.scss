@@ -75,3 +75,25 @@
         }
     }
 }
+
+//mobile only
+@media(max-width: 768px){
+    .materia-card{
+        width: 90vw;
+        flex-direction: column;
+    }
+
+    .materia-card-img-wrapper{
+        width: 90vw;
+        border-bottom: 1.5px solid white;
+    }
+
+    .materia-card-text-wrapper{
+        padding: 5vw;
+        gap: 1vh;
+
+        .materia-card-profesor{
+            margin-top: -2.5vh;
+        }
+    }
+}
