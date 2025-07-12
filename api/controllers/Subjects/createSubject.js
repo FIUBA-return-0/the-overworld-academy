@@ -1,4 +1,4 @@
-const db  = require('../../db.js') 
+const db = require("../../db.js");
 
 /**
  * Crea en la base de datos la carrera con los datos brindados
@@ -7,29 +7,21 @@ const db  = require('../../db.js')
  */
 
 const createSubject = async (body) => {
-    
-    const {
-        profesor,
-        nombre,
-        carga_horaria,
-        carrera
-    } = body
-    const values = [profesor, nombre, carga_horaria, carrera]
+  const { profesor, nombre, carga_horaria, carrera } = body;
+  const values = [profesor, nombre, carga_horaria, carrera];
 
-    
-    const query = `
+  const query = `
         INSERT INTO materias (profesor,nombre,carga_horaria,carrera)
         VALUES($1,$2,$3,$4)
-        RETURNING *
+        RETURNING id
     `;
-    try {
-        const content = await db.query(query, values)
-        
-        return {"status":0,"content":content.rows[0]}
-    } catch (error) {
-        return { status: 1, content: error.message }
-    }
-    
-}
+  try {
+    const content = await db.query(query, values);
 
-module.exports = createSubject
+    return { status: 0, content: content.rows[0] };
+  } catch (error) {
+    return { status: 1, content: error.message };
+  }
+};
+
+module.exports = createSubject;

@@ -11,6 +11,7 @@ const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
 const authMiddleware = require("../utils/authMiddleware.js");
 const { authDirector, authDirectorProfesor } = require("../utils/authRoles");
+const promoteUser = require("../controllers/Degrees/promoteUser.js");
 
 router.post(
   "/",
@@ -20,8 +21,15 @@ router.post(
   validateEmptyEntriesS,
   async (req, res) => {
     const result = await createSubject(req.body);
+    const created = await getSubject(result.content);
+    const newProfesor = await promoteUser(created[0]);
+
+    if (newProfesor.status) {
+      res.statsu(500).json(newProfesor.content);
+    }
+
     let status = !result.status ? 201 : 500;
-    res.status(status).json(result.content);
+    res.status(status).json(created[0]);
   }
 );
 
