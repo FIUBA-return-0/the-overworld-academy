@@ -66,6 +66,17 @@ router.get(
   }
 );
 
+router.get("/self", authMiddleware, async (req, res) => {
+  const user = await getUser({ id: req.user.id });
+
+  if (!user) {
+    res.status(404).json({ error: "el usuario no existe" });
+  } else {
+    res.status(200).json(user);
+  }
+});
+
+
 router.get("/:id", authMiddleware, authSameUser, async (req, res) => {
   const user = await getUser(req.params);
 
