@@ -5,6 +5,7 @@ const postGrade = require("../controllers/Grades/postGrade");
 const updateGrade = require("../controllers/Grades/updateGrade");
 const authMiddleware = require("../utils/authMiddleware");
 const { authProfesor } = require("../utils/authRoles.js");
+const { validateEmptyEntriesG, validateGradeValues } = require("../validations/gradesValidations.js");
 
 router.get("/", authMiddleware, async (req, res) => {
   const result = await getGrade(req.body);
@@ -18,7 +19,7 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/", authMiddleware, authProfesor, async (req, res) => {
+router.post("/", authMiddleware, authProfesor, validateGradeValues, validateEmptyEntriesG, async (req, res) => {
   const result = await postGrade(req.body);
   if (!result.status) {
     const created = await getGrade(req.body);
