@@ -8,6 +8,8 @@ const updateInscription = require("../controllers/Inscriptions/updateInscription
 const {
   validateQueryParamsI,
   validateStudentCondition,
+  validateEmptyBodyI,
+  validateEmptyEntriesI,
 } = require("../validations/inscriptionValidations");
 const authMiddleware = require("../utils/authMiddleware");
 const { authProfesor } = require("../utils/authRoles");
@@ -26,6 +28,7 @@ router.patch(
   "/",
   authMiddleware,
   authProfesor,
+  validateEmptyBodyI,
   validateStudentCondition,
   async (req, res) => {
     const result = await updateInscription(req.query);
@@ -48,7 +51,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validateEmptyBodyI, validateEmptyEntriesI, async (req, res) => {
   const result = await postInscription(req.body);
 
   if (!result.status) {
