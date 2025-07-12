@@ -1,6 +1,10 @@
 async function getCarreras(){
     try{
-        const res = await fetch(`${API}/carrera/`);
+        const res = await fetch(`${API}/carrera/`, {
+            headers: {
+                "Content-Type":"application/json"
+            },
+        });
 
         if(res.status === 200){
             let ans = {};
