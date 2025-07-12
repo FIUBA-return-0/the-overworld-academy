@@ -35,7 +35,8 @@ CREATE TABLE materias (
   profesor INT REFERENCES usuario(id),
   nombre VARCHAR(50) NOT NULL,
   carga_horaria INT NOT NULL,
-  carrera INT REFERENCES carreras(id)
+  carrera INT REFERENCES carreras(id),
+  foto text
 );
 --! auxiliares:
 CREATE TABLE notas (
