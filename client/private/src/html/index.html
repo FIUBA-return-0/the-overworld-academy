@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login · The Overworld Academy</title>
 
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./auth.css">
-    <link rel="stylesheet" href="./login.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/auth.css">
+    <link rel="stylesheet" href="/login.css">
 
 </head>
 
@@ -19,11 +19,14 @@
 
     <div class="auth-wrapper">
         <p class="minecraft-p">Usuario</p>
-        <input class="large-input" type="text" required maxlength="30">
+        <input id="usuario" class="large-input" type="text" required maxlength="30">
+        <p id="error-usuario" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> El usuario no puede ser vacio</p>
+        <p id="error-usuario-invalido" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Tu usuario es invalido</p>
         <p class="minecraft-p">Contrasenia</p>
-        <input class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <p id="error-contrasenia" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> La contrasenia no puede ser vacia</p>
         <p class="minecraft-p">No tenes cuenta? <a href="registrarse.html">Registrarse</a></p>
-        <button class="large-button sound-button">Iniciar sesion</button>
+        <button id="login" class="large-button sound-button">Iniciar sesion</button>
     </div>
 
     <footer class="footer-auth">
@@ -31,9 +34,9 @@
         <p class="minecraft-p">Copyright <a href="https://github.com/FIUBA-return-0" target="_blank">return 0;</a> No distribuir</p>
     </footer>
 
-    <script src="./main.js"></script>
-    <script src="./frasesRandom.js"></script>
-
+    <script src="/main.js"></script>
+    <script src="/frasesRandom.js"></script>
+    <script src="/login.js"></script>
 </body>
 </html>
 

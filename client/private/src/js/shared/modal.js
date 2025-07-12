@@ -23,9 +23,9 @@ if (cancelarSalida !== null){
 
 // logout
 const confirmarSalida = document.getElementById("cancelar-salida");
-
 if (confirmarSalida !== null){
-	document.getElementById("confirmar-salida").addEventListener("click", function() {
-  		window.location.href = "index.html";
+	document.getElementById("confirmar-salida").addEventListener("click", () => {
+  		localStorage.clear();
+		window.location.href = "/";
   	});
 }
