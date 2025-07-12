@@ -12,6 +12,7 @@ const deleteDegree = require("../controllers/Degrees/deleteDegree.js");
 const updateDegree = require("../controllers/Degrees/updateDegree.js");
 const authMiddleware = require("../utils/authMiddleware.js");
 const { authDirector } = require("../utils/authRoles");
+const promoteUser = require("../controllers/Degrees/promoteUser.js");
 
 router.post(
   "/",
@@ -22,6 +23,7 @@ router.post(
   async (req, res) => {
     const result = await createDegree(req.body);
     const created = await getDegree(result.content);
+
     let status = !result.status ? 201 : 500;
     res.status(status).json(created);
   }

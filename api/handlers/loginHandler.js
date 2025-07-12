@@ -9,7 +9,9 @@ router.get("/", async (req, res) => {
 
   const access = await bcrypt.compare(req.body.password, password);
 
-  !access && res.status(401).json({ error: "contra incorrecta" });
+  if (!access) {
+    return res.status(401).json({ error: "contraseña incorrecta" });
+  }
 
   const token = tokenCreation({ username, condicion, id });
 
