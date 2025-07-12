@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const checkData = require("../controllers/login/checkdata.js");
 const tokenCreation = require("../utils/tokenCreate.js");
 
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   const { username, password, condicion, id } = await checkData(req);
 
   const access = await bcrypt.compare(req.body.password, password);
