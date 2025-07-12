@@ -1,0 +1,70 @@
+@use '../variables' as *;
+
+.crear-materia-page{
+    .crear-materia-data{
+        .crear-materia-data-box{
+            border-radius: 10px;
+            border: 1.5px solid white;
+            background-color: rgba($color: $color-10, $alpha: 0.9);
+        }
+
+        .crear-materia-data-box-wrapper{
+            display: flex;
+            flex-direction: column;
+
+            textarea{
+                padding-top: 1vh;
+                line-height: 1.25;
+                min-height: 15vh;
+                resize: vertical;
+            }
+        }
+
+        //mobile only
+        @media(max-width: 768px){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .crear-materia-data-box{
+                margin-top: 8vh;
+                padding-top: 2vh;
+                padding-bottom: 3vh;
+                width: 80vw;
+                margin-bottom: 3vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        //PC only
+        @media(min-width: 768px){
+            min-height: calc(var(--vh, 1vh) * 90); //PC only; height - PC nav
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .crear-materia-data-box{
+                width: 50vw;
+                min-height: 90vh;
+                margin-top: 2.5vw;
+                margin-bottom: 2.5vw;
+
+                display: flex;
+                justify-content: center;
+                align-items: top;
+                
+                .crear-materia-data-box-wrapper{
+                    margin-top: 2.5vw;
+
+                    button:last-child{
+                        margin-bottom: 2.5vw;
+                    }
+                }
+            }
+        }
+    }
+}

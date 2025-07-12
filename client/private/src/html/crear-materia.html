@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Materia · The Overworld Academy</title>
+    
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./crear-materia.css">
+
+</head>
+
+<body class="crear-materia-page">
+    <nav>
+        <div class="nav-left">
+            <img class="nav-img-logo" src="/img/the-overworld-academy-logo.png" alt="Nuestro logo">
+        </div>
+        <div class="nav-right">
+            <img class="icon" src="/img/user-logo.svg" alt="Perfil">
+            <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
+            <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
+        </div> 
+    </nav>
+
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+        <p class="minecraft-p">Estas seguro de que queres salir?</p>
+        <div class="modal-botones">
+            <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+            <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="crear-materia-data">
+        <div class="crear-materia-data-box">
+            <div class="crear-materia-data-box-wrapper">
+
+                <p class="minecraft-p">Nombre de la materia</p>
+                <input class="large-input" type="text" id="nombre-materia" placeholder="Pscicologia del atacante" disabled>
+
+                <p class="minecraft-p">Profesor a cargo</p>
+                <input class="large-input" type="text" id="nombre-profesor" placeholder="112233 (Padron)" disabled>
+
+                <p class="minecraft-p">Imagen de la materia</p>
+                <input class="large-input" type="url" id="materia-img" placeholder="https://imagen-materia.com" pattern="https://.*" disabled>
+
+                <p class="minecraft-p">Descripcion</p>
+                <textarea class="large-input" type="text" id="descripcion" disabled ></textarea>
+
+                <button class="large-button sound-button" id="editar-materia">Editar materia</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" class="flex-c-c">
+        <p>&copy; 2025 por <a href="https://github.com/FIUBA-return-0" target="_blank">return 0;</a></p>
+        <p>Todos los derechos reservados</p>
+    </footer>
+
+    <script src="./main.js"></script>
+    <script src="./crearMateria.js"></script>
+
+</body>
+</html>
