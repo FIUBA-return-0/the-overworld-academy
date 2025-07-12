@@ -3,7 +3,7 @@ const validateGradeValues = (req, res, next) => {
         return res.status(400).json({ error: "No se recibió body en la solicitud" });
     }
 
-    const nota = req.body
+    const { nota } = req.body
 
     if(nota <= 0 || isNaN(nota)){
         return res

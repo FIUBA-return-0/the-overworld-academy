@@ -28,8 +28,6 @@ router.patch(
   "/",
   authMiddleware,
   authProfesor,
-  validateEmptyBodyI,
-  validateStudentCondition,
   async (req, res) => {
     const result = await updateInscription(req.query);
     if (!result.status) {
