@@ -1,4 +1,5 @@
 @use '../variables' as *;
+@use 'sass:color';
 
 .large-button{
     color: $base-foreground-color;
@@ -40,5 +41,13 @@
 
     &:hover{
         background-color: #e50914;
+    }
+}
+
+.green-button{
+    background-color: $color-11;
+
+    &:hover{
+        background-color: color.scale($color-11, $lightness: -10%);
     }
 }

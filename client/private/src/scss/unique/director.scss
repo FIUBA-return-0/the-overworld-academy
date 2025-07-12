@@ -1,0 +1,30 @@
+@use '../variables.scss' as *;
+
+.director-page{
+    background-color: $color-9;
+
+    h1{
+        margin-top: 6vh;
+    }
+
+    #campos-carrera{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+    }
+
+    #materias{
+        margin-top: 3vh;
+        margin-bottom: 6vh;
+        
+        gap: 3vh;
+        .minecraft-p{
+            margin-bottom: -1.5vh;
+        }
+        button{
+            margin-top: -.5vh;
+        }
+    }
+}
+
