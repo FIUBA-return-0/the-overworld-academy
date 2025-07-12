@@ -32,7 +32,7 @@ router.post("/", authMiddleware, authProfesor, validateGradeValues, validateEmpt
 router.put("/", authMiddleware, authProfesor, async (req, res) => {
   const result = await updateGrade(req.body);
   if (!result.length) {
-    res.status(400).json({ error: result.content });
+    res.status(400).json({ error: "No se encontró la nota." });
   } else {
     const created = await getGrade(req.body);
     res.status(201).json(created[0]);
