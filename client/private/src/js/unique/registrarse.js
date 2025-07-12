@@ -10,6 +10,7 @@ async function getCarreras(){
                 ans[carrera.carrera] = carrera.id;
             });
 
+            localStorage.setItem("dictCarreras", JSON.stringify(ans));
             return ans;
         }
 
@@ -92,6 +93,40 @@ function validarEmptyFields(usuario, contrasenia, repContrasenia, apellido, nomb
     return flag;
 }
 
+async function postRegister(usuario, contrasenia, nombre, apellido, carrera, foto){
+    body = {
+        "nombre": nombre,
+        "apellido": apellido,
+        "username": usuario,
+        "password": contrasenia,
+        "carrera": carrera,
+        "foto": foto
+    };
+
+    try{
+        const res = await fetch(`${API}/usuario/`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(body)
+        });
+
+        if(res.status === 200){
+            //TODO login
+        }
+        else if(res.status === 409){
+            //TODO user repetido
+        }
+        else if(res.status === 500){
+            window.location.href = '/500.html';
+        }
+    }
+    catch (e){
+        console.log(e);
+    }
+}
+
 async function register(){
     ocultarErrores();
     
@@ -123,6 +158,17 @@ async function register(){
     }
 
     if(invalidFlag) return;
+
+    const dictCarreras = JSON.parse(localStorage.getItem("dictCarreras"));
+
+    await postRegister(
+        usuario.value,
+        contrasenia.value,
+        nombre.value,
+        apellido.value,
+        dictCarreras[carrera.value],
+        `/img/pp${Math.floor(Math.random() * (10 - 1 + 1)) + 1}.jpg`
+    );
 
     sound3.play();
 }
