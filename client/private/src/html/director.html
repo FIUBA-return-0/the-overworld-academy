@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Director · The Overworld Academy</title>
+    
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./director.css">
+</head>
+<body class="director-page flex-c-c">
+    <nav>
+        <div class="nav-left">
+            <img class="nav-img-logo" src="/img/the-overworld-academy-logo.png" alt="Nuestro logo">
+        </div>
+        <div class="nav-right">
+            <img class="icon" src="/img/user-logo.svg" alt="Perfil">
+            <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
+            <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
+        </div> 
+    </nav>
+
+    <div id="modal-opcion" class="modal hidden">
+        <div class="modal-contenido">
+        <p class="minecraft-p">Estas seguro de que queres salir?</p>
+        <div class="modal-botones">
+            <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+            <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="welcome">
+        <h1 class="materias-title">Bienvenido director de carrera Facundo</h1>
+    </section>
+
+    <section id="campos-carrera">
+        <p class="minecraft-p">Nombre de la carrera</p>
+        <input id="nombre" class="large-input" type="text">
+        <p class="minecraft-p">Descripcion de la carrera</p>
+        <input id="description" class="large-input" type="text">
+        <p class="minecraft-p">Foto de la carrera (URL directa)</p>
+        <input id="foto" class="large-input" type="text">
+        <button class="large-button sound-button">Editar</button>
+    </section>
+    
+    <section id="materias" class="flex-c-c">
+        <p class="minecraft-p">Materias de la carrera</p>
+        <div class="materia-card">
+            <div class="materia-card-img-wrapper">
+                <img class="materia-card-img" src="https://i.imgflip.com/1ixrwd.jpg" alt="Logo materia">
+            </div>
+            <div class="materia-card-text-wrapper">
+                <h2 class="materia-card-title">Lorem ipsum dolor sit amet</h2>
+                <h2 class="materia-card-profesor">Cátedra: Camejo</h2>
+                <p class="materia-card-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo illum sit nam dignissimos saepe quod maiores eligendi necessitatibus deserunt. Quasi nemo voluptatem rem excepturi architecto reprehenderit ut autem. Necessitatibus mollitia suscipit eaque non ut reiciendis delectus? Magni, dolorem minima? Non eum nostrum corporis placeat perspiciatis fugiat id dolorem veniam deserunt.</p>
+            </div>
+        </div>
+        <div class="materia-card">
+            <div class="materia-card-img-wrapper">
+                <img class="materia-card-img" src="https://i.imgflip.com/1ixrwd.jpg" alt="Logo materia">
+            </div>
+            <div class="materia-card-text-wrapper">
+                <h2 class="materia-card-title">La Psicología del atacante</h2>
+                <h2 class="materia-card-profesor">Cátedra: Manu Bilbao</h2>
+                <p class="materia-card-description">Estuviste toda la ronda holdeando el mismo ángulo, dejaste de mirar y te mataron? no más.</p>
+            </div>
+        </div>
+        <button class="large-button sound-button green-button">Crear nueva materia</button>
+    </section>
+
+    <footer class="footer" class="flex-c-c">
+        <p>&copy; 2025 por <a href="https://github.com/FIUBA-return-0" target="_blank">return 0;</a></p>
+        <p>Todos los derechos reservados</p>
+    </footer>
+
+    <script src="/main.js"></script>
+</body>
+</html>
