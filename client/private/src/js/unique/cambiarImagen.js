@@ -1,6 +1,7 @@
 const imagenes = document.querySelectorAll("#modal-cambiar-foto .modal-fotos img");
 
 function abrirModalFoto(){
+    frenarAudios();
     document.getElementById("modal-cambiar-foto").classList.remove("hidden");
     document.getElementsByTagName("body")[0].style = "overflow: hidden;";
 

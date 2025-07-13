@@ -110,12 +110,13 @@
     }
 }
 
+
 #easteregg-1{
     width: calc(100vw - var(--scrollbar-width, 0));
     height: calc((var(--vh, 1vh) * 100));
     background-color: rgba($color: $color-10, $alpha: 0.9);
     z-index: 9;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
