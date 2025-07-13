@@ -32,51 +32,63 @@
         </div>
     </div>
 
+    <div id="modal-opcion-borrar-cuenta" class="modal hidden">
+        <div class="modal-contenido">
+        <p class="minecraft-p">Vas a tirar surrender?</p>
+        <div class="modal-botones">
+            <button id="cancelar-borrar" class="large-button sound-button">Seguir luchando</button>
+            <button id="borrar-cuenta" class="large-button sound-button red-button">Rendirme</button>
+            </div>
+        </div>
+    </div>
+
     <div id="modal-cambiar-foto" class="modal hidden">
         <div class="salir-pp" onclick="document.getElementById('modal-cambiar-foto').classList.add('hidden');document.getElementsByTagName('body')[0].style = '';"></div>
         <div class="modal-contenido-pp">
             <p class="minecraft-p">Choose your fighter</p>
             <div class="modal-fotos">
                 <!-- Aca van las fotos defaults -->
-                <img src="/img/pp1.jpg">
+                <img src="/img/pp1.jpg" onclick="sound24.play();">
                 <img src="/img/pp2.jpg">
-                <img src="/img/pp3.jpg">
-                <img src="/img/pp4.jpg">
-                <img src="/img/pp5.jpg">
+                <img src="/img/pp3.jpg" onclick="sound7.play();">
+                <img src="/img/pp4.jpg" onclick="sound12.play();">
+                <img src="/img/pp5.jpg" onclick="sound10.play();">
                 <img src="/img/pp6.jpg">
-                <img src="/img/pp7.jpg">
+                <img src="/img/pp7.jpg" onclick="sound16.play();">
                 <img src="/img/pp8.jpg">
-                <img src="/img/pp9.jpg">
-                <img src="/img/pp10.jpg">
-                <img src="/img/pp11.png">
+                <img src="/img/pp9.jpg" onclick="sound25.play();">
+                <img src="/img/pp10.jpg" onclick="sound9.play();">
+                <img src="/img/pp11.png" onclick="sound9.play();">
                 <img src="/img/pp12.jpg">
                 <img src="/img/pp13.png">
-                <img src="/img/pp14.png">
-                <img src="/img/pp15.png">
-                <img src="/img/pp16.png">
-                <img src="/img/pp17.jpg">
-                <img src="/img/pp18.jpg">
-                <img src="/img/pp19.png">
-                <img src="/img/pp20.png">
-                <img src="/img/pp21.jpg">
-                <img src="/img/pp22.jpg">
-                <img src="/img/pp23.jpg">
-                <img src="/img/pp24.jpg">
-                <img src="/img/pp25.jpg">
+                <img src="/img/pp14.png" onclick="sound18.play();">
+                <img src="/img/pp15.png" onclick="sound8.play();">
+                <img src="/img/pp16.png" onclick="sound17.play();">
+                <img src="/img/pp17.jpg" onclick="sound13.play();">
+                <img src="/img/pp18.jpg" onclick="sound19.play();">
+                <img src="/img/pp19.png" onclick="sound8.play();">
+                <img src="/img/pp20.png" onclick="sound15.play();">
+                <img src="/img/pp21.jpg" onclick="sound26.play();">
+                <img src="/img/pp22.jpg" onclick="sound22.play();">
+                <img src="/img/pp23.jpg" onclick="sound20.play();">
+                <img src="/img/pp24.jpg" onclick="sound11.play();">
+                <img src="/img/pp25.jpg" onclick="sound21.play();">
                 <img src="/img/pp26.png">
-                <img src="/img/pp27.jpg">
-                <img src="/img/pp28.jpg">
-                <img src="/img/pp29.jpg">
+                <img src="/img/pp27.jpg" onclick="sound23.play();">
+                <img src="/img/pp28.jpg" onclick="sound14.play();">
+                <img src="/img/pp29.jpg" onclick="sound8.play();">
                 <img src="/img/pp30.jpg">
+                <img src="/img/pp31.jpg" onclick="sound8.play();">
+                <img src="/img/pp32.jpg" onclick="sound27.play();">
                 <!-- Aca van las fotos defaults -->
             </div>
         </div>
     </div>
 
-    <section id="easteregg-1" class="hidden" onclick="sound2.pause();document.getElementById('easteregg-1').classList.add('hidden'); window.scrollTo(0, 10000);">
+    <div id="easteregg-1" class="hidden">
         <div id="easteregg-1-img"></div>
-    </section>
-
+    </div>
+        
     <section class="perfil-data">
         <div class="perfil-p-wrapper">
             <img class="perfil-p" id="foto-perfil" src="/img/backup-pp.jpg" alt="Foto de perfil" style="cursor: pointer;" onclick="abrirModalFoto()">
@@ -114,9 +126,10 @@
         <p>Todos los derechos reservados</p>
     </footer>
     
-    <script src="./main.js"></script>
-    <script src="./imagenesRandom.js"></script>
-    <script src="./editarPerfil.js"></script>
-    <script src="./cambiarImagen.js"></script>
+    <script src="/main.js"></script>
+    <script src="/imagenesRandom.js"></script>
+    <script src="/editarPerfil.js"></script>
+    <script src="/cambiarImagen.js"></script>
+    <script src="/borrarCuenta.js"></script>
 </body>
 </html>
