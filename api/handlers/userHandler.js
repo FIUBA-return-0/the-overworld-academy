@@ -14,7 +14,7 @@ const updateUser = require("../controllers/Users/updateUser.js");
 const bcrypt = require("bcryptjs");
 const deleteUser = require("../controllers/Users/deleteUser.js");
 const authMiddleware = require("../utils/authMiddleware.js");
-const { authProfesor, authSameUser } = require("../utils/authRoles");
+const { authProfesor } = require("../utils/authRoles");
 
 router.post(
   "/",
@@ -69,7 +69,7 @@ router.get(
   }
 );
 
-router.get("/self", authMiddleware, authSameUser, async (req, res) => {
+router.get("/self", authMiddleware, async (req, res) => {
   const user = await getUser({ id: req.user.id });
 
   if (!user) {
@@ -93,7 +93,6 @@ router.get("/self", authMiddleware, authSameUser, async (req, res) => {
 router.patch(
   "/:id",
   authMiddleware,
-  authSameUser,
   validateUserValues,
   validateChangeCondition,
   async (req, res) => {
@@ -109,8 +108,10 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req, res) => {
-  const result = await deleteUser(req.params);
+router.delete("/", authMiddleware, async (req, res) => {
+  console.log(req.user);
+
+  const result = await deleteUser(req.user);
 
   if (!result) {
     res
