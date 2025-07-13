@@ -9,10 +9,25 @@ async function loginPOST(body){
         });
 
         if(res.status === 200){
-            const data = await res.text();
-            localStorage.setItem("token", data);
-            //TODO getSelf
-            window.location.href = "/alumno.html";
+            try{
+                let token = await res.json();
+
+                localStorage.setItem("token", token);
+                
+                const selfData = await fetch(`${API}/usuario/self`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                const selfDataJSON = await selfData.json();
+                console.log(selfDataJSON);
+
+                localStorage.setItem("condicion", selfDataJSON.condicion);
+
+                window.location.href = `/${selfDataJSON.condicion}.html`;
+            } catch(e){ console.error(e) }
         }
 
         else if(res.status === 401){
@@ -23,7 +38,5 @@ async function loginPOST(body){
             window.location.href = '/500.html';
         }
     }
-    catch(e){
-        console.log(e);
-    }
+    catch(e){ console.log(e); }
 }
