@@ -7,8 +7,8 @@
 
 > perfil
 
-- info user - getUser
-- modificar info user - updateuser
+- info user - getUser #
+- modificar info user - updateuser #
 - dar de baja - deleeteUser,deleteGrades,deleteInscription
 
 > alumno
@@ -18,8 +18,8 @@
 
 > materia (pov alumno)
 
-- info de la materia (menos los inscriptos)
-- notas en la mateeria
+- info de la materia (menos los inscriptos) #
+- notas en la mateeria #
 
 > director
 
