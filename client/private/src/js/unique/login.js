@@ -47,8 +47,10 @@ async function login(){
         invalidFlag = true;
     }
 
-    if(invalidFlag) return;
-
+    if(invalidFlag){
+        sound5.play();
+        return;
+    }
     const body = {
         "username": usuario.value,
         "password": contrasenia.value
