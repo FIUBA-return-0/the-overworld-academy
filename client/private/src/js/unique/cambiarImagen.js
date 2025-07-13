@@ -2,7 +2,8 @@ const imagenes = document.querySelectorAll("#modal-cambiar-foto .modal-fotos img
 
 function abrirModalFoto(){
     document.getElementById("modal-cambiar-foto").classList.remove("hidden");
-    
+    document.getElementsByTagName("body")[0].style = "overflow: hidden;";
+
     const actual = document.getElementById("foto-perfil").getAttribute("src");
     imagenes.forEach(img => {
         if (img.getAttribute("src") === actual){
@@ -20,6 +21,7 @@ imagenes.forEach(img=>{
 
         document.getElementById("foto-perfil").setAttribute("src", nuevaImagen);
         document.getElementById("modal-cambiar-foto").classList.add('hidden');
+        document.getElementsByTagName("body")[0].style = "";
         
         // localStorage 
         localStorage.setItem("imagenPerfil", nuevaImagen);

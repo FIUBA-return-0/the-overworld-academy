@@ -21,6 +21,9 @@ const frases_menu = [
 	"lo viejo funciona",
 	"maaaamaaaaa, cortaste toda la looz!!",
 	"fix: arreglo lo que yo mismo rompi",
+	"poneme la repe!",
+	"con 15 pesos me hago alto guiso",
+	"tenes que cerrar el estadio",
 ];
 
 // agrego un feature nuevo para que no se repitan las frases 
@@ -37,3 +40,5 @@ if (elemento) {
 }
 
 localStorage.setItem("ultimaFrase", fraseAleatoria);
+
+// so
