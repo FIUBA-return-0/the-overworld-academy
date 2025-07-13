@@ -41,6 +41,9 @@ router.post(
         foto,
         bio,
       });
+    }
+    if (result.content.includes("already exists")) {
+      res.status(409).json({ error: "el usuario ya existe" });
     } else {
       res.status(500).json(result.content);
     }
@@ -75,7 +78,6 @@ router.get("/self", authMiddleware, async (req, res) => {
     res.status(200).json(user);
   }
 });
-
 
 router.get("/:id", authMiddleware, authSameUser, async (req, res) => {
   const user = await getUser(req.params);
