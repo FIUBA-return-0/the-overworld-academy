@@ -12,7 +12,7 @@ const createSubject = async (body) => {
 
   const query = `
         INSERT INTO materias (profesor,nombre,carga_horaria,carrera,foto)
-        VALUES($1,$2,$3,$4)
+        VALUES($1,$2,$3,$4,$5)
         RETURNING id
     `;
   try {
