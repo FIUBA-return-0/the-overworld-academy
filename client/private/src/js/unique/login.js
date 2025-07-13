@@ -36,11 +36,6 @@ async function login(){
     const usuario = document.getElementById("usuario");
     const contrasenia = document.getElementById("contrasenia");
 
-    const body = {
-        "username": usuario.value,
-        "password": contrasenia.value
-    };
-
     ocultarErrores();
 
     let invalidFlag = false;
@@ -55,33 +50,12 @@ async function login(){
 
     if(invalidFlag) return;
 
-    try{
-        const res = await fetch(`${API}/login/`, {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(body)
-        });
+    const body = {
+        "username": usuario.value,
+        "password": contrasenia.value
+    };
 
-        if(res.status === 200){
-            const data = await res.text();
-            localStorage.setItem("token", data);
-            //TODO getSelf
-            window.location.href = "/alumno.html";
-        }
-
-        else if(res.status === 401){
-            window.location.href = '/401.html';
-        }
-
-        else if(res.status === 500){
-            window.location.href = '/500.html';
-        }
-    }
-    catch(e){
-        console.log(e);
-    }
+    await loginPOST(body);
 }
 
 document.getElementById("login").addEventListener("click", login);

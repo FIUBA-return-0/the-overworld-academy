@@ -116,8 +116,13 @@ async function postRegister(usuario, contrasenia, nombre, apellido, carrera, fot
             body: JSON.stringify(body)
         });
 
-        if(res.status === 200){
-            //TODO login
+        if(res.status === 201){
+            const bodyLogin={
+                "username": usuario,
+                "password": contrasenia
+            }
+            sound3.play();
+            await loginPOST(bodyLogin);
         }
         else if(res.status === 409){
             //TODO user repetido
@@ -173,8 +178,6 @@ async function register(){
         dictCarreras[carrera.value],
         `/img/pp${Math.floor(Math.random() * (10 - 1 + 1)) + 1}.jpg`
     );
-
-    sound3.play();
 }
 
 document.getElementById("registrarse").addEventListener("click", register);
