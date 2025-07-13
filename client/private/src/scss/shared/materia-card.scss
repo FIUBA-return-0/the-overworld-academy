@@ -50,6 +50,8 @@
         }
     }
 
+    transition: .25s;
+    
     &:hover{
         transform: scale(1.05) rotate(-.25deg);
         cursor: pointer;

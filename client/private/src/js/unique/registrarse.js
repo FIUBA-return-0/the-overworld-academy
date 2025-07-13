@@ -124,11 +124,20 @@ async function postRegister(usuario, contrasenia, nombre, apellido, carrera, fot
             sound3.play();
             await loginPOST(bodyLogin);
         }
+        
         else if(res.status === 409){
-            //TODO user repetido
+           /*  sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/401.html';
+            }
+            */
+
         }
         else if(res.status === 500){
-            window.location.href = '/500.html';
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/500.html';
+            }
         }
     }
     catch (e){
@@ -166,7 +175,10 @@ async function register(){
         invalidFlag = true;
     }
 
-    if(invalidFlag) return;
+    if(invalidFlag){
+        sound5.play();
+        return;
+    }
 
     const dictCarreras = JSON.parse(localStorage.getItem("dictCarreras"));
 
@@ -176,7 +188,7 @@ async function register(){
         nombre.value,
         apellido.value,
         dictCarreras[carrera.value],
-        `/img/pp${Math.floor(Math.random() * (10 - 1 + 1)) + 1}.jpg`
+        `/img/pp${Math.floor(Math.random() * (30 - 1 + 1)) + 1}.jpg`
     );
 }
 

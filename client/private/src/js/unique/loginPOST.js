@@ -31,11 +31,17 @@ async function loginPOST(body){
         }
 
         else if(res.status === 401){
-            window.location.href = '/401.html';
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/401.html';
+            }
         }
 
         else if(res.status === 500){
-            window.location.href = '/500.html';
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/500.html';
+            }
         }
     }
     catch(e){ console.log(e); }
