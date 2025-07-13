@@ -1,7 +1,6 @@
 async function validateLoggedIn(){
     if(localStorage.getItem("token") !== null){
-        //TODO getSelf
-        window.location.href = "/alumno.html";
+        window.location.href = `/${localStorage.getItem("condicion")}.html`;
     }
 }
 
