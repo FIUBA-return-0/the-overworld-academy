@@ -9,9 +9,9 @@
 
 - La primera vez y si alguna vez se hace algún cambio al archivo [`/client/private/package.json`](/client/private/package.json), se debe ejecutar `npm install`
 
-- Para procesar todos los archivos, sobre la carpeta [`/client/private/`](/client/private/) ejecutar `gulp`. Si no hay errores se crea [`/public/dist/`](/client/public/dist/) con todo listo para hostear.
+- Para procesar todos los archivos en producción (para hostear), sobre la carpeta [`/client/private/`](/client/private/) ejecutar `gulp prod_build`. Si no hay errores se crea [`/public/dist/`](/client/public/dist/) con todo listo para hostear (puede demorar bastante tiempo ya que optimiza imágenes).
 
-- Para trabajar activamente en alguna interfaz, existe `gulp watch_build`, que ejecuta cada función cada vez que se cambia algún archivo de esa correspondiente sección. se recomienda la extensión Live Server con estas configuraciones para trabajar de forma cómoda: en `/.vscode/settings.json`:
+- Para trabajar activamente en alguna interfaz, existe `gulp dwb`, que ejecuta gulp en modo development, cada función, cada vez que se cambia algún archivo de esa correspondiente sección. Se recomienda la extensión «Live Server» con estas configuraciones para trabajar de forma cómoda: en `/.vscode/settings.json`:
 ```
 {
     "liveServer.settings.port": 5000,

@@ -10,6 +10,7 @@ import terser from 'gulp-terser';
 import imagemin from 'gulp-imagemin';
 import newer from 'gulp-newer';
 import optipng from 'imagemin-optipng';
+import { deleteAsync } from 'del';
 
 export async function parse_and_export_html(){
     return src('./src/html/**/*.html')
@@ -64,6 +65,16 @@ export async function optimize_and_export_images(){
         .pipe(dest('../public/dist/img/'))
 }
 
+export async function export_images(){
+    return src('./src/img/**', {encoding: false})
+        .pipe(newer('../public/dist/img/'))
+        .pipe(dest('../public/dist/img/'))
+}
+
+export async function full_clean(){
+    return await deleteAsync('../public/**', { force: true });
+}
+
 async function watch_html(){
     watch('./src/html/**/*.html', async function html(){
         return await parse_and_export_html();
@@ -84,7 +95,7 @@ async function watch_js(){
 
 async function watch_images(){
     watch('./src/img/**', async function img(){
-        return await optimize_and_export_images();
+        return await export_images();
     });
 }
 
@@ -100,13 +111,15 @@ async function watch_sounds(){
     });
 }
 
-export async function watch_build(){
+export async function dev_watch_build(){
+    console.log("\n\x1b[43m  Atención: modo development (no se optimizan imágenes)  \x1b[0m");
+    
     parse_and_export_html();
     parse_and_export_scss();
     parse_and_export_js();
     export_fonts();
     export_sounds();
-    optimize_and_export_images();
+    export_images();
     
     watch_html();
     watch_scss();
@@ -114,9 +127,25 @@ export async function watch_build(){
     watch_images();
     watch_fonts();
     watch_sounds();
+
+    console.log("esperando cambios…");
 }
 
-async function no_watch_build(){
+export function dwb(){ dev_watch_build() };
+
+export default async function dev_build(){
+    console.log("\n\x1b[43m  Atención: modo development (no se optimizan imágenes)  \x1b[0m\n");
+    await parse_and_export_html();
+    await parse_and_export_scss();
+    await parse_and_export_js();
+    await export_fonts();
+    await export_sounds();
+    await export_images();
+}
+
+export async function prod_build(){
+    console.log("\n\x1b[42m  El momento ha llegado! (esto puede demorar varios minutos)  \x1b[0m\n");
+    await full_clean();
     await parse_and_export_html();
     await parse_and_export_scss();
     await parse_and_export_js();
@@ -124,5 +153,3 @@ async function no_watch_build(){
     await export_sounds();
     await optimize_and_export_images();
 }
-
-export default no_watch_build;
