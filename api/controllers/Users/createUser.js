@@ -11,7 +11,7 @@ const createUser = async ({
   password,
   carrera,
   foto,
-  bio
+  bio,
 }) => {
   const values = [nombre, apellido, username, password, carrera, foto, bio];
 
