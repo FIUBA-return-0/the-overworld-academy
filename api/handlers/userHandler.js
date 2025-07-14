@@ -15,6 +15,8 @@ const bcrypt = require("bcryptjs");
 const deleteUser = require("../controllers/Users/deleteUser.js");
 const authMiddleware = require("../utils/authMiddleware.js");
 const { authProfesor } = require("../utils/authRoles");
+const deleteInscription = require("../controllers/Inscriptions/deleteInscription.js");
+const deleteGrade = require("../controllers/Grades/deleteGrade.js");
 
 router.post(
   "/",
@@ -109,17 +111,11 @@ router.patch(
 );
 
 router.delete("/", authMiddleware, async (req, res) => {
-  console.log(req.user);
-
+  await deleteInscription(req.user);
+  await deleteGrade(req.user);
   const result = await deleteUser(req.user);
 
-  if (!result) {
-    res
-      .status(404)
-      .json({ error: "No se puede eliminar un alumno que no existe" });
-  } else {
-    res.status(200).json(result);
-  }
+  res.status(200).json(result);
 });
 
 module.exports = router;
