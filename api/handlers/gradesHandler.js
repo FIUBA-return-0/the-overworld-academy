@@ -55,25 +55,6 @@ router.post(
   }
 );
 
-router.put(
-  "/",
-  authMiddleware,
-  authProfesor,
-  validateGradeValues,
-  validateStudentId,
-  validateSubjectId,
-  validateEmptyEntriesG,
-  async (req, res) => {
-    const result = await updateGrade(req.body);
-    if (!result.length) {
-      res.status(400).json({ error: "No se encontró la nota." });
-    } else {
-      const created = await getGrade(req.body);
-      res.status(201).json(created[0]);
-    }
-  }
-);
-
 router.delete("/", authMiddleware, async (req, res) => {
   const result = await deleteGrade(req.user);
 
