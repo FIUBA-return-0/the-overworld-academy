@@ -2,8 +2,8 @@
 
 - -get Subject ()
 - -updateSubject
-- -getGrade (materia)
-- -updateGrade ([materias]) hay que iterar en el back
+- -getGrade (materia) #
+- -updateGrade ([materias]) hay que iterar en el back #
 
 > perfil
 
@@ -28,13 +28,13 @@
 
 > modificar materia (pov director)
 
-- modificar usuario (promover a profe, con un id enviado)
-- modificar materia (bio,nombre,foto etc)
+- modificar usuario (promover a profe, con un id enviado) #
+- modificar materia (bio,nombre,foto etc) #
 
 > login
 
-- pedir token
+- pedir token #
 
 > register
 
-- pedir carreras
+- pedir carreras #
