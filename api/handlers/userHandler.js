@@ -77,7 +77,7 @@ router.get("/self", authMiddleware, async (req, res) => {
   if (!user) {
     res.status(404).json({ error: "el usuario no existe" });
   } else {
-    const { id, nombre, apellido, condicion, username, carrera, foto, bio } =
+    const { id, nombre, apellido, condicion, username, carrera, carreraid, foto, bio } =
       user;
     res.status(200).json({
       id,
@@ -86,6 +86,7 @@ router.get("/self", authMiddleware, async (req, res) => {
       condicion,
       username,
       carrera,
+      carreraid,
       foto,
       bio,
     });

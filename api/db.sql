@@ -15,7 +15,8 @@ CREATE TABLE carreras (
   nombre VARCHAR(50) NOT NULL,
   description TEXT NOT NULL,
   duracion INT NOT NULL,
-  sede VARCHAR(40) NOT NULL
+  sede VARCHAR(40) NOT NULL,
+  foto text
 );
 CREATE TABLE usuario (
   nombre VARCHAR(50),

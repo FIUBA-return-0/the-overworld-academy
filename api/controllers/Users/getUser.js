@@ -14,6 +14,7 @@ const getUser = async ({ id }) => {
             u.condicion,
             u.username,
             c.nombre as carrera,
+            c.id as carreraid,
             u.password,
             u.foto,
             u.bio
