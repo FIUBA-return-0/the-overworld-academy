@@ -9,12 +9,13 @@ const createDegree = async ({
   description,
   duracion,
   sede,
+  foto,
   director,
 }) => {
-  const values = [nombre, description, duracion, sede, director];
+  const values = [nombre, description, duracion, sede, foto, director];
   const query = `
-        INSERT INTO carreras (nombre,description,duracion,sede,director)
-        VALUES($1,$2,$3,$4,$5)
+        INSERT INTO carreras (nombre,description,duracion,sede,foto,director)
+        VALUES($1,$2,$3,$4,$5,$6)
         RETURNING id
     `;
   try {

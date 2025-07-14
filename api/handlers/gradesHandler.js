@@ -9,6 +9,8 @@ const { authProfesor } = require("../utils/authRoles.js");
 const {
   validateEmptyEntriesG,
   validateGradeValues,
+  validateStudentId,
+  validateSubjectId,
 } = require("../validations/gradesValidations.js");
 
 router.get("/", authMiddleware, async (req, res) => {
@@ -28,6 +30,8 @@ router.post(
   authMiddleware,
   authProfesor,
   validateGradeValues,
+  validateStudentId,
+  validateSubjectId,
   validateEmptyEntriesG,
   async (req, res) => {
     const result = await postGrade(req.body);
@@ -40,7 +44,14 @@ router.post(
   }
 );
 
-router.put("/", authMiddleware, authProfesor, async (req, res) => {
+router.put("/", 
+  authMiddleware, 
+  authProfesor, 
+  validateGradeValues, 
+  validateStudentId,
+  validateSubjectId,
+  validateEmptyEntriesG,  
+  async (req, res) => {
   const result = await updateGrade(req.body);
   if (!result.length) {
     res.status(400).json({ error: "No se encontró la nota." });

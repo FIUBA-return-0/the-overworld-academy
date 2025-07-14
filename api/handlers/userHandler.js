@@ -7,8 +7,8 @@ const {
   validateEmptyEntriesU,
   validateSentCondition,
   validateChangeCondition,
+  validateDegreeId,
 } = require("../validations/userValidations.js");
-const validateId = require("../validations/idValidation.js");
 const getAllUsers = require("../controllers/Users/getAllUsers.js");
 const updateUser = require("../controllers/Users/updateUser.js");
 const bcrypt = require("bcryptjs");
@@ -22,7 +22,7 @@ router.post(
   "/",
   validateUserValues,
   validateEmptyEntriesU,
-  validateId,
+  validateDegreeId,
   async (req, res) => {
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(req.body.password, salt);
@@ -97,6 +97,7 @@ router.patch(
   authMiddleware,
   validateUserValues,
   validateChangeCondition,
+  validateDegreeId,
   async (req, res) => {
     const { id } = req.params;
 

@@ -65,4 +65,15 @@ const validateChangeCondition = async (req, res, next) => {
     next()
 
 }
-module.exports = {validateUserValues,validateEmptyEntriesU,validateSentCondition,validateChangeCondition}
+
+const validateDegreeId = async (req, res, next) => {
+
+    const { carrera } = await req.body;
+
+    if(carrera !== undefined && (carrera <= 0 || isNaN(carrera))){
+        return res.status(400).json({error: 'El id de carrera enviado debe ser un número mayor que 0'})
+    }
+    next()
+}
+
+module.exports = {validateUserValues,validateEmptyEntriesU,validateSentCondition,validateChangeCondition, validateDegreeId}
