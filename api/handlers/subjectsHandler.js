@@ -22,16 +22,16 @@ router.post(
   validateEmptyEntriesS,
   validateTeacherId,
   async (req, res) => {
-    const result = await createSubject(req.body);
-    const created = await getSubject(result.content);
-    const newProfesor = await promoteUser(created[0]);
+    const newProfesor = await promoteUser(req.body);
 
-    if (newProfesor.status) {
-      res.statsu(500).json(newProfesor.content);
+    if (!newProfesor.content.length) {
+      res.status(404).json({ error: "no se encontro alumno con ese id" });
+    } else {
+      const result = await createSubject(req.body);
+      const created = await getSubject(result.content);
+      let status = !result.status ? 201 : 500;
+      res.status(status).json(created[0]);
     }
-
-    let status = !result.status ? 201 : 500;
-    res.status(status).json(created[0]);
   }
 );
 
