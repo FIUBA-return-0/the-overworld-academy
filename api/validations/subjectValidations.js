@@ -10,10 +10,21 @@ const validateSubjectValues = (req, res, next) => {
       return res.status(400).json({ error: "No se recibió body en la solicitud" });
   }
 
-  const nombre = req.body
+  const { nombre, foto, carga_horaria } = req.body
+
+  if(carga_horaria !== undefined && (carga_horaria <= 0 || isNaN(carga_horaria))){
+    return res.status(400).json({error: 'La carga horaria debe ser un número mayor que 0'})
+}
 
   if ((nombre && nombre.length > 50)) {
       return res.status(400).json({ error: "Nombre más largo de lo permitido." });
+  }
+  if(foto){
+    try{
+        new URL(foto)
+    } catch(error) {
+        return res.status(404).json({ error: "Debe enviar una URL de foto válida"})
+    }
   }
 
   next();
@@ -43,7 +54,20 @@ const validateQueryParamsS = async (req, res, next) => {
   }
   next();
 };
+
+const validateTeacherId = async (req, res, next) => {
+
+  const { profesor } = await req.body;
+
+  if(profesor !== undefined && (profesor <= 0 || isNaN(profesor))){
+      return res.status(400).json({error: 'El id de profesor enviado debe ser un número mayor que 0'})
+  }
+  next()
+}
+
+
 module.exports =
   { validateSubjectValues,
   validateEmptyEntriesS,
-  validateQueryParamsS }
+  validateQueryParamsS,
+  validateTeacherId }

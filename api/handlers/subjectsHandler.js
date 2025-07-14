@@ -6,6 +6,7 @@ const {
   validateSubjectValues,
   validateEmptyEntriesS,
   validateQueryParamsS,
+  validateTeacherId,
 } = require("../validations/subjectValidations.js");
 const deleteSubject = require("../controllers/Subjects/deleteSubject.js");
 const updateSubject = require("../controllers/Subjects/updateSubject.js");
@@ -19,6 +20,7 @@ router.post(
   authDirector,
   validateSubjectValues,
   validateEmptyEntriesS,
+  validateTeacherId,
   async (req, res) => {
     const result = await createSubject(req.body);
     const created = await getSubject(result.content);
@@ -60,6 +62,7 @@ router.patch(
   authMiddleware,
   authDirectorProfesor,
   validateSubjectValues,
+  validateTeacherId,
   async (req, res) => {
     const { id } = req.params;
     const result = await updateSubject(req.body, id);

@@ -6,7 +6,6 @@ const {
   validateDegreeValues,
   validateEmptyEntriesD,
 } = require("../validations/degreeValidations.js");
-const validateId = require("../validations/idValidation.js");
 const getDegree = require("../controllers/Degrees/getDegree.js");
 const deleteDegree = require("../controllers/Degrees/deleteDegree.js");
 const updateDegree = require("../controllers/Degrees/updateDegree.js");
@@ -39,7 +38,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", authMiddleware, validateId, async (req, res) => {
+router.get("/:id", authMiddleware, async (req, res) => {
   const degree = await getDegree(req.params);
 
   if (!degree) {

@@ -11,10 +11,21 @@ const validateDegreeValues = (req, res, next) => {
         return res.status(400).json({ error: "No se recibió body en la solicitud" });
     }
 
-    const { nombre, sede } = req.body;
+    const { nombre, sede, duracion, foto } = req.body;
+
+    if(duracion !== undefined && (duracion <= 0 || isNaN(duracion))){
+        return res.status(400).json({error: 'La duración debe ser un número mayor que 0'})
+    }
 
     if ((nombre && nombre.length > 50) || (sede && sede.length > 40)) {
         return res.status(400).json({ error: "Nombre o sede más largo de lo permitido." });
+    }
+    if(foto){
+        try{
+            new URL(foto)
+        } catch(error) {
+            return res.status(404).json({ error: "Debe enviar una URL de foto válida"})
+        }
     }
 
     next();
