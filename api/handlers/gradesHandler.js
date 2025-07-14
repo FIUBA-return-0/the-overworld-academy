@@ -34,32 +34,26 @@ router.post(
   validateSubjectId,
   validateEmptyEntriesG,
   async (req, res) => {
-    const result = await postGrade(req.body);
-    if (!result.status) {
-      const created = await getGrade(req.body);
-      res.status(201).json(created[0]);
+    const { alumno, materia, description } = req.body;
+    const grade = await getGrade({ alumno, materia, description });
+
+    let newGrade = {};
+    if (!grade.length) {
+      console.log("la nota no existe, la creo");
+
+      const result = await postGrade(req.body);
+      newGrade = result.content;
     } else {
-      res.status(400).json({ error: result.content });
+      console.log("la nota existe, la modifico");
+
+      const result = await updateGrade(req.body);
+      newGrade = result[0];
     }
+
+    const result = await getGrade(newGrade);
+    res.status(200).json(result[0]);
   }
 );
-
-router.put("/", 
-  authMiddleware, 
-  authProfesor, 
-  validateGradeValues, 
-  validateStudentId,
-  validateSubjectId,
-  validateEmptyEntriesG,  
-  async (req, res) => {
-  const result = await updateGrade(req.body);
-  if (!result.length) {
-    res.status(400).json({ error: "No se encontró la nota." });
-  } else {
-    const created = await getGrade(req.body);
-    res.status(201).json(created[0]);
-  }
-});
 
 router.delete("/", authMiddleware, async (req, res) => {
   const result = await deleteGrade(req.user);
