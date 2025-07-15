@@ -94,15 +94,13 @@ router.get("/self", authMiddleware, async (req, res) => {
 });
 
 router.patch(
-  "/:id",
+  "/",
   authMiddleware,
   validateUserValues,
-  validateChangeCondition,
   validateDegreeId,
   async (req, res) => {
-    const { id } = req.params;
 
-    const result = await updateUser(req.body, id);
+    const result = await updateUser(req.body, req.user.id);
 
     if (!result) {
       res.status(404).json({ error: "El usuario no existe" });
