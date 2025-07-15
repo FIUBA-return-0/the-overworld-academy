@@ -15,17 +15,20 @@ const {
 } = require("../validations/gradesValidations.js");
 
 router.get("/", authMiddleware, validateQueryParamsG, async (req, res) => {
-  const id = req.user.id
-  const newQuery = { ...req.query, alumno: id }
+  const { id, condicion } = req.user;
+
+  const newQuery = {
+    ...req.query,
+    ...(condicion === "alumno" ? { alumno: id } : {}),
+  };
+
   const result = await getGrade(newQuery);
 
   if (!result.length) {
-    res.status(400).json({
-      error: "no se encontro la nota",
-    });
-  } else {
-    res.status(200).json(result);
+    return res.status(400).json({ error: "no se encontró la nota" });
   }
+
+  return res.status(200).json(result);
 });
 
 router.post(
