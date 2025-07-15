@@ -40,14 +40,14 @@ const validateEmptyEntriesS = (req, res, next) => {
 }
 
 const validateQueryParamsS = async (req, res, next) => {
-  const { id, carrera } = req.query;
+  const { id, carrera, profesor } = req.query;
 
-  if (!id && !carrera) {
+  if (!id && !carrera && !profesor) {
     return res
       .status(400)
       .json({ error: "Debe enviar una carrera o una materia." });
   }
-  if ((!id && isNaN(carrera)) || (!carrera && isNaN(id))) {
+  if ((!id && !!carrera && isNaN(profesor)) || (!carrera && isNaN(id) && !profesor) || (!profesor && isNaN(carrera) && !id)) {
     return res
       .status(400)
       .json({ error: "El parámetro enviado debe ser un id existente." });

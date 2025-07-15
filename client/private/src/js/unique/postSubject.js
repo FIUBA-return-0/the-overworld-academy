@@ -1,5 +1,4 @@
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImdyYWNpZWxhIiwiY29uZGljaW9uIjoiZGlyZWN0b3IiLCJpZCI6OCwiaWF0IjoxNzUyNTAyMzI1fQ.aGF17tjF3ROKKGQnJR4vPMiNOvybCpmb0gu4AkcHLfo"
-
+const token = window.localStorage("token")
 
 async function crearMateria() {
 
