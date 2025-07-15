@@ -1,7 +1,10 @@
 @use '../variables' as *;
 
 nav{
-    position: static;
+    position: sticky;
+    display: block;
+    top: -1px;
+    z-index: 100;
     border-bottom: 1px solid white;
     background-color: $color-10;
     width: calc(100vw - var(--scrollbar-width, 0));
@@ -30,10 +33,11 @@ nav{
         gap: 2vw;
         padding-right: 3vw;
 
-        .icon {
+        .icon, a.icon{
             padding-inline: 0.2vw;
             cursor: pointer;
-            height: 75%;
+            height: 6vh;
+            display: block;
 
             &.active {
                 border-bottom: 3px solid $color-12;

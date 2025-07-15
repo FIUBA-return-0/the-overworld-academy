@@ -1,5 +1,9 @@
 @use '../variables.scss' as *;
 
+.materia-card-link{
+    text-decoration: none;
+}
+
 .materia-card{
     border: 1.5px solid white;
     border-radius: 10px;

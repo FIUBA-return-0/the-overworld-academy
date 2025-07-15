@@ -5,8 +5,12 @@
     color: white;
     font-family: minecraft-p;
     text-align: center;
-    padding-block: 6vh;
     margin-top: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 19vh;
 
     width: calc(100vw - var(--scrollbar-width, 0));
     font-weight: 200;

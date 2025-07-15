@@ -25,6 +25,10 @@ async function loginPOST(body){
                 console.log(selfDataJSON);
 
                 localStorage.setItem("condicion", selfDataJSON.condicion);
+                localStorage.setItem("nombre", selfDataJSON.nombre);
+                localStorage.setItem("apellido", selfDataJSON.apellido);
+                localStorage.setItem("foto", selfDataJSON.foto);
+                localStorage.setItem("carreraID", selfDataJSON.carreraid);
 
                 window.location.href = `/${selfDataJSON.condicion}.html`;
             } catch(e){ console.error(e) }
