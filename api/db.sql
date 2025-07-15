@@ -37,7 +37,7 @@ CREATE TABLE materias (
   nombre VARCHAR(50) NOT NULL,
   carga_horaria INT NOT NULL,
   carrera INT REFERENCES carreras(id),
-  foto text
+  foto text,
   descripcion text
 );
 --! auxiliares:
