@@ -188,7 +188,7 @@ async function register(){
         nombre.value,
         apellido.value,
         dictCarreras[carrera.value],
-        `/img/pp${Math.floor(Math.random() * (31 - 1 + 1)) + 1}.jpg`
+        `/img/pp${Math.floor(Math.random() * (35 - 1 + 1)) + 1}.jpg`
     );
 }
 

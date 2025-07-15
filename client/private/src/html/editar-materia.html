@@ -36,16 +36,19 @@
             <div class="crear-materia-data-box-wrapper">
 
                 <p class="minecraft-p">Nombre de la materia</p>
-                <input class="large-input" type="text" id="nombre-materia" placeholder="Pscicologia del atacante" disabled>
+                <input class="large-input" type="text" id="nombre-materia" autocomplete="off" disabled>
 
                 <p class="minecraft-p">Profesor a cargo</p>
-                <input class="large-input" type="text" id="nombre-profesor" placeholder="112233 (Padron)" disabled>
+                <input class="large-input" type="number" id="nombre-profesor" placeholder="112233 (Padron)" autocomplete="off" disabled>
+
+                <p class="minecraft-p">Carga horaria</p>
+                <input class="large-input" type="number" id="carga-horaria" autocomplete="off" disabled>
 
                 <p class="minecraft-p">Imagen de la materia</p>
-                <input class="large-input" type="url" id="materia-img" placeholder="https://imagen-materia.com" pattern="https://.*" disabled>
+                <input class="large-input" type="url" id="materia-img" placeholder="https://imagen-materia.png" pattern="https://.*" autocomplete="off" disabled>
 
                 <p class="minecraft-p">Descripcion</p>
-                <textarea class="large-input" type="text" id="descripcion" disabled ></textarea>
+                <textarea class="large-input" type="text" id="descripcion" autocomplete="off" disabled></textarea>
 
                 <button class="large-button sound-button" id="editar-materia">Editar materia</button>
             </div>
@@ -58,7 +61,6 @@
     </footer>
 
     <script src="/main.js"></script>
-    <script src="/crearMateria.js"></script>
     <script src="/editarMateria.js"></script>
 
 </body>

@@ -16,7 +16,6 @@ const frases_menu = [
 	"me cambie a admin. de empresas en la UADE <span class='emoji-font'>🫣</span>",
 	"intro al desarrollo personal!",
 	"Geronimo Gran Hermano 2027",
-	"si, Mauricio? <span class='emoji-font'>🤨</span>",
 	"el comandante.",
 	"lo viejo funciona",
 	"maaaamaaaaa, cortaste toda la looz!!",
@@ -40,5 +39,3 @@ if (elemento) {
 }
 
 localStorage.setItem("ultimaFrase", fraseAleatoria);
-
-// so
