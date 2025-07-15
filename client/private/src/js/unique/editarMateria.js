@@ -1,5 +1,5 @@
 let modo = "editar";
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jYXJ1bGxvIiwiY29uZGljaW9uIjoicHJvZmVzb3IiLCJpZCI6MSwiaWF0IjoxNzUyNTM4NzUyfQ.jLpY1u7TS2HmkLEL80NDnGmqyERm5YepauMIVEzBvXw"
+let token = window.localStorage("token")
 let teacherID = ""
 let degreeID = ""
 let subjectID = ""
