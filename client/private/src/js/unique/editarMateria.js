@@ -8,7 +8,6 @@ function habilitarEditarMateria(){
     const boton = document.getElementById("editar-materia");
     if (modo === "editar"){
     document.getElementById("nombre-materia").disabled = false;
-    document.getElementById("nombre-profesor").disabled = false;
     document.getElementById("materia-img").disabled = false;
     document.getElementById("descripcion").disabled = false;
     document.getElementById("carga-horaria").disabled = false;
@@ -23,10 +22,10 @@ function habilitarEditarMateria(){
     document.getElementById("materia-img").value,
     teacherID,
     document.getElementById("carga-horaria").value,
+    document.getElementById("descripcion").value,
     degreeID)
 
     document.getElementById("nombre-materia").disabled = true;
-    document.getElementById("nombre-profesor").disabled = true;
     document.getElementById("materia-img").disabled = true;
     document.getElementById("descripcion").disabled = true;
     document.getElementById("carga-horaria").disabled = true;
@@ -66,23 +65,26 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
     document.getElementById("nombre-materia").disabled = false;
+    document.getElementById("descripcion").disabled = false;
     document.getElementById("materia-img").disabled = false;
     document.getElementById("carga-horaria").disabled = false;
     document.getElementById("nombre-profesor").disabled = false;
 
 
     document.getElementById("nombre-materia").value = materia.materia;
+    document.getElementById("descripcion").value = materia.descripcion;
     document.getElementById("materia-img").value = materia.foto;
     document.getElementById("carga-horaria").value = materia.carga_horaria;
     document.getElementById("nombre-profesor").value = teacherID
 
     document.getElementById("nombre-materia").disabled = true;
+    document.getElementById("descripcion").disabled = true;
     document.getElementById("materia-img").disabled = true;
     document.getElementById("carga-horaria").disabled = true;
     document.getElementById("nombre-profesor").disabled = true;
 });
 
-async function editarMateria(nombre_materia,foto_materia,id_profesor,carga_horaria,id_carrera) {
+async function editarMateria(nombre_materia,foto_materia,id_profesor,carga_horaria,descripcion,id_carrera) {
     
     
     const updateSubjectURL = await fetch("http://localhost:3000/materia/" + subjectID, {
@@ -96,6 +98,7 @@ async function editarMateria(nombre_materia,foto_materia,id_profesor,carga_horar
             foto:foto_materia,
             profesor:id_profesor,
             carga_horaria:carga_horaria,
+            descripcion:descripcion,
             carrera:id_carrera
         })
     })
