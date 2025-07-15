@@ -6,7 +6,6 @@ const sound5 = new Audio("/sounds/sound-5.mp3");
 const sound6 = new Audio("/sounds/traicion.mp3");
 const sound7 = new Audio("/sounds/pero-bueno-lo-vamos-a-tolerar-manu.mp3");
 const sound8 = new Audio("/sounds/pipshas-camejo.mp3");
-const sound9 = new Audio("/sounds/si-mauricio-peque.mp3");
 const sound10 = new Audio("/sounds/vamos-con-ese-nico.mp3");
 const sound11 = new Audio("/sounds/sound11.mp3");
 const sound12 = new Audio("/sounds/sound12.mp3");
@@ -25,6 +24,11 @@ const sound24 = new Audio("/sounds/sound24.mp3");
 const sound25 = new Audio("/sounds/sound25.mp3");
 const sound26 = new Audio("/sounds/sound26.mp3");
 const sound27 = new Audio("/sounds/sound27.mp3");
+const sound28 = new Audio("/sounds/sound28.mp3");
+const sound29 = new Audio("/sounds/sound29.mp3");
+const sound30 = new Audio("/sounds/sound30.mp3");
+const sound31 = new Audio("/sounds/sound31.mp3");
+
 
 const buttons = document.getElementsByClassName("sound-button");
 
@@ -48,9 +52,9 @@ for (const e of buttons) {
 }
 
 function frenarAudios(){
-    const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9,sound10, sound11, 
+    const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8, sound10, sound11, 
         sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21,
-        sound22, sound23, sound24, sound25, sound26, sound27];
+        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31];
     
         for (const audio in audios) {
         audios[audio].currentTime = 0;
@@ -59,9 +63,9 @@ function frenarAudios(){
 }
 
 function cargarAudios(){
-    const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound9,sound10, sound11, 
+    const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound10, sound11, 
         sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21,
-        sound22, sound23, sound24, sound25, sound26, sound27];
+        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31];
     
         for (const audio in audios) {
         audios[audio].load();

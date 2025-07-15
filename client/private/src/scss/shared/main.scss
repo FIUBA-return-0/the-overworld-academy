@@ -62,6 +62,10 @@ h1, h2, h3, h4, h5, h6 {
     color: red;
 }
 
+::placeholder{
+    color: $color-13;
+}
+
 .materias-title{
     font-size: clamp(.9em, 2vw, 2em);
     font-family: 'Lexend Deca', Rubik;

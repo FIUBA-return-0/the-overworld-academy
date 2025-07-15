@@ -1,8 +1,8 @@
 let modo = "editar";
-let token = window.localStorage("token")
-let teacherID = ""
-let degreeID = ""
-let subjectID = ""
+let token = localStorage.getItem('token');
+let teacherID = "";
+let degreeID = "";
+let subjectID = "";
 
 function habilitarEditarMateria(){
     const boton = document.getElementById("editar-materia");
@@ -10,6 +10,7 @@ function habilitarEditarMateria(){
     document.getElementById("nombre-materia").disabled = false;
     document.getElementById("materia-img").disabled = false;
     document.getElementById("descripcion").disabled = false;
+    document.getElementById("nombre-profesor").disabled = false;
     document.getElementById("carga-horaria").disabled = false;
     
     boton.textContent = "Guardar cambios";
@@ -29,6 +30,7 @@ function habilitarEditarMateria(){
     document.getElementById("materia-img").disabled = true;
     document.getElementById("descripcion").disabled = true;
     document.getElementById("carga-horaria").disabled = true;
+    document.getElementById("nombre-profesor").disabled = true;
     
     boton.textContent = "Editar materia";
     modo = "editar";
@@ -36,58 +38,99 @@ function habilitarEditarMateria(){
 };
 
 window.addEventListener("DOMContentLoaded", async () => {
-    const botonEditar = document.getElementById("editar-materia");
-    if (botonEditar) {
-        botonEditar.addEventListener("click", habilitarEditarMateria);
+    try{
+        const botonEditar = document.getElementById("editar-materia");
+        if (botonEditar) {
+            botonEditar.addEventListener("click", habilitarEditarMateria);
+        }
+
+        const getUserURL = await fetch(`${API}/usuario/self`, {
+            method:"GET",
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+        })
+
+        const userInfo = await getUserURL.json()
+        teacherID = userInfo.id
+        degreeID = userInfo.carreraid
+        const getSubjectURL = await fetch(`${API}/usuario/materia?profesor=` + teacherID, {
+            method:"GET",
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`,
+                },
+        })
+
+        // check de errores
+
+        if (userInfo.status === 404){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/404.html';
+            }
+        }
+        
+        else if (userInfo.status === 500){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/500.html';
+            }
+        }
+
+        else if (userInfo.status === 401){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/401.html';
+            }
+        }
+
+        else{
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/error-inesperado.html';
+            }
+        }
+
+        // check de errores
+
+        const subjectInfo = await getSubjectURL.json()
+        const materia = subjectInfo[0]
+        subjectID = materia.id
+
+        document.getElementById("nombre-materia").disabled = false;
+        document.getElementById("descripcion").disabled = false;
+        document.getElementById("materia-img").disabled = false;
+        document.getElementById("carga-horaria").disabled = false;
+        document.getElementById("nombre-profesor").disabled = false;
+
+        document.getElementById("nombre-materia").value = materia.materia;
+        document.getElementById("descripcion").value = materia.descripcion;
+        document.getElementById("materia-img").value = materia.foto;
+        document.getElementById("carga-horaria").value = materia.carga_horaria;
+        document.getElementById("nombre-profesor").value = teacherID
+
+        document.getElementById("nombre-materia").disabled = true;
+        document.getElementById("descripcion").disabled = true;
+        document.getElementById("materia-img").disabled = true;
+        document.getElementById("carga-horaria").disabled = true;
+        document.getElementById("nombre-profesor").disabled = true;
     }
 
-    const getUserURL = await fetch("http://localhost:3000/usuario/self", {
-        method:"GET",
-        headers: {
-            "Content-Type":"application/json",
-            "Authorization": `Bearer ${token}`,
-        },
-    })
-    const userInfo = await getUserURL.json()
-    teacherID = userInfo.id
-    degreeID = userInfo.carreraid
-    const getSubjectURL = await fetch("http://localhost:3000/materia?profesor=" + teacherID, {
-        method:"GET",
-        headers: {
-            "Content-Type":"application/json",
-            "Authorization": `Bearer ${token}`,
-            },
-    })
-    const subjectInfo = await getSubjectURL.json()
-    const materia = subjectInfo[0]
-    subjectID = materia.id
+    catch(e){
+        console.error(e);
+        sound5.play();
+        sound5.onended = function(){
+            window.location.href = '/error-inesperado.html';
+        }
+    }
+    });
 
-
-
-    document.getElementById("nombre-materia").disabled = false;
-    document.getElementById("descripcion").disabled = false;
-    document.getElementById("materia-img").disabled = false;
-    document.getElementById("carga-horaria").disabled = false;
-    document.getElementById("nombre-profesor").disabled = false;
-
-
-    document.getElementById("nombre-materia").value = materia.materia;
-    document.getElementById("descripcion").value = materia.descripcion;
-    document.getElementById("materia-img").value = materia.foto;
-    document.getElementById("carga-horaria").value = materia.carga_horaria;
-    document.getElementById("nombre-profesor").value = teacherID
-
-    document.getElementById("nombre-materia").disabled = true;
-    document.getElementById("descripcion").disabled = true;
-    document.getElementById("materia-img").disabled = true;
-    document.getElementById("carga-horaria").disabled = true;
-    document.getElementById("nombre-profesor").disabled = true;
-});
 
 async function editarMateria(nombre_materia,foto_materia,id_profesor,carga_horaria,descripcion,id_carrera) {
     
-    
-    const updateSubjectURL = await fetch("http://localhost:3000/materia/" + subjectID, {
+    const updateSubjectURL = await fetch(`${API}/usuario/materia/` + subjectID, {
         method:"PATCH",
         headers: {
             "Content-Type":"application/json",
@@ -104,5 +147,4 @@ async function editarMateria(nombre_materia,foto_materia,id_profesor,carga_horar
     })
 
     const newSubject = await updateSubjectURL.json()
-    console.log(newSubject)
 }

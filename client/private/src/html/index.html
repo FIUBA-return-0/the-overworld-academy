@@ -20,11 +20,11 @@
     <div class="auth-wrapper">
         <p class="minecraft-p">Usuario</p>
         <input id="usuario" class="large-input" type="text" required maxlength="30">
-        <p id="error-usuario" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> El usuario no puede ser vacio</p>
+        <p id="error-usuario" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> El usuario no puede estar vacio</p>
         <p id="error-usuario-invalido" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Tu usuario es invalido</p>
         <p class="minecraft-p">Contrasenia</p>
-        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required>
-        <p id="error-contrasenia" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> La contrasenia no puede ser vacia</p>
+        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" autocomplete="off" required>
+        <p id="error-contrasenia" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> La contrasenia no puede estar vacia</p>
         <p class="minecraft-p">No tenes cuenta? <a href="registrarse.html">Registrarse</a></p>
         <button id="login" class="large-button sound-button">Iniciar sesion</button>
     </div>
