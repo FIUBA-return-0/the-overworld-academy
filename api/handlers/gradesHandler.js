@@ -11,10 +11,11 @@ const {
   validateGradeValues,
   validateStudentId,
   validateSubjectId,
+  validateQueryParamsG
 } = require("../validations/gradesValidations.js");
 
-router.get("/", authMiddleware, async (req, res) => {
-  const result = await getGrade(req.body);
+router.get("/", authMiddleware, validateQueryParamsG, async (req, res) => {
+  const result = await getGrade(req.query);
 
   if (!result.length) {
     res.status(400).json({
