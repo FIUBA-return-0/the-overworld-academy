@@ -46,4 +46,50 @@ function createMateriaCard(id, foto, nombre, profesor, descripcion){
     document.getElementById("materias-wrapper").appendChild(link);
 }
 
-createMateriaCard(1, "https://skinsmonkey.com/blog/wp-content/uploads/sites/2/csgo-bomb-code-ingame.jpg", "Plantar la bomba sin morir en el intento", "Camejo", "Se te pasa el tiempo cubriendo B y derrepente explotaste? no más.");
+async function fetchfillMateriasAlumno(){
+    try{
+        const idCarrera = localStorage.getItem("carreraID");
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${API}/materia?carrera=${idCarrera}`, {
+            method: "GET",
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        if(res.status === 200){
+            const materias = await res.json();
+
+            document.getElementById("materias-title").innerHTML = `Propuesta: ${materias[0].carrera}`;
+
+            for(const materia of materias){
+                if(materia.foto === null) materia.foto = "https://i.imgur.com/DJKWYUo.png";
+                if(materia.descripcion === null) materia.descripcion = "";
+                createMateriaCard(materia.id, materia.foto, materia.materia, materia.apeprofesor, materia.descripcion);
+            }
+        }
+
+        else if(res.status === 404){
+            const error = document.createElement("p").innerText = "Esta carrera no tiene materias.";
+            document.getElementById("materias-wrapper").append(error);
+        }
+
+        else{
+            console.error(e);
+            sound5.play();
+            sound5.onended=()=>{
+                window.location.href = '/error-inesperado.html';
+            }
+        }
+    }
+    catch(e){
+        console.error(e);
+        sound5.play();
+        sound5.onended=()=>{
+            window.location.href = '/error-inesperado.html';
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", fetchfillMateriasAlumno);
