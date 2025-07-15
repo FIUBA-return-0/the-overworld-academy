@@ -44,9 +44,28 @@ if(materia !== undefined && (materia <= 0 || isNaN(materia))){
 next()
 }
   
+const validateQueryParamsG = async (req, res, next) => {
+
+    const { alumno, materia } = req.query;
+
+    if (!alumno && !materia) {
+    return res.status(400).json({ error: "debe enviar un alumno o una materia" });
+    }
+
+    if (alumno && isNaN(Number(alumno))) {
+    return res.status(400).json({ error: "ID de alumno inválido" });
+    }
+
+    if (materia && isNaN(Number(materia))) {
+    return res.status(400).json({ error: "ID de materia inválido" });
+    }
+    next()
+
+
+}
   
 
   
   
 
-module.exports = { validateGradeValues, validateEmptyEntriesG, validateStudentId, validateSubjectId}
+module.exports = { validateGradeValues, validateEmptyEntriesG, validateStudentId, validateSubjectId, validateQueryParamsG}
