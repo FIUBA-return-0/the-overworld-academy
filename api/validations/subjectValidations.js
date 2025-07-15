@@ -7,23 +7,32 @@
  */
 const validateSubjectValues = (req, res, next) => {
   if (!req.body) {
-      return res.status(400).json({ error: "No se recibió body en la solicitud" });
+    return res
+      .status(400)
+      .json({ error: "No se recibió body en la solicitud" });
   }
 
-  const { nombre, foto, carga_horaria } = req.body
+  const { nombre, foto, carga_horaria } = req.body;
 
-  if(carga_horaria !== undefined && (carga_horaria <= 0 || isNaN(carga_horaria))){
-    return res.status(400).json({error: 'La carga horaria debe ser un número mayor que 0'})
-}
-
-  if ((nombre && nombre.length > 50)) {
-      return res.status(400).json({ error: "Nombre más largo de lo permitido." });
+  if (
+    carga_horaria !== undefined &&
+    (carga_horaria <= 0 || isNaN(carga_horaria))
+  ) {
+    return res
+      .status(400)
+      .json({ error: "La carga horaria debe ser un número mayor que 0" });
   }
-  if(foto){
-    try{
-        new URL(foto)
-    } catch(error) {
-        return res.status(404).json({ error: "Debe enviar una URL de foto válida"})
+
+  if (nombre && nombre.length > 50) {
+    return res.status(400).json({ error: "Nombre más largo de lo permitido." });
+  }
+  if (foto) {
+    try {
+      new URL(foto);
+    } catch (error) {
+      return res
+        .status(404)
+        .json({ error: "Debe enviar una URL de foto válida" });
     }
   }
 
@@ -31,15 +40,19 @@ const validateSubjectValues = (req, res, next) => {
 };
 
 const validateEmptyEntriesS = (req, res, next) => {
-  const { profesor, nombre, carga_horaria, carrera } = req.body
+  const { profesor, nombre, carga_horaria, carrera } = req.body;
 
   if (!profesor || !nombre || !carga_horaria || !carrera) {
-      return res.status(400).json({"error":"Algun contenido esta vacio, por favor revisa tus entradas"})
+    return res
+      .status(400)
+      .json({
+        error: "Algun contenido esta vacio, por favor revisa tus entradas",
+      });
   }
-  next()
-}
+  next();
+};
 
-const validateQueryParamsS = async (req, res, next) => {
+const validateQueryParamsS = (req, res, next) => {
   const { id, carrera, profesor } = req.query;
 
   if (!id && !carrera && !profesor) {
@@ -47,27 +60,36 @@ const validateQueryParamsS = async (req, res, next) => {
       .status(400)
       .json({ error: "Debe enviar una carrera o una materia." });
   }
-  if ((!id && !!carrera && isNaN(profesor)) || (!carrera && isNaN(id) && !profesor) || (!profesor && isNaN(carrera) && !id)) {
+
+  if (
+    (id && isNaN(Number(id))) ||
+    (carrera && isNaN(Number(carrera))) ||
+    (profesor && isNaN(Number(profesor)))
+  ) {
     return res
       .status(400)
-      .json({ error: "El parámetro enviado debe ser un id existente." });
+      .json({ error: "Los parámetros deben ser IDs numéricos válidos." });
   }
+
   next();
 };
 
 const validateTeacherId = async (req, res, next) => {
-
   const { profesor } = await req.body;
 
-  if(profesor !== undefined && (profesor <= 0 || isNaN(profesor))){
-      return res.status(400).json({error: 'El id de profesor enviado debe ser un número mayor que 0'})
+  if (profesor !== undefined && (profesor <= 0 || isNaN(profesor))) {
+    return res
+      .status(400)
+      .json({
+        error: "El id de profesor enviado debe ser un número mayor que 0",
+      });
   }
-  next()
-}
+  next();
+};
 
-
-module.exports =
-  { validateSubjectValues,
+module.exports = {
+  validateSubjectValues,
   validateEmptyEntriesS,
   validateQueryParamsS,
-  validateTeacherId }
+  validateTeacherId,
+};
