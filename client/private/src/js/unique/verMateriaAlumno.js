@@ -1,10 +1,6 @@
 window.addEventListener("DOMContentLoaded", async () => {
     let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jdWxvIiwiY29uZGljaW9uIjoiYWx1bW5vIiwiaWQiOjMsImlhdCI6MTc1MjU4Mzc3OH0.YxVzC3Mdofw1a-Rf6zw0U5A7MCklIO0fbkeJRqWf3Vw";
-  
-    let payloadBase64 = token.split('.')[1];
-    let decodedPayload = JSON.parse(atob(payloadBase64));
-    let userId = decodedPayload.id;
-
+    
     const getSubjectURL = await fetch("http://localhost:3000/materia?id=1", {
       method: "GET",
       headers: {
@@ -19,7 +15,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
         document.getElementById("cartelera").textContent = subjectInfo.descripcion;
 
-        const getGradesURL = await fetch("http://localhost:3000/nota?alumno=" + userId + "&materia=1", {
+        const getGradesURL = await fetch("http://localhost:3000/nota?materia=1", {
             method: "GET", 
             headers: {
               "Content-Type": "application/json",
