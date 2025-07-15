@@ -14,6 +14,12 @@ function habilitarEditarCampos(){
     }
 
     else{
+
+    editarPerfil(document.getElementById("apellido").value,
+    document.getElementById("nombre").value,
+    document.getElementById("biografia").value,
+)
+
     document.getElementById("apellido").disabled = true;
     document.getElementById("nombre").disabled = true;
     document.getElementById("biografia").disabled = true;
@@ -62,3 +68,21 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 });
+
+async function editarPerfil(apellido,nombre,biografia) {
+
+    const updateUserURL = await fetch("http://localhost:3000/usuario", {
+        method:"PATCH",
+        headers: {
+            "Content-Type":"application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        body: JSON.stringify({
+            nombre:nombre,
+            apellido:apellido,
+            bio:biografia
+        })
+    })
+    const newData = await updateUserURL.json()
+    console.log(newData)
+}
