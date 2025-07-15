@@ -15,7 +15,9 @@ const {
 } = require("../validations/gradesValidations.js");
 
 router.get("/", authMiddleware, validateQueryParamsG, async (req, res) => {
-  const result = await getGrade(req.query);
+  const id = req.user.id
+  const newQuery = { ...req.query, alumno: id }
+  const result = await getGrade(newQuery);
 
   if (!result.length) {
     res.status(400).json({
