@@ -1,3 +1,12 @@
+const truncarPromedio = (n) => {
+  let strNum = String(n);
+  const decimal = strNum.indexOf(".");
+  if (decimal === -1) {
+    return n;
+  }
+  return strNum.substring(0, decimal + 2);
+};
+
 async function cargarInfoProfesor() {
   const token = window.localStorage.getItem("token");
 
@@ -43,6 +52,7 @@ async function cargarInfoProfesor() {
         nombre: g.nombre,
         apellido: g.apellido,
         notas: {},
+        promedio: 0,
       };
     }
 
@@ -50,6 +60,11 @@ async function cargarInfoProfesor() {
     sortedGrades[alumnoId].notas[claveNota] = g.nota;
   }
 
+  for (const key in sortedGrades) {
+    const notas = Object.values(sortedGrades[key].notas);
+    const sum = notas.reduce((a, b) => a + b, 0);
+    sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
+  }
   const tabla = document.querySelector(".notas-table");
 
   const encabezado = tabla.querySelector("tr");
@@ -87,6 +102,11 @@ async function cargarInfoProfesor() {
     tdP2.textContent = alumno.notas.P2 ?? "-";
     tdP2.classList.add("table-nota");
     fila.appendChild(tdP2);
+
+    const tdProm = document.createElement("th");
+    tdProm.textContent = alumno.promedio ?? "-";
+    tdProm.classList.add("table-nota");
+    fila.appendChild(tdProm);
 
     tabla.appendChild(fila);
   }
