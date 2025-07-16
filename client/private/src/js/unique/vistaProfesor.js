@@ -22,9 +22,7 @@ async function cargarInfoProfesor() {
   document.querySelector(
     ".materias-title"
   ).textContent = `Propuesta: ${infoMateria[0].materia}`;
-  document.getElementById("cartelera").value = infoMateria.descripcion;
 
-  document.querySelector(".materias-title").value = infoMateria.carrera;
   teacherSubject = infoMateria[0].id;
 
   let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
@@ -47,7 +45,7 @@ async function cargarInfoProfesor() {
         nombre: g.nombre,
         apellido: g.apellido,
         notas: {},
-        promedio: 0,
+        prom: 0,
       };
     }
 
@@ -60,8 +58,8 @@ async function cargarInfoProfesor() {
     const sum = notas.reduce((a, b) => a + b, 0);
     sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
   }
-  const tabla = document.querySelector(".notas-table");
 
+  const tabla = document.querySelector(".notas-table");
   const encabezado = tabla.querySelector("tr");
   tabla.innerHTML = "";
   tabla.appendChild(encabezado);
@@ -78,25 +76,15 @@ async function cargarInfoProfesor() {
     tdPadron.textContent = alumno.id_alumno ?? "-";
     fila.appendChild(tdPadron);
 
-    const tdTP1 = document.createElement("th");
-    tdTP1.textContent = alumno.notas.TP1 ?? "-";
-    tdTP1.classList.add("table-nota");
-    fila.appendChild(tdTP1);
-
-    const tdTP2 = document.createElement("th");
-    tdTP2.textContent = alumno.notas.TP2 ?? "-";
-    tdTP2.classList.add("table-nota");
-    fila.appendChild(tdTP2);
-
-    const tdP1 = document.createElement("th");
-    tdP1.textContent = alumno.notas.P1 ?? "-";
-    tdP1.classList.add("table-nota");
-    fila.appendChild(tdP1);
-
-    const tdP2 = document.createElement("th");
-    tdP2.textContent = alumno.notas.P2 ?? "-";
-    tdP2.classList.add("table-nota");
-    fila.appendChild(tdP2);
+    for (const desc of ["TP1", "TP2", "P1", "P2"]) {
+      const celda = document.createElement("th");
+      celda.textContent = alumno.notas[desc] ?? "-";
+      celda.classList.add("table-nota");
+      celda.setAttribute("contenteditable", "false");
+      celda.dataset.padron = alumno.id_alumno;
+      celda.dataset.description = desc;
+      fila.appendChild(celda);
+    }
 
     const tdProm = document.createElement("th");
     tdProm.textContent = alumno.promedio ?? "-";
@@ -105,39 +93,55 @@ async function cargarInfoProfesor() {
 
     tabla.appendChild(fila);
   }
-}
 
-function habilitarEditarCartelera() {
-  const boton = document.getElementById("editar-cartelera");
-  if (modo === "editar") {
-    document.getElementById("cartelera").disabled = false;
+  const botonEditar = document.querySelector(".notas-table-wrapper button");
+  let modoEdicion = false;
 
-    boton.textContent = "Guardar cambios";
-    modo = "guardar";
-  } else {
-    editarCartelera(document.getElementById("cartelera").value);
+  botonEditar.addEventListener("click", () => {
+    const celdas = document.querySelectorAll(".table-nota");
 
-    document.getElementById("cartelera").disabled = true;
+    if (!modoEdicion) {
+      celdas.forEach((celda) => {
+        celda.setAttribute("contenteditable", "true");
+        celda.classList.add("editable");
+      });
+      botonEditar.textContent = "Guardar";
+    } else {
+      celdas.forEach(async (celda) => {
+        celda.setAttribute("contenteditable", "false");
+        celda.classList.remove("editable");
 
-    boton.textContent = "Editar perfil";
-    modo = "editar";
-  }
-}
+        const nuevaNota = celda.textContent;
 
-async function editarCartelera(cartelera) {
-  await fetch(`${API}}/materia?profesor=1`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({
-      descripcion: cartelera,
-    }),
+        const body = {
+          alumno: Number(celda.dataset.padron),
+          materia: teacherSubject,
+          description: celda.dataset.description,
+          nota: nuevaNota,
+        };
+        console.log(body);
+
+        await fetch(`${API}/nota`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        });
+      });
+
+      window.location.reload();
+      botonEditar.textContent = "Editar";
+    }
+
+    modoEdicion = !modoEdicion;
   });
 }
-document.addEventListener(
-  "DOMContentLoaded",
-  cargarInfoProfesor(),
-  habilitarEditarCartelera()
-);
+
+document.addEventListener("DOMContentLoaded", async () => {
+  setTimeout(() => {
+    document.getElementById("loader-container").classList.add("hidden");
+  }, 1 * 1000);
+  cargarInfoProfesor();
+});
