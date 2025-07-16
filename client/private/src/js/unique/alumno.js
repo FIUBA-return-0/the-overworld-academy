@@ -77,6 +77,10 @@ async function fetchfillMateriasAlumno(){
         else if(res.status === 404){
             const error = document.createElement("p").innerText = "Esta carrera no tiene materias.";
             document.getElementById("materias-wrapper").append(error);
+
+            setTimeout(()=>{
+                document.getElementById("loader-container").classList.add("hidden");
+            }, 1*1000);
         }
 
         else{
