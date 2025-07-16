@@ -1,11 +1,11 @@
-const checkPasswordStrength = async (req, res, next) => {
+const checkPasswordStrength = (password) => {
   const passwordRegEx =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?^&#.$($)$-$_])[A-Za-z\d$@$!%*?^&#.$($)$-$_]{8,500}$/;
 
-  if (passwordRegEx.test(req.body.password)) {
-    next();
+  if (passwordRegEx.test(password)) {
+    return 0;
   } else {
-    return res.status(400).json({ error: "contraseña insegura" });
+    return 1;
   }
 };
 module.exports = checkPasswordStrength;
