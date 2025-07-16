@@ -10,36 +10,30 @@ const truncarPromedio = (n) => {
 async function cargarInfoProfesor() {
   const token = window.localStorage.getItem("token");
 
-  const getSubjectURL = await fetch(
-    "http://localhost:3000/materia?profesor=1",
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const infoMateria = await getSubjectURL.json();
 
   document.querySelector(
     ".materias-title"
   ).textContent = `Propuesta: ${infoMateria[0].materia}`;
-  document.getElementById("cartelera").value = infoMateria.descripcion
+  document.getElementById("cartelera").value = infoMateria.descripcion;
 
   document.querySelector(".materias-title").value = infoMateria.carrera;
   teacherSubject = infoMateria[0].id;
 
-  let grades = await fetch(
-    `http://localhost:3000/nota?materia=${teacherSubject}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   grades = await grades.json();
 
   const sortedGrades = {};
@@ -113,40 +107,37 @@ async function cargarInfoProfesor() {
   }
 }
 
-function habilitarEditarCartelera(){
+function habilitarEditarCartelera() {
   const boton = document.getElementById("editar-cartelera");
-  if (modo === "editar"){
-  document.getElementById("cartelera").disabled = false;
-  
-  boton.textContent = "Guardar cambios";
-  modo = "guardar";
+  if (modo === "editar") {
+    document.getElementById("cartelera").disabled = false;
+
+    boton.textContent = "Guardar cambios";
+    modo = "guardar";
+  } else {
+    editarCartelera(document.getElementById("cartelera").value);
+
+    document.getElementById("cartelera").disabled = true;
+
+    boton.textContent = "Editar perfil";
+    modo = "editar";
   }
-
-  else{
-
-  editarCartelera(
-  document.getElementById("cartelera").value,
-)
-
-  document.getElementById("cartelera").disabled = true;
-  
-  boton.textContent = "Editar perfil";
-  modo = "editar";
-  }
-};
-
-async function editarCartelera(cartelera){
-
-  await fetch("http://localhost:3000/materia?profesor=1",
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        descripcion:cartelera
-      })
-    })
 }
-document.addEventListener("DOMContentLoaded", cargarInfoProfesor(), habilitarEditarCartelera());
+
+async function editarCartelera(cartelera) {
+  await fetch(`${API}}/materia?profesor=1`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      descripcion: cartelera,
+    }),
+  });
+}
+document.addEventListener(
+  "DOMContentLoaded",
+  cargarInfoProfesor(),
+  habilitarEditarCartelera()
+);
