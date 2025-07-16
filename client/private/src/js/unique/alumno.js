@@ -64,7 +64,7 @@ async function fetchfillMateriasAlumno(){
             document.getElementById("materias-title").innerHTML = `Propuesta: ${materias[0].carrera}`;
 
             for(const materia of materias){
-                if(materia.foto === null) materia.foto = "https://i.imgur.com/DJKWYUo.png";
+                if(materia.foto === null) materia.foto = "https://i.imgur.com/DJKWYUo.webp";
                 if(materia.descripcion === null) materia.descripcion = "";
                 createMateriaCard(materia.id, materia.foto, materia.materia, materia.apeprofesor, materia.descripcion);
             }

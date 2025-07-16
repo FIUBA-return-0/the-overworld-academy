@@ -1,7 +1,7 @@
 @use '../variables' as *;
 
 .error-page{
-    background-image: url('./img/dirt.png');
+    background-image: url('./img/dirt.webp');
     background-repeat: repeat;
 
     width: calc(100vw - var(--scrollbar-width, 0));

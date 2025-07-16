@@ -1,8 +1,8 @@
 const imagenesFondo = [
-    "/img/background-1.png",
-    "/img/background-3.png",
-    "/img/background-4.png",
-    "/img/background-5.png"
+    "/img/background-1.webp",
+    "/img/background-3.webp",
+    "/img/background-4.webp",
+    "/img/background-5.webp"
 ];
 
 const imagenAleatoria = imagenesFondo[Math.floor(Math.random() * imagenesFondo.length)];
