@@ -77,8 +77,17 @@ router.get("/self", authMiddleware, async (req, res) => {
   if (!user) {
     res.status(404).json({ error: "el usuario no existe" });
   } else {
-    const { id, nombre, apellido, condicion, username, carrera, carreraid, foto, bio } =
-      user;
+    const {
+      id,
+      nombre,
+      apellido,
+      condicion,
+      username,
+      carrera,
+      carreraid,
+      foto,
+      bio,
+    } = user;
     res.status(200).json({
       id,
       nombre,
@@ -99,13 +108,29 @@ router.patch(
   validateUserValues,
   validateDegreeId,
   async (req, res) => {
+    if ("password" in req.body) {
+      const salt = await bcrypt.genSalt(12);
+      const hash = await bcrypt.hash(req.body.password, salt);
+      req.body.password = hash;
+    }
 
     const result = await updateUser(req.body, req.user.id);
 
     if (!result) {
       res.status(404).json({ error: "El usuario no existe" });
     } else {
-      res.status(200).json(result);
+      const { nombre, apellido, id, condicion, username, carrera, foto, bio } =
+        result;
+      res.status(200).json({
+        nombre,
+        apellido,
+        id,
+        condicion,
+        username,
+        carrera,
+        foto,
+        bio,
+      });
     }
   }
 );
