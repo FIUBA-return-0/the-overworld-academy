@@ -46,7 +46,7 @@ CREATE TABLE notas (
   alumno SERIAL REFERENCES usuario(id),
   materia SERIAL REFERENCES materias(id),
   description VARCHAR(20) NOT NULL,
-  nota INT NOT NULL
+  nota INT
 );
 CREATE TABLE correlativas (
   id serial primary key,

@@ -1,6 +1,12 @@
 const db = require("../../db.js");
 
 const updateGrade = async ({ alumno, materia, description, nota }) => {
+  let values = [alumno, materia, description];
+  if (!nota) {
+    values.unshift("null");
+  } else {
+    values.unshift(nota);
+  }
   const query = `
     update notas n
     set nota = $1

@@ -11,7 +11,7 @@ const {
   validateGradeValues,
   validateStudentId,
   validateSubjectId,
-  validateQueryParamsG
+  validateQueryParamsG,
 } = require("../validations/gradesValidations.js");
 
 router.get("/", authMiddleware, validateQueryParamsG, async (req, res) => {
@@ -35,23 +35,19 @@ router.post(
   "/",
   authMiddleware,
   authProfesor,
-  validateGradeValues,
   validateStudentId,
   validateSubjectId,
   validateEmptyEntriesG,
+  validateGradeValues,
   async (req, res) => {
     const { alumno, materia, description } = req.body;
     const grade = await getGrade({ alumno, materia, description });
 
     let newGrade = {};
     if (!grade.length) {
-      console.log("la nota no existe, la creo");
-
       const result = await postGrade(req.body);
       newGrade = result.content;
     } else {
-      console.log("la nota existe, la modifico");
-
       const result = await updateGrade(req.body);
       newGrade = result[0];
     }
