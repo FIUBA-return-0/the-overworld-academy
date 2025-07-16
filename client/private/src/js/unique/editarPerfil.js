@@ -1,6 +1,5 @@
 // inicia siempre en modo editar
 let modo = "editar";
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jdWxvIiwiY29uZGljaW9uIjoiYWx1bW5vIiwiaWQiOjMsImlhdCI6MTc1MjU4Mzc3OH0.YxVzC3Mdofw1a-Rf6zw0U5A7MCklIO0fbkeJRqWf3Vw";
 
 function habilitarEditarCampos(){
     const boton = document.getElementById("editar-perfil");
@@ -30,48 +29,89 @@ function habilitarEditarCampos(){
 };
 
 window.addEventListener("DOMContentLoaded", async () => {
-    const botonEditar = document.getElementById("editar-perfil");
-    if (botonEditar) {
-        botonEditar.addEventListener("click", habilitarEditarCampos);
+    try{
+
+    
+        const botonEditar = document.getElementById("editar-perfil");
+        if (botonEditar) {
+            botonEditar.addEventListener("click", habilitarEditarCampos);
+        }
+
+        document.getElementById("apellido").disabled = false;
+        document.getElementById("nombre").disabled = false;
+        document.getElementById("biografia").disabled = false;
+        document.getElementById("carrera").disabled = false;
+        document.getElementById("padron").disabled = false;
+        document.getElementById("usuario").disabled = false;
+
+        const getUserURL = await fetch(`${API}/usuario/self`,{
+            method:"GET",
+            headers: {
+                "Content-Type":"application/json",
+                "Authorization": `Bearer ${token}`,
+                },
+        })
+        
+        // check errores
+
+        if (userInfo.status === 404){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/404.html';
+            }
+        }
+        
+        else if (userInfo.status === 500){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/500.html';
+            }
+        }
+
+        else if (userInfo.status === 401){
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/401.html';
+            }
+        }
+
+        else{
+            sound5.play();
+            sound5.onended = function(){
+                window.location.href = '/error-inesperado.html';
+            }
+        }
+
+        const userInfo = await getUserURL.json()
+        console.log(userInfo)
+
+        document.getElementById("biografia").value = userInfo.bio
+        document.getElementById("apellido").value = userInfo.apellido
+        document.getElementById("nombre").value = userInfo.nombre
+        document.getElementById("padron").value = userInfo.id
+        document.getElementById("carrera").value = userInfo.carrera
+        document.getElementById("usuario").value = userInfo.username
+       
+        document.getElementById("apellido").disabled = true;
+        document.getElementById("nombre").disabled = true;
+        document.getElementById("biografia").disabled = true;
+        document.getElementById("carrera").disabled = true;
+        document.getElementById("padron").disabled = true;
+        document.getElementById("usuario").disabled = true;
     }
-
-    document.getElementById("usuario").disabled = false;
-    document.getElementById("apellido").disabled = false;
-    document.getElementById("nombre").disabled = false;
-    document.getElementById("padron").disabled = false;
-    document.getElementById("carrera").disabled = false;
-    document.getElementById("biografia").disabled = false;
-
-    const getUserURL = await fetch("http://localhost:3000/usuario/self",{
-        method:"GET",
-        headers: {
-            "Content-Type":"application/json",
-            "Authorization": `Bearer ${token}`,
-            },
-    })
-    const userInfo = await getUserURL.json()
-    console.log(userInfo)
-
-    document.getElementById("usuario").value = userInfo.username
-    document.getElementById("apellido").value = userInfo.apellido
-    document.getElementById("nombre").value = userInfo.nombre
-    document.getElementById("padron").value = userInfo.id
-    document.getElementById("carrera").value = userInfo.carrera
-    document.getElementById("biografia").value = userInfo.bio
-
-    document.getElementById("usuario").disabled = true;
-    document.getElementById("apellido").disabled = true;
-    document.getElementById("nombre").disabled = true;
-    document.getElementById("padron").disabled = true;
-    document.getElementById("carrera").disabled = true;
-    document.getElementById("biografia").disabled = true;
-
+    catch(e){
+        console.error(e);
+        sound5.play();
+        sound5.onended = function(){
+            window.location.href = '/error-inesperado.html';
+        }
+    }
 
 });
 
 async function editarPerfil(apellido,nombre,biografia) {
 
-    const updateUserURL = await fetch("http://localhost:3000/usuario", {
+    const updateUserURL = await fetch(`${API}/usuario`, {
         method:"PATCH",
         headers: {
             "Content-Type":"application/json",
