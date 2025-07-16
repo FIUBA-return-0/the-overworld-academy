@@ -5,7 +5,7 @@
     min-height: calc(var(--vh, 1vh) * 100);
 
     background-color: $color-9;
-    background-image: url('/img/background-1.png');
+    background-image: url('/img/background-1.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: right center;
@@ -128,7 +128,7 @@
         height: calc((var(--vh, 1vh) * 100) - 5vw);
 
         z-index: 10;
-        background-image: url('/img/background-2.png');
+        background-image: url('/img/background-2.webp');
         background-position: center center;
         background-size: contain;
         background-repeat: no-repeat;
