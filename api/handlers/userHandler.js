@@ -109,9 +109,12 @@ router.patch(
   authMiddleware,
   validateUserValues,
   validateDegreeId,
-  checkPasswordStrength,
   async (req, res) => {
     if ("password" in req.body) {
+      if (checkPasswordStrength(req.body.password)) {
+        return res.status(400).json({ error: "contraseña insegura" });
+      }
+
       const salt = await bcrypt.genSalt(12);
       const hash = await bcrypt.hash(req.body.password, salt);
       req.body.password = hash;
