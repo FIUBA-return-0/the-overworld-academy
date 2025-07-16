@@ -6,24 +6,30 @@ async function getCarreras(){
             },
         });
 
-        if(res.status === 200){
-            let ans = {};
-            const data = await res.json();
+        switch (res.status) {
+            case 201:
+                let ans = {};
+                const data = await res.json();
 
-            data.forEach(carrera => {
-                ans[carrera.carrera] = carrera.id;
-            });
+                data.forEach(carrera => {
+                    ans[carrera.carrera] = carrera.id;
+                });
 
-            localStorage.setItem("dictCarreras", JSON.stringify(ans));
+                localStorage.setItem("dictCarreras", JSON.stringify(ans));
             return ans;
-        }
 
-        else if(res.status === 500){
-            window.location.href = '/500.html';
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
     catch(e){
-        console.log(e);
+        console.error(e);
+        soundAndRedirect('/error-inesperado.html');
     }
 }
 
@@ -116,32 +122,38 @@ async function postRegister(usuario, contrasenia, nombre, apellido, carrera, fot
             body: JSON.stringify(body)
         });
 
-        if(res.status === 201){
-            const bodyLogin={
-                "username": usuario,
-                "password": contrasenia
-            }
-            sound3.play();
-            await loginPOST(bodyLogin);
-        }
-        
-        else if(res.status === 409){
-           /*  sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/401.html';
-            }
-            */
+        switch (res.status) {
+            case 201:
+                const bodyLogin={
+                    "username": usuario,
+                    "password": contrasenia
+                }
+                try{
+                    sound3.play();
+                    sound3.onended = async () =>{
+                        await loginPOST(bodyLogin);
+                    }
+                } catch(e){
+                    await loginPOST(bodyLogin);
+                }
+            break;
 
-        }
-        else if(res.status === 500){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/500.html';
-            }
+            case 409:
+                //user already exists
+            break;
+
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
-    catch (e){
-        console.log(e);
+    catch(e){
+        console.error(e);
+        soundAndRedirect('/error-inesperado.html');
     }
 }
 
@@ -176,7 +188,10 @@ async function register(){
     }
 
     if(invalidFlag){
-        sound5.play();
+        try{
+            sound5.play();
+        } catch(e){}
+
         return;
     }
 
