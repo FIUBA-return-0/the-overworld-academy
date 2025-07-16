@@ -1,11 +1,16 @@
-let token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jYXJ1c2hvIiwiY29uZGljaW9uIjoiYWx1bW5vIiwiaWQiOjEwLCJpYXQiOjE3NTI0MzAwMDh9._Mi-CacyHAFLexQF12tZJF39fvSO7Pgw6TXBvLkuhHU";
-let teacherSubject = "";
-let alumnosInscriptos = [];
+const truncarPromedio = (n) => {
+  let strNum = String(n);
+  const decimal = strNum.indexOf(".");
+  if (decimal === -1) {
+    return n;
+  }
+  return strNum.substring(0, decimal + 2);
+};
 
 async function cargarInfoProfesor() {
-  console.log("HOLA");
-  const getSubjectURL = await fetch("http://localhost:3000/materia?profesor=", {
+  const token = window.localStorage.getItem("token");
+
+  const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -14,70 +19,125 @@ async function cargarInfoProfesor() {
   });
   const infoMateria = await getSubjectURL.json();
 
+  document.querySelector(
+    ".materias-title"
+  ).textContent = `Propuesta: ${infoMateria[0].materia}`;
+  document.getElementById("cartelera").value = infoMateria.descripcion;
+
   document.querySelector(".materias-title").value = infoMateria.carrera;
   teacherSubject = infoMateria[0].id;
 
-  let grades = await fetch(
-    `http://localhost:3000/nota/?materia=${teacherSubject}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   grades = await grades.json();
+
   const sortedGrades = {};
 
   for (const g of grades) {
-    if (!sortedGrades[g.id_alumno]) {
-      sortedGrades[g.id_alumno] = {
-        id_alumno: g.id_alumno,
+    const alumnoId = g.padron;
+
+    if (!sortedGrades[alumnoId]) {
+      sortedGrades[alumnoId] = {
+        id_alumno: alumnoId,
         nombre: g.nombre,
         apellido: g.apellido,
         notas: {},
+        promedio: 0,
       };
     }
+
+    const claveNota = g.description.replace(/\s+/g, "");
+    sortedGrades[alumnoId].notas[claveNota] = g.nota;
+  }
+
+  for (const key in sortedGrades) {
+    const notas = Object.values(sortedGrades[key].notas);
+    const sum = notas.reduce((a, b) => a + b, 0);
+    sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
+  }
+  const tabla = document.querySelector(".notas-table");
+
+  const encabezado = tabla.querySelector("tr");
+  tabla.innerHTML = "";
+  tabla.appendChild(encabezado);
+
+  for (const key in sortedGrades) {
+    const alumno = sortedGrades[key];
+    const fila = document.createElement("tr");
+
+    const tdNombre = document.createElement("th");
+    tdNombre.textContent = `${alumno.apellido}, ${alumno.nombre}`;
+    fila.appendChild(tdNombre);
+
+    const tdPadron = document.createElement("th");
+    tdPadron.textContent = alumno.id_alumno ?? "-";
+    fila.appendChild(tdPadron);
+
+    const tdTP1 = document.createElement("th");
+    tdTP1.textContent = alumno.notas.TP1 ?? "-";
+    tdTP1.classList.add("table-nota");
+    fila.appendChild(tdTP1);
+
+    const tdTP2 = document.createElement("th");
+    tdTP2.textContent = alumno.notas.TP2 ?? "-";
+    tdTP2.classList.add("table-nota");
+    fila.appendChild(tdTP2);
+
+    const tdP1 = document.createElement("th");
+    tdP1.textContent = alumno.notas.P1 ?? "-";
+    tdP1.classList.add("table-nota");
+    fila.appendChild(tdP1);
+
+    const tdP2 = document.createElement("th");
+    tdP2.textContent = alumno.notas.P2 ?? "-";
+    tdP2.classList.add("table-nota");
+    fila.appendChild(tdP2);
+
+    const tdProm = document.createElement("th");
+    tdProm.textContent = alumno.promedio ?? "-";
+    tdProm.classList.add("table-nota");
+    fila.appendChild(tdProm);
+
+    tabla.appendChild(fila);
   }
 }
 
-const tabla = document.querySelector(".notas-table");
+function habilitarEditarCartelera() {
+  const boton = document.getElementById("editar-cartelera");
+  if (modo === "editar") {
+    document.getElementById("cartelera").disabled = false;
 
-for (const alumno of grades) {
-  const fila = document.createElement("tr");
+    boton.textContent = "Guardar cambios";
+    modo = "guardar";
+  } else {
+    editarCartelera(document.getElementById("cartelera").value);
 
-  const tdNombre = document.createElement("td");
-  tdNombre.textContent = `${alumno.apellido}, ${alumno.nombre}`;
-  fila.appendChild(tdNombre);
+    document.getElementById("cartelera").disabled = true;
 
-  const tdPadron = document.createElement("td");
-  tdPadron.textContent = alumno.id_alumno ?? "-";
-  fila.appendChild(tdPadron);
-
-  const tdTP1 = document.createElement("td");
-  tdTP1.textContent = alumno.TP1 ?? "-";
-  tdTP1.classList.add("table-nota");
-  fila.appendChild(tdTP1);
-
-  const tdTP2 = document.createElement("td");
-  tdTP2.textContent = alumno.TP2 ?? "-";
-  tdTP2.classList.add("table-nota");
-  fila.appendChild(tdTP2);
-
-  const tdP1 = document.createElement("td");
-  tdP1.textContent = alumno.P1 ?? "-";
-  tdP1.classList.add("table-nota");
-  fila.appendChild(tdP1);
-
-  const tdP2 = document.createElement("td");
-  tdP2.textContent = alumno.P2 ?? "-";
-  tdP2.classList.add("table-nota");
-  fila.appendChild(tdP2);
-
-  tabla.appendChild(fila);
+    boton.textContent = "Editar perfil";
+    modo = "editar";
+  }
 }
 
-document
-  .getElementById("pruebitas")
-  .addEventListener("click", cargarInfoProfesor);
+async function editarCartelera(cartelera) {
+  await fetch(`${API}}/materia?profesor=1`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      descripcion: cartelera,
+    }),
+  });
+}
+document.addEventListener(
+  "DOMContentLoaded",
+  cargarInfoProfesor(),
+  habilitarEditarCartelera()
+);
