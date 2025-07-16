@@ -13,6 +13,7 @@ const updateSubject = require("../controllers/Subjects/updateSubject.js");
 const authMiddleware = require("../utils/authMiddleware.js");
 const { authDirector, authDirectorProfesor } = require("../utils/authRoles");
 const promoteUser = require("../controllers/Degrees/promoteUser.js");
+const deleteStudentData = require("../controllers/Subjects/deleteStudentData.js")
 
 router.post(
   "/",
@@ -22,9 +23,10 @@ router.post(
   validateEmptyEntriesS,
   validateTeacherId,
   async (req, res) => {
+    const teacherId = await deleteStudentData(req)
     const newProfesor = await promoteUser(req.body);
 
-    if (!newProfesor.content.length) {
+    if (!newProfesor.content.length || !teacherId) {
       res.status(404).json({ error: "no se encontro alumno con ese id" });
     } else {
       const result = await createSubject(req.body);
