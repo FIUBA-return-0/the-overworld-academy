@@ -6,7 +6,7 @@ const getNote = async (query) => {
   const values = [];
 
   let queryText = `
-    select n.id,u.nombre,u.apellido,m.nombre as materia,n.description,n.nota from notas n
+    select n.id,u.nombre,u.apellido,u.id as padron, m.nombre as materia,n.description,n.nota from notas n
     join usuario u on u.id = n.alumno 
     join materias m on m.id = n.materia 
   `;
