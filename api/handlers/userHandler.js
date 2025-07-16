@@ -17,12 +17,14 @@ const authMiddleware = require("../utils/authMiddleware.js");
 const { authProfesor } = require("../utils/authRoles");
 const deleteInscription = require("../controllers/Inscriptions/deleteInscription.js");
 const deleteGrade = require("../controllers/Grades/deleteGrade.js");
+const checkPasswordStrength = require("../validations/checkPasswordStrength.js");
 
 router.post(
   "/",
   validateUserValues,
   validateEmptyEntriesU,
   validateDegreeId,
+  checkPasswordStrength,
   async (req, res) => {
     const salt = await bcrypt.genSalt(12);
     const hash = await bcrypt.hash(req.body.password, salt);
@@ -107,6 +109,7 @@ router.patch(
   authMiddleware,
   validateUserValues,
   validateDegreeId,
+  checkPasswordStrength,
   async (req, res) => {
     if ("password" in req.body) {
       const salt = await bcrypt.genSalt(12);
