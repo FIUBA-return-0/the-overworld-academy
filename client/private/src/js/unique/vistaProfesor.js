@@ -112,7 +112,6 @@ async function cargarInfoProfesor() {
         celda.classList.remove("editable");
 
         const nuevaNota = celda.textContent;
-        // if (nuevaNota === "-") return;
 
         const body = {
           alumno: Number(celda.dataset.padron),
