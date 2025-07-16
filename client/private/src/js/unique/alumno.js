@@ -68,6 +68,10 @@ async function fetchfillMateriasAlumno(){
                 if(materia.descripcion === null) materia.descripcion = "";
                 createMateriaCard(materia.id, materia.foto, materia.materia, materia.apeprofesor, materia.descripcion);
             }
+
+            setTimeout(()=>{
+                document.getElementById("loader-container").classList.add("hidden");
+            }, 1*1000);
         }
 
         else if(res.status === 404){

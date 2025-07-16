@@ -52,7 +52,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             document.getElementById("carrera").value = userInfo.carrera;
             document.getElementById("usuario").value = userInfo.username;
             document.getElementById("foto-perfil").setAttribute("src", userInfo.foto);
-            setSeleccionada();            
+            await setSeleccionada();
+
+            setTimeout(()=>{
+                document.getElementById("loader-container").classList.add("hidden");
+            }, 1*1000);
         }
         
         // check errores
