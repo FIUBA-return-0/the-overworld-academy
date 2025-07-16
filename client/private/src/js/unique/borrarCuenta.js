@@ -23,36 +23,31 @@ document.getElementById("borrar-cuenta").addEventListener("click", async () => {
             }
         });
         
-        if(res.status === 200){
-            localStorage.clear();
-            sound6.play();
-                sound6.onended = function(){
+        switch (getUserURL.status) {
+            case 200:
+                localStorage.clear();
+                try{
+                    sound6.play();
+                    sound6.onended = function(){
+                        window.location.href = '/index.html';
+                    }
+                } catch(e){
                     window.location.href = '/index.html';
                 }
-        }
+            break;
 
-        else if(res.status === 500){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/500.html';
-            }
-        }
-        
-        else{
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/error-inesperado.html';
-            }
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
 
     }
-
     catch(e){
         console.error(e);
-        sound5.play();
-        sound5.onended = function(){
-            window.location.href = '/error-inesperado.html';
-        }
+        soundAndRedirect('/error-inesperado.html');
     }
-
 });

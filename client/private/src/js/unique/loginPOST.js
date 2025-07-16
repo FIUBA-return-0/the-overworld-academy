@@ -8,45 +8,48 @@ async function loginPOST(body){
             body: JSON.stringify(body)
         });
 
-        if(res.status === 200){
-            try{
-                let token = await res.json();
+        switch (getUserURL.status) {
+            case 200:
+                try{
+                    let token = await res.json();
 
-                localStorage.setItem("token", token);
-                
-                const selfData = await fetch(`${API}/usuario/self`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-                    }
-                });
+                    localStorage.setItem("token", token);
+                    
+                    const selfData = await fetch(`${API}/usuario/self`, {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
 
-                const selfDataJSON = await selfData.json();
-                console.log(selfDataJSON);
+                    const selfDataJSON = await selfData.json();
+                    console.log(selfDataJSON);
 
-                localStorage.setItem("condicion", selfDataJSON.condicion);
-                localStorage.setItem("nombre", selfDataJSON.nombre);
-                localStorage.setItem("apellido", selfDataJSON.apellido);
-                localStorage.setItem("foto", selfDataJSON.foto);
-                localStorage.setItem("carreraID", selfDataJSON.carreraid);
+                    localStorage.setItem("condicion", selfDataJSON.condicion);
+                    localStorage.setItem("nombre", selfDataJSON.nombre);
+                    localStorage.setItem("apellido", selfDataJSON.apellido);
+                    localStorage.setItem("foto", selfDataJSON.foto);
+                    localStorage.setItem("carreraID", selfDataJSON.carreraid);
 
-                window.location.href = `/${selfDataJSON.condicion}.html`;
-            } catch(e){ console.error(e) }
-        }
+                    window.location.href = `/${selfDataJSON.condicion}.html`;
+                } catch(e){ console.error(e) }
+            break;
 
-        else if(res.status === 401){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/401.html';
-            }
-        }
+            case 401:
+                soundAndRedirect('/401.html');
+            break;
 
-        else if(res.status === 500){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/500.html';
-            }
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
-    catch(e){ console.log(e); }
+    catch(e){
+        console.error(e);
+        soundAndRedirect('/error-inesperado.html');
+    }
 }

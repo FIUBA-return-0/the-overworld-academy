@@ -58,45 +58,49 @@ async function fetchfillMateriasAlumno(){
             }
         });
 
-        if(res.status === 200){
-            const materias = await res.json();
+        switch (getUserURL.status) {
+            case 200:
+                const materias = await res.json();
 
-            document.getElementById("materias-title").innerHTML = `Propuesta: ${materias[0].carrera}`;
+                document.getElementById("materias-title").innerHTML = `Propuesta: ${materias[0].carrera}`;
 
-            for(const materia of materias){
-                if(materia.foto === null) materia.foto = "https://i.imgur.com/DJKWYUo.webp";
-                if(materia.descripcion === null) materia.descripcion = "";
-                createMateriaCard(materia.id, materia.foto, materia.materia, materia.apeprofesor, materia.descripcion);
-            }
+                for(const materia of materias){
+                    if(materia.foto === null) materia.foto = "https://i.imgur.com/DJKWYUo.webp";
+                    if(materia.descripcion === null) materia.descripcion = "";
+                    createMateriaCard(materia.id, materia.foto, materia.materia, materia.apeprofesor, materia.descripcion);
+                }
 
-            setTimeout(()=>{
-                document.getElementById("loader-container").classList.add("hidden");
-            }, 1*1000);
-        }
+                setTimeout(()=>{
+                    document.getElementById("loader-container").classList.add("hidden");
+                }, 1*1000);
+            break;
 
-        else if(res.status === 404){
-            const error = document.createElement("p").innerText = "Esta carrera no tiene materias.";
-            document.getElementById("materias-wrapper").append(error);
+            case 404:
+                const error = document.createElement("p").innerText = "Esta carrera no tiene materias.";
+                document.getElementById("materias-wrapper").append(error);
 
-            setTimeout(()=>{
-                document.getElementById("loader-container").classList.add("hidden");
-            }, 1*1000);
-        }
+                setTimeout(()=>{
+                    document.getElementById("loader-container").classList.add("hidden");
+                }, 1*1000);
+            break;
 
-        else{
-            console.error(e);
-            sound5.play();
-            sound5.onended=()=>{
-                window.location.href = '/error-inesperado.html';
-            }
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            case 401:
+                localStorage.clear();
+                soundAndRedirect('/401.html');
+            break;
+        
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
     catch(e){
         console.error(e);
-        sound5.play();
-        sound5.onended=()=>{
-            window.location.href = '/error-inesperado.html';
-        }
+        soundAndRedirect('/error-inesperado.html');
     }
 }
 

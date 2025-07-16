@@ -42,58 +42,45 @@ document.addEventListener("DOMContentLoaded", async () => {
             },
         });
 
-        if(getUserURL.status === 200){
-            const userInfo = await getUserURL.json();
+        switch (getUserURL.status) {
+            case 200:
+                const userInfo = await getUserURL.json();
 
-            document.getElementById("biografia").value = userInfo.bio;
-            document.getElementById("apellido").value = userInfo.apellido;
-            document.getElementById("nombre").value = userInfo.nombre;
-            document.getElementById("padron").value = userInfo.id;
-            document.getElementById("carrera").value = userInfo.carrera;
-            document.getElementById("usuario").value = userInfo.username;
-            document.getElementById("foto-perfil").setAttribute("src", userInfo.foto);
-            await setSeleccionada();
+                document.getElementById("biografia").value = userInfo.bio;
+                document.getElementById("apellido").value = userInfo.apellido;
+                document.getElementById("nombre").value = userInfo.nombre;
+                document.getElementById("padron").value = userInfo.id;
+                document.getElementById("carrera").value = userInfo.carrera;
+                document.getElementById("usuario").value = userInfo.username;
+                document.getElementById("foto-perfil").setAttribute("src", userInfo.foto);
+                await setSeleccionada();
 
-            setTimeout(()=>{
-                document.getElementById("loader-container").classList.add("hidden");
-            }, 1*1000);
-        }
+                setTimeout(()=>{
+                    document.getElementById("loader-container").classList.add("hidden");
+                }, 1*1000);
+            break;
+
+            case 404:
+                soundAndRedirect('/404.html');
+            break;
+
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+
+            case 401:
+                localStorage.clear();
+                soundAndRedirect('/401.html');
+            break;
         
-        // check errores
-        else if (getUserURL.status === 404){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/404.html';
-            }
-        }
-        
-        else if (getUserURL.status === 500){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/500.html';
-            }
-        }
-
-        else if (getUserURL.status === 401){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/401.html';
-            }
-        }
-
-        else{
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/error-inesperado.html';
-            }
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
     catch(e){
         console.error(e);
-        sound5.play();
-        sound5.onended = function(){
-            window.location.href = '/error-inesperado.html';
-        }
+        soundAndRedirect('/error-inesperado.html');
     }
 });
 
@@ -109,43 +96,30 @@ async function patchUsuario(body){
             body: JSON.stringify(body)
         });
 
-        if(updateUserURL.status === 200){
-            return;
-        }
+        switch (getUserURL.status) {
+            case 200:
+                return;
 
-        else if (updateUserURL.status === 404){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/404.html';
-            }
-        }
-        
-        else if (updateUserURL.status === 500){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/500.html';
-            }
-        }
+            case 404:
+                soundAndRedirect('/404.html');
+            break;
 
-        else if (updateUserURL.status === 401){
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/401.html';
-            }
-        }
+            case 500:
+                soundAndRedirect('/500.html');
+            break;
+            
+            case 401:
+                localStorage.clear();
+                soundAndRedirect('/401.html');
+            break;
 
-        else{
-            sound5.play();
-            sound5.onended = function(){
-                window.location.href = '/error-inesperado.html';
-            }
+            default:
+                soundAndRedirect('/error-inesperado.html');
+            break;
         }
     }
     catch(e){
         console.error(e);
-        sound5.play();
-        sound5.onended = function(){
-            window.location.href = '/error-inesperado.html';
-        }
+        soundAndRedirect('/error-inesperado.html');
     }
 }
