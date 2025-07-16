@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .loader {
+    display: inline-flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    }
+
+    .loader:before,
+    .loader:after {
+        content: "";
+        height: 80px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background:
+            linear-gradient(#222 0 0) top/100% 40% no-repeat,
+            radial-gradient(farthest-side, #000 95%, #0000) 50%/20px 20px no-repeat
+            #fff;
+        animation: l7 1.5s infinite alternate ease-in;
+        }
+
+    @keyframes l7 {
+    0%,
+    70% {
+        background-size: 100% 40%, 20px 20px;
+    }
+    85% {
+        background-size: 100% 120%, 20px 20px;
+    }
+    100% {
+        background-size: 100% 40%, 20px 20px;
+    }
+}
