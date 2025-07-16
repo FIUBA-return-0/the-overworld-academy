@@ -1,7 +1,4 @@
-window.onload = ()=>{
-    let vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-    let scrollbarWidth = window.innerWidth - document.body.clientWidth;
-    document.documentElement.style.setProperty("--scrollbar-width", `${scrollbarWidth}px`);
-};
+window.addEventListener("load", ()=>{
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight*0.01}px`);
+    document.documentElement.style.setProperty("--scrollbar-width", `${window.innerWidth-document.body.clientWidth}px`);
+});
