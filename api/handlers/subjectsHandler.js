@@ -38,7 +38,13 @@ router.post(
 );
 
 router.get("/", authMiddleware, validateQueryParamsS, async (req, res) => {
-  const result = await getSubject(req.query);
+  let newQuery = { ...req.query };
+
+  if ("profesor" in req.query) {
+    newQuery.profesor = req.user.id;
+  }
+
+  const result = await getSubject(newQuery);
 
   if (!result.length) {
     res.status(404).json({ error: "no se encontro la materia" });
