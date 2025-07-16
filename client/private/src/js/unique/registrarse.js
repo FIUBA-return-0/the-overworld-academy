@@ -45,7 +45,7 @@ function validarContrasenia(password1, password2){
         return 1;
     }
     
-    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z]){2,}(?=.*\d){2,}(?=.*[$@$!%*?^&#.$($)$-$_]){2,}[A-Za-z\d$@$!%*?^&#.$($)$-$_]{8,500}$/;
+    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?^&#.$($)$-$_])[A-Za-z\d$@$!%*?^&#.$($)$-$_]{8,500}$/;
     if(!password1.match(passwordRegEx)){
         return 2;
     }
