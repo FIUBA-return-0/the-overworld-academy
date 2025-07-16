@@ -25,6 +25,7 @@ async function cargarInfoProfesor() {
   document.querySelector(
     ".materias-title"
   ).textContent = `Propuesta: ${infoMateria[0].materia}`;
+  document.getElementById("cartelera").value = infoMateria.descripcion
 
   document.querySelector(".materias-title").value = infoMateria.carrera;
   teacherSubject = infoMateria[0].id;
@@ -112,4 +113,40 @@ async function cargarInfoProfesor() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", cargarInfoProfesor);
+function habilitarEditarCartelera(){
+  const boton = document.getElementById("editar-cartelera");
+  if (modo === "editar"){
+  document.getElementById("cartelera").disabled = false;
+  
+  boton.textContent = "Guardar cambios";
+  modo = "guardar";
+  }
+
+  else{
+
+  editarCartelera(
+  document.getElementById("cartelera").value,
+)
+
+  document.getElementById("cartelera").disabled = true;
+  
+  boton.textContent = "Editar perfil";
+  modo = "editar";
+  }
+};
+
+async function editarCartelera(cartelera){
+
+  await fetch("http://localhost:3000/materia?profesor=1",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        descripcion:cartelera
+      })
+    })
+}
+document.addEventListener("DOMContentLoaded", cargarInfoProfesor(), habilitarEditarCartelera());
