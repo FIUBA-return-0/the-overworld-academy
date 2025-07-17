@@ -240,6 +240,35 @@ async function editarNotas(padron){
             const ntp2=parseFloat(tp2);
             const np1=parseFloat(p1);
             const np2=parseFloat(p2);
+
+            if(ntp1<0 || ntp1>10){
+                tp1I.value="";
+                document.getElementById("modal-nota-invalida").classList.remove("hidden");
+                document.getElementById("continuar-nota-invalida").addEventListener("click", ()=>{ window.location.reload(); document.getElementById("modal-nota-invalida").classList.add("hidden"); });
+                return;
+            }
+
+            if(ntp2<0 || ntp2>10){
+                tp2I.value="";
+                document.getElementById("modal-nota-invalida").classList.remove("hidden");
+                document.getElementById("continuar-nota-invalida").addEventListener("click", ()=>{ window.location.reload(); document.getElementById("modal-nota-invalida").classList.add("hidden"); });
+                return;
+            }
+
+            if(np1<0 || np1>10){
+                p1I.value="";
+                document.getElementById("modal-nota-invalida").classList.remove("hidden");
+                document.getElementById("continuar-nota-invalida").addEventListener("click", ()=>{ window.location.reload(); document.getElementById("modal-nota-invalida").classList.add("hidden"); });
+                return;
+            }
+
+            if(np2<0 || np2>10){
+                p2I.value="";
+                document.getElementById("modal-nota-invalida").classList.remove("hidden");
+                document.getElementById("continuar-nota-invalida").addEventListener("click", ()=>{ window.location.reload(); document.getElementById("modal-nota-invalida").classList.add("hidden"); });
+                return;
+            }
+            
             promedioI.value=(((np1+np2)/2)+((ntp1+ntp2)/2))/2;
         }
         else{
@@ -312,6 +341,8 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     tp1I.value=tp1;
     tp1I.disabled=true;
     tp1I.id=`tp1-${padron}`;
+    tp1I.setAttribute("min", 0);
+    tp1I.setAttribute("max", 10);
     notaCardAlumno.append(tp1I);
     
     let tp2I = document.createElement("input");
@@ -319,6 +350,8 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     tp2I.value=tp2;
     tp2I.disabled=true;
     tp2I.id=`tp2-${padron}`;
+    tp2I.setAttribute("min", 0);
+    tp2I.setAttribute("max", 10);
     notaCardAlumno.append(tp2I);
 
     let p1I = document.createElement("input");
@@ -326,6 +359,8 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     p1I.value=p1;
     p1I.disabled=true;
     p1I.id=`p1-${padron}`;
+    p1I.setAttribute("min", 0);
+    p1I.setAttribute("max", 10);
     notaCardAlumno.append(p1I);
 
     let p2I = document.createElement("input");
@@ -333,6 +368,8 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     p2I.value=p2;
     p2I.disabled=true;
     p2I.id=`p2-${padron}`;
+    p2I.setAttribute("min", 0);
+    p2I.setAttribute("max", 10);
     notaCardAlumno.append(p2I);
     
     let promedioI = document.createElement("input");

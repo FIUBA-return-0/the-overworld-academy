@@ -8,45 +8,47 @@
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/ver-materia.css">
 </head>
-<body class="ver-materia-page flex-c-c">
+<body class="ver-materia-page">
     <nav>
         <div class="nav-left">
             <img class="nav-img-logo" src="/img/the-overworld-academy-logo.webp" alt="Nuestro logo">
         </div>
         <div class="nav-right">
-            <img class="icon" src="/img/user-logo.svg" alt="Perfil">
+            <a href="/perfil.html"><img class="icon" src="/img/user-logo.svg" alt="Perfil"></a>
             <img class="icon active" src="/img/materias-logo.svg" alt="Materias"> 
             <img class="icon" id="boton-salir" src="/img/logout-logo.svg" alt="Salir">  
         </div> 
     </nav>
 
-    <div id="modal-opcion" class="modal hidden">
-        <div class="modal-contenido">
-            <p class="minecraft-p">Estas seguro de que queres salir?</p>
-            <div class="modal-botones">
-                <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
-                <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+    <div id="content-wrapper">
+        <div id="modal-opcion" class="modal hidden">
+            <div class="modal-contenido">
+                <p class="minecraft-p">Estas seguro de que queres salir?</p>
+                <div class="modal-botones">
+                    <button id="confirmar-salida" class="large-button sound-button red-button">Salir</button>
+                    <button id="cancelar-salida" class="large-button sound-button">Cancelar</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <section id="info-materia" class="flex-c-c">
-        <h1 class="materias-title">Plantar la bomba sin morir en el intento</h1>
-        <h2 class="materia-catedra">Cátedra: Nico Riedel <span class="emoji-font">🐐</span></h2>
-        <p class="minecraft-p">Cartelera de la materia</p>
-        <p id="cartelera">Recu: 20250715T090000-03</p>
-        <p class="minecraft-p hidden" id="notas-text">Notas</p>
-        <div id="notas" class="hidden">
-            <p id="promedio-materia" class="materia-nota">Promedio materia: </p>
-            <p id="promedio-parciales" class="materia-nota">Promedio parciales: </p>
-            <p id="promedio-TPs" class="materia-nota">Promedio TPs: </p>
-            <p id="TP1" class="materia-nota">Nota TP1: </p>
-            <p id="TP2" class="materia-nota">Nota TP2: </p>
-            <p id="P1" class="materia-nota">Nota P1: </p>
-            <p id="P2" class="materia-nota">Nota P2: </p>
-        </div>
-        <button class="large-button sound-button" id="inscripcion">Inscribirse</button>
-    </section>
+        <section id="info-materia" class="flex-c-c">
+            <h1 class="materias-title">Plantar la bomba sin morir en el intento</h1>
+            <h2 class="materia-catedra">Cátedra: Nico Riedel <span class="emoji-font">🐐</span></h2>
+            <p class="minecraft-p">Cartelera de la materia</p>
+            <p id="cartelera">Recu: 20250715T090000-03</p>
+            <p class="minecraft-p hidden" id="notas-text">Notas</p>
+            <div id="notas" class="hidden">
+                <p id="promedio-materia" class="materia-nota">Promedio materia: </p>
+                <p id="promedio-parciales" class="materia-nota">Promedio parciales: </p>
+                <p id="promedio-TPs" class="materia-nota">Promedio TPs: </p>
+                <p id="TP1" class="materia-nota">Nota TP1: </p>
+                <p id="TP2" class="materia-nota">Nota TP2: </p>
+                <p id="P1" class="materia-nota">Nota P1: </p>
+                <p id="P2" class="materia-nota">Nota P2: </p>
+            </div>
+            <button class="large-button sound-button" id="inscripcion">Inscribirse</button>
+        </section>
+    </div>
 
     <footer class="footer" class="flex-c-c">
         <p>&copy; 2025 por <a href="https://github.com/FIUBA-return-0" target="_blank">return 0;</a></p>
