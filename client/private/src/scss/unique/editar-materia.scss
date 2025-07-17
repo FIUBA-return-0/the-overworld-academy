@@ -53,6 +53,7 @@
                 min-height: 90vh;
                 margin-top: 2.5vw;
                 margin-bottom: 2.5vw;
+                padding-bottom: 2.5vw;
 
                 display: flex;
                 justify-content: center;
@@ -60,10 +61,6 @@
                 
                 .crear-materia-data-box-wrapper{
                     margin-top: 2.5vw;
-
-                    button:last-child{
-                        margin-bottom: 2.5vw;
-                    }
                 }
             }
         }

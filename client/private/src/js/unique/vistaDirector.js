@@ -65,45 +65,99 @@ document.addEventListener("DOMContentLoaded", async () => {
             Authorization: `Bearer ${token}`,
           },
         });
+        switch (getUserURL.status){
+            case 200:
+                const userInfo = await getUserURL.json();
+                degreeId = userInfo.carreraid;
+                
+                document.querySelector(".materias-title").textContent = "Bienvenido, director de carrera " + userInfo.nombre;
 
-        switch (getDegreeURL.status) {
-          case 200:
-            const degreeInfo = await getDegreeURL.json();
+                const getDegreeURL = await fetch(`${API}/carrera/` + degreeId, {
+                    method:"GET",
+                    headers: {
+                        "Content-Type":"application/json",
+                        "Authorization": `Bearer ${token}`,
+                    }
+                });
 
-            document.getElementById("nombre").value = degreeInfo.carrera;
-            document.getElementById("description").value =
-              degreeInfo.description;
-            document.getElementById("foto").value = degreeInfo.foto;
+                switch (getDegreeURL.status){
+                    case 200:
+                        const degreeInfo = await getDegreeURL.json()
+                
+                        document.getElementById("nombre").value = degreeInfo.carrera;
+                        document.getElementById("description").value = degreeInfo.description;
+                        document.getElementById("foto").value = degreeInfo.foto;
 
-            const getSubjects = await fetch(
-              `${API}/materia?carrera=` + degreeId,
-              {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+                        const getSubjects = await fetch(`${API}/materia?carrera=` + degreeId,{
+                            method:"GET",
+                            headers: {
+                                "Content-Type":"application/json",
+                                "Authorization": `Bearer ${token}`,
+                            }
+                        });
 
-            switch (getSubjects.status) {
-              case 200:
-                const subjects = await getSubjects.json();
-                for (const materia of subjects) {
-                  if (materia.foto === null)
-                    materia.foto = "https://i.imgur.com/DJKWYUo.webp";
-                  if (materia.descripcion === null) materia.descripcion = "";
-                  createMateriaCard(
-                    materia.id,
-                    materia.foto,
-                    materia.materia,
-                    materia.apeprofesor,
-                    materia.descripcion,
-                    "",
-                    "materias-wrapper",
-                    "/editar-materia.html?id=",
-                    ""
-                  );
+                        switch (getSubjects.status){
+                            case 200:
+                                const subjects = await getSubjects.json()
+                                for (const materia of subjects) {
+                                    if (materia.foto === null)
+                                        materia.foto = "https://i.imgur.com/DJKWYUo.webp";
+                                    if (materia.descripcion === null) materia.descripcion = "";
+                                    createMateriaCard(
+                                        materia.id,
+                                        materia.foto,
+                                        materia.materia,
+                                        materia.apeprofesor,
+                                        materia.descripcion,
+                                        "",
+                                        "materias-wrapper",
+                                        "/editar-materia.html?id=",
+                                    );
+                                }
+                                setTimeout(() => {
+                                    document.getElementById("loader-container").classList.add("hidden");
+                                }, 1 * 1000);
+                            break;
+
+                            case 404:
+                                let p = document.createElement("p");
+                                p.innerText = "Esta carrera no tiene materias.";
+                                p.classList.add("minecraft-p");
+                                document.getElementById("materias-wrapper").append(p);
+                                setTimeout(() => {
+                                    document.getElementById("loader-container").classList.add("hidden");
+                                }, 1 * 1000);
+                            break;
+
+                            case 500:
+                                soundAndRedirect('/500.html');
+                            break;
+
+                            case 401:
+                                soundAndRedirect('/401.html');
+                            break;
+
+                            default:
+                                soundAndRedirect('/error-inesperado.html');
+                            break;
+                        }
+                    break;
+
+                    case 404:
+                        soundAndRedirect('/404.html');
+                    break;
+
+                    case 500:
+                        soundAndRedirect('/500.html');
+                    break;
+
+                    case 401:
+                        soundAndRedirect('/401.html');
+                    break;
+
+                    default:
+                        soundAndRedirect('/error-inesperado.html');
+                    break;
                 }
                 setTimeout(() => {
                   document

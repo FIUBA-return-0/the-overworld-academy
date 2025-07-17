@@ -39,12 +39,16 @@ nav{
             height: 6vh;
             display: block;
 
-            &.active {
+            &.active, &.active-valid {
                 border-bottom: 3px solid $color-12;
             }
 
             &.active:hover{
                 cursor: not-allowed;
+                transform: none;
+            }
+
+            &.active-valid:hover{
                 transform: none;
             }
             
