@@ -40,6 +40,10 @@
 
     //PC only
     @media(min-width: 768px){
+        #content-wrapper{
+            min-height: calc((var(--vh, 1vh) * 62));
+        }
+
         #info-materia{
             #cartelera{
                 width: 60vw;
@@ -56,6 +60,10 @@
 
     //mobile only 
     @media(max-width: 768px){
+        #content-wrapper{
+            min-height: calc((var(--vh, 1vh) * 54.5));
+        }
+
         #info-materia{
             #cartelera{
                 width: 85vw;

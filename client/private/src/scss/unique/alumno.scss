@@ -6,6 +6,15 @@
 
     .materias-wrapper{
         .materia-inscripto{
+            background-color: rgba($color: #f9ee3f, $alpha: 0.5);
+            border: 2.5px solid #f9ee3f;
+
+            .materia-card-img{
+                border-right: 2.5px solid #f9ee3f;
+            }
+        }
+
+        .materia-aprobado{
             background-color: rgba($color: $color-1, $alpha: 0.8);
             border: 5px double $color-11;
 
