@@ -29,6 +29,16 @@ async function habilitarEditarCampos(){
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
+    if(localStorage.condicion == "profesor"){
+        window.location.href = "/401.html";
+        return
+    }
+    
+    else if(localStorage.condicion == "alumno"){
+        window.location.href = "/401.html";
+        return;
+    }
+    
     try{
         const botonEditar = document.getElementById("editar-carrera");
         if (botonEditar) {

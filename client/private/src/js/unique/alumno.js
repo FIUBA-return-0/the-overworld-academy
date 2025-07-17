@@ -21,6 +21,15 @@ async function inscripcionAlumno() {
 }
 
 async function fetchfillMateriasAlumno() {
+<<<<<<< Updated upstream
+=======
+  if(localStorage.condicion == "profesor" || localStorage.condicion == "director"){
+    window.location.href = "/401.html";
+    return;
+  }
+
+  await inscripcionAlumno();
+>>>>>>> Stashed changes
   try {
     await inscripcionAlumno();
     const idCarrera = localStorage.getItem("carreraID");

@@ -8,6 +8,11 @@ function truncarPromedio(n){
 };
 
 async function cargarDatosProfesor(){
+    if(localStorage.condicion == "alumno" || localStorage.condicion == "director"){
+        window.location.href = "/401.html";
+        return;
+    }
+
     const token = localStorage.getItem('token');
 
     try{
