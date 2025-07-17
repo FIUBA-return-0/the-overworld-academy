@@ -1,7 +1,9 @@
 let modo = "editar";
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jYXJ1bGxvIiwiY29uZGljaW9uIjoiZGlyZWN0b3IiLCJpZCI6MSwiaWF0IjoxNzUyNzE0Njk2fQ.h9B0MhUzwKoDujYSuUa59EA3CE5PE7DwtVyyvB0rrhU"
+let token = localStorage.getItem("token")
 let degreeID = "";
-let subjectID = "crear"; 
+const queryString = window.location.search;
+const params = new URLSearchParams(queryString);
+let subjectID = params.get("id"); 
 
 function habilitarEditarMateria() {
     const boton = document.getElementById("editar-materia");
@@ -141,7 +143,6 @@ async function editarMateria(nombre_materia, foto_materia, id_profesor, carga_ho
 
         switch (updateSubjectURL.status){
             case 200:
-                const newSubject = await updateSubjectURL.json();
                 break;
             case 401:
                 soundAndRedirect("/401.html");
@@ -182,9 +183,7 @@ async function crearMateria(nombre_materia, foto_materia, id_profesor, carga_hor
         });
 
         switch (createSubjectURL.status) {
-            case 200:
-                const newSubject = await createSubjectURL.json();
-                console.log(newSubject);
+            case 201:
                 // salio todo regio!!!!
                 window.location.href = "/director.html";
                 break;
