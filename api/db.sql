@@ -10,6 +10,7 @@ drop table if exists inscripciones;
 create type rol as enum ('alumno', 'profesor', 'director');
 create type aprobado as enum ('cursando', 'aprobado');
 -- ! entidades elementales
+
 CREATE TABLE carreras (
   id SERIAL PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL,
@@ -18,6 +19,7 @@ CREATE TABLE carreras (
   sede VARCHAR(40) NOT NULL,
   foto text
 );
+
 CREATE TABLE usuario (
   nombre VARCHAR(50),
   apellido VARCHAR(20),
@@ -29,8 +31,10 @@ CREATE TABLE usuario (
   foto text,
   bio text
 );
+
 ALTER TABLE carreras
 ADD COLUMN director INT REFERENCES usuario(id);
+
 CREATE TABLE materias (
   id SERIAL PRIMARY KEY,
   profesor INT REFERENCES usuario(id),
@@ -40,7 +44,7 @@ CREATE TABLE materias (
   foto text,
   descripcion text
 );
---! auxiliares:
+
 CREATE TABLE notas (
   id serial primary key,
   alumno SERIAL REFERENCES usuario(id),
@@ -48,11 +52,7 @@ CREATE TABLE notas (
   description VARCHAR(20) NOT NULL,
   nota float
 );
-CREATE TABLE correlativas (
-  id serial primary key,
-  materia SERIAL REFERENCES materias(id),
-  materia_necesaria SERIAL REFERENCES materias(id)
-);
+
 CREATE TABLE inscripciones (
   id serial primary key,
   alumno SERIAL REFERENCES usuario(id),
