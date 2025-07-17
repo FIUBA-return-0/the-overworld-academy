@@ -8,7 +8,7 @@ const getSubject = async (data) => {
   const campo = Object.keys(data);
   const values = data[campo];
   const query = `
-    select m.id,m.nombre as materia,m.foto , u.nombre as nombProfesor, u.apellido apeProfesor, m.carga_horaria, m.descripcion, c.nombre as carrera from materias m
+    select m.id,m.nombre as materia,m.foto , u.nombre as nombProfesor, u.apellido apeProfesor, m.carga_horaria, m.descripcion, m.cartelera c.nombre as carrera from materias m
     join carreras c
     on c.id = m.carrera
     join usuario u
