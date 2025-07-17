@@ -68,6 +68,7 @@ function validarUsuario(usuario) {
 
 function ocultarErrores() {
   document.getElementById("error-rep-contrasenia").classList.add("hidden");
+  document.getElementById("error-usuario-repetido").classList.add("hidden");
   document.getElementById("error-contrasenia").classList.add("hidden");
   document.getElementById("error-usuario").classList.add("hidden");
   document.getElementById("error-usuario-invalido").classList.add("hidden");
@@ -128,7 +129,6 @@ async function postRegister(
     carrera: carrera,
     foto: foto,
   };
-  console.log(body);
 
   try {
     let res = await fetch(`${API}/usuario/`, {
@@ -139,10 +139,9 @@ async function postRegister(
       body: JSON.stringify(body),
     });
 
-    res = await res.json();
-
     switch (res.status) {
       case 201:
+        res = await res.json();
         const bodyLogin = {
           username: usuario,
           password: contrasenia,
@@ -155,19 +154,22 @@ async function postRegister(
         } catch (e) {
           await loginPOST(bodyLogin);
         }
-        break;
+      break;
 
       case 409:
-        //user already exists
-        break;
+        document.getElementById("error-usuario-repetido").classList.remove("hidden");
+        try {
+          sound5.play();
+        } catch (e) {}
+      break;
 
       case 500:
         soundAndRedirect("/500.html");
-        break;
+      break;
 
       default:
         soundAndRedirect("/error-inesperado.html");
-        break;
+      break;
     }
   } catch (e) {
     console.error(e);
