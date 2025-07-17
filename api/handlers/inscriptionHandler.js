@@ -25,7 +25,7 @@ router.get("/", authMiddleware, async (req, res) => {
   const result = await getAllInscriptions(newQuery);
 
   if (!result.length) {
-    res.status(400).json({ error: "no se encontro la inscripcion" });
+    res.status(404).json([]);
   } else {
     res.status(200).json(result);
   }
@@ -37,7 +37,7 @@ router.patch("/", authMiddleware, authProfesor, async (req, res) => {
     const updated = await getInscription(result.content);
     res.status(200).json(updated[0]);
   } else {
-    res.status(400).json(result.content);
+    res.status(404).json(result.content);
   }
 });
 

@@ -21,8 +21,8 @@ async function inscripcionAlumno() {
 }
 
 async function fetchfillMateriasAlumno() {
-  await inscripcionAlumno();
   try {
+    await inscripcionAlumno();
     const idCarrera = localStorage.getItem("carreraID");
     const token = localStorage.getItem("token");
     const res = await fetch(`${API}/materia?carrera=${idCarrera}`, {
