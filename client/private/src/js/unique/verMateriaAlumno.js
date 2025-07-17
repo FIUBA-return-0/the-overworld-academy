@@ -1,44 +1,72 @@
+const truncarPromedio = (n) => {
+  let strNum = String(n);
+  const decimal = strNum.indexOf(".");
+  if (decimal === -1) {
+    return n;
+  }
+  return strNum.substring(0, decimal + 2);
+};
+const promedioMateria = (promTp, promP) => {
+  promTP = parseFloat(promTp);
+  promP = parseFloat(promP);
+  return truncarPromedio((promTp + promP) / 2);
+};
+
+const promedio = (notasParciales) => {
+  console.log(notasParciales);
+
+  if (!notasParciales.length) return 0;
+  const sum = notasParciales.reduce((acc, cur) => acc + cur);
+  return truncarPromedio(sum / notasParciales.length);
+};
+
 window.addEventListener("DOMContentLoaded", async () => {
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imdlcm9jdWxvIiwiY29uZGljaW9uIjoiYWx1bW5vIiwiaWQiOjMsImlhdCI6MTc1MjU4Mzc3OH0.YxVzC3Mdofw1a-Rf6zw0U5A7MCklIO0fbkeJRqWf3Vw";
-    
-    const getSubjectURL = await fetch("http://localhost:3000/materia?id=1", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-    })
-    const subjectInfo = await getSubjectURL.json()
+  let token = localStorage.token;
 
-    document.querySelector(".materias-title").textContent = subjectInfo.materia;
-        document.querySelector(".materia-catedra").textContent =
-          "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
-        document.getElementById("cartelera").textContent = subjectInfo.descripcion;
+  const getSubjectURL = await fetch(`${API}/materia?id=1`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const subjectInfo = await getSubjectURL.json();
 
-        const getGradesURL = await fetch("http://localhost:3000/nota?materia=1", {
-            method: "GET", 
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
-            },
-          })
-        const notas = await getGradesURL.json()
-        let promedioTPS = 0
-        let promedioParciales = 0
-              notas.forEach(notaObj => {
-                const { nota, description } = notaObj;
-                if(description==="TP1" || description==="TP2"){
-                    promedioTPS += nota
-                }
-                if(description==="P1" || description==="P2"){
-                    promedioParciales += nota
-                }
+  document.querySelector(".materias-title").textContent = subjectInfo.materia;
+  document.querySelector(".materia-catedra").textContent =
+    "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
+  document.getElementById("cartelera").textContent = subjectInfo.descripcion;
 
+  const getGradesURL = await fetch(`${API}/nota?materia=1`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const notas = await getGradesURL.json();
+  let parciales = [];
+  let tps = [];
+  notas.forEach((notaObj) => {
+    const { description, nota } = notaObj;
+    description.includes("TP") ? tps.push(nota) : parciales.push(nota);
 
-                document.getElementById(description).textContent = `Nota ${description}: ${nota}`;
-              });
-              document.getElementById("promedio-parciales").textContent = `Promedio parciales: ${promedioParciales / 2}`;
-              document.getElementById("promedio-tps").textContent = `Promedio TPs: ${promedioTPS / 2}`;
-              document.getElementById("promedio-materia").textContent = `Promedio materia: ${(promedioParciales + promedioTPS) / 2
-              }`;
-            });
+    document.getElementById(description).textContent = `Nota ${description}: ${
+      nota ? nota : ""
+    }`;
+  });
+
+  let promTp = promedio(tps);
+  let promP = promedio(parciales);
+  let promMateria = promedioMateria(promP, promTp);
+
+  document.getElementById(
+    "promedio-parciales"
+  ).textContent = `Promedio parciales: ${promP}`;
+  document.getElementById(
+    "promedio-TPs"
+  ).textContent = `Promedio TPs: ${promTp}`;
+  document.getElementById(
+    "promedio-materia"
+  ).textContent = `Promedio materia: ${promMateria}`;
+});
