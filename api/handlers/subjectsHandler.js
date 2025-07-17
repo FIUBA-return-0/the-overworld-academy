@@ -23,10 +23,10 @@ router.post(
   validateEmptyEntriesS,
   validateTeacherId,
   async (req, res) => {
-    const teacherId = await deleteStudentData(req)
+    await deleteStudentData(req)
     const newProfesor = await promoteUser(req.body);
 
-    if (!newProfesor.content.length || !teacherId) {
+    if (!newProfesor.content.length) {
       res.status(404).json({ error: "no se encontro alumno con ese id" });
     } else {
       const result = await createSubject(req.body);
