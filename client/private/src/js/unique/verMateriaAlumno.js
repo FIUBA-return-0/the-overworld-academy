@@ -13,7 +13,6 @@ const promedioMateria = (promTp, promP) => {
 };
 
 const promedio = (notasParciales) => {
-  console.log(notasParciales);
 
   if (!notasParciales.length) return 0;
   const sum = notasParciales.reduce((acc, cur) => acc + cur);
@@ -21,12 +20,11 @@ const promedio = (notasParciales) => {
 };
 
 window.addEventListener("DOMContentLoaded", async () => {
-  let token = localStorage.token;
-  const queryString = window.location.search;
+  let token = localStorage.getItem("token")
   const params = new URLSearchParams(queryString);
-  const id = params.get('id')
+  const idCarrera = params.get('id')
 
-  const getSubjectURL = await fetch(`${API}/materia?id=` + id, {
+  const getSubjectURL = await fetch(`${API}/materia?id=` + idCarrera, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +38,16 @@ window.addEventListener("DOMContentLoaded", async () => {
     "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
   document.getElementById("cartelera").textContent = subjectInfo.descripcion;
 
-  const getGradesURL = await fetch(`${API}/nota?materia=` + id, {
+  const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
+  const materiasAprobadas = JSON.parse(localStorage.getItem("inscripto")) || [];
+
+
+
+if (materiasInscripto.includes(idCarrera) || materiasAprobadas.includes(idCarrera)) {
+  document.getElementById("notas").classList.remove("hidden")
+  document.getElementById("notas-text").classList.remove("hidden")
+  
+  const getGradesURL = await fetch(`${API}/nota?materia=` + idCarrera, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -50,6 +57,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const notas = await getGradesURL.json();
   let parciales = [];
   let tps = [];
+
   notas.forEach((notaObj) => {
     const { description, nota } = notaObj;
     description.includes("TP") ? tps.push(nota) : parciales.push(nota);
@@ -63,13 +71,14 @@ window.addEventListener("DOMContentLoaded", async () => {
   let promP = promedio(parciales);
   let promMateria = promedioMateria(promP, promTp);
 
-  document.getElementById(
-    "promedio-parciales"
-  ).textContent = `Promedio parciales: ${promP}`;
-  document.getElementById(
-    "promedio-TPs"
-  ).textContent = `Promedio TPs: ${promTp}`;
-  document.getElementById(
-    "promedio-materia"
-  ).textContent = `Promedio materia: ${promMateria}`;
+  document.getElementById("promedio-parciales").textContent = `Promedio parciales: ${promP}`;
+  document.getElementById("promedio-TPs").textContent = `Promedio TPs: ${promTp}`;
+  document.getElementById("promedio-materia").textContent = `Promedio materia: ${promMateria}`;
+} else {
+  document.getElementById("notas").classList.remove("hidden")
+  document.getElementById("notas-text").classList.remove("hidden")
+  document.getElementById("boton-inscripcion").classList.add("hidden")
+}
+
+
 });

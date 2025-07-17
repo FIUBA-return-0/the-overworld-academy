@@ -5,7 +5,7 @@ const getInscriptions = async (data) => {
 
   const values = data[tabla];
   const query = `
-    select i.id, u.nombre,u.apellido,m.nombre as materia, i.condicion
+    select i.id, m.id as idCarrera,u.nombre,u.apellido,m.nombre as materia, i.condicion
     from inscripciones i
     join usuario u on u.id = i.alumno
     join materias m on m.id = i.materia

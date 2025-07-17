@@ -16,7 +16,13 @@ const { authProfesor } = require("../utils/authRoles");
 const postGrade = require("../controllers/Grades/postGrade");
 
 router.get("/", authMiddleware, validateQueryParamsI, async (req, res) => {
-  const result = await getAllInscriptions(req.query);
+  let newQuery = { ...req.query };
+
+  if ("usuario" in req.query) {
+    newQuery.usuario = req.user.id;
+  }
+
+  const result = await getAllInscriptions(newQuery);
 
   if (!result.length) {
     res.status(400).json({ error: "no se encontro la inscripcion" });
@@ -51,18 +57,18 @@ router.post(
   validateEmptyEntriesI,
   async (req, res) => {
     const result = await postInscription(req.body);
-    const descriptions = ["P1","P2","TP1","TP2"]
-    const { alumno, materia } = req.body
+    const descriptions = ["P1", "P2", "TP1", "TP2"];
+    const { alumno, materia } = req.body;
 
     if (!result.status) {
       const created = await getInscription(result.content);
       for (const description of descriptions) {
-        await postGrade({ 
-          alumno, 
-          materia, 
-          description 
+        await postGrade({
+          alumno,
+          materia,
+          description,
         });
-      }      
+      }
       res.status(200).json(created[0]);
     } else {
       res.status(400).json(result.content);
