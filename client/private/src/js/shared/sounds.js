@@ -28,7 +28,7 @@ const sound28 = new Audio("/sounds/sound28.mp3");
 const sound29 = new Audio("/sounds/sound29.mp3");
 const sound30 = new Audio("/sounds/sound30.mp3");
 const sound31 = new Audio("/sounds/sound31.mp3");
-
+const sound32 = new Audio("/sounds/sound32.mp3");
 
 const buttons = document.getElementsByClassName("sound-button");
 
@@ -54,7 +54,7 @@ for (const e of buttons) {
 function frenarAudios(){
     const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8, sound10, sound11, 
         sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21,
-        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31];
+        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31, sound32];
     
         for (const audio in audios) {
         audios[audio].currentTime = 0;
@@ -65,7 +65,7 @@ function frenarAudios(){
 function cargarAudios(){
     const audios = [sound1,sound2,sound3,sound4,sound5,sound6,sound7,sound8,sound10, sound11, 
         sound12, sound13, sound14, sound15, sound16, sound17, sound18, sound19, sound20, sound21,
-        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31];
+        sound22, sound23, sound24, sound25, sound26, sound27, sound28, sound29, sound30, sound31, sound32];
     
         for (const audio in audios) {
         audios[audio].load();

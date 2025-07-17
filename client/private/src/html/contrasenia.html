@@ -5,23 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambiar contraseña · The Overworld Academy</title>
     
-    <link rel="stylesheet" href="./main.css">
-    <link rel="stylesheet" href="./auth.css">
+    <link rel="shortcut icon" href="/img/favicon.webp" type="image/x-icon">
+
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/auth.css">
 </head>
 
 <body class="auth-page contrasenia flex-c-c">
     <img class="titulo-imagen" src="/img/the-overworld-academy-logo.webp" alt="Nuestro Logo">
     <div class="auth-wrapper">
-        <p class="minecraft-p">Usuario</p>
-        <input class="large-input" type="text" required maxlength="30">
-
         <p class="minecraft-p">Contrasenia nueva</p>
-        <input class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required autocomplete="off">
+        <p id="error-contrasenia" class="minecraft-p red-minecraft-p hidden">
+            <span class="emoji-font">⛔</span> La contrasenia no es segura<br>
+            ➟ Minimo 8 caracteres<br>
+            ➟ Una minuscula<br>
+            ➟ Una mayuscula<br>
+            ➟ Un digito<br>
+            ➟ Un caracter especial<br>
+        </p>
 
         <p class="minecraft-p">Repetir contrasenia nueva</p>
-        <input class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <input id="rep-contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required autocomplete="off">
+        <p id="error-rep-contrasenia" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Las contrasenias no coinciden</p>
 
-        <button class="large-button sound-button">Cambiar contrasenia</button>
+        <button id="change-button" class="large-button sound-button">Cambiar contrasenia</button>
     </div>
 
     <footer class="footer-auth">
@@ -29,6 +37,7 @@
         <p class="minecraft-p">Copyright <a href="https://github.com/FIUBA-return-0" target="_blank">return 0;</a> No distribuir</p>
     </footer>
 
-    <script src="./main.js"></script>
+    <script src="/main.js"></script>
+    <script src="/cambiarContrasenia.js"></script>
 </body>
 </html> 
