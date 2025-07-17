@@ -1,9 +1,6 @@
 const db = require("../../db.js");
 
 const getInscriptions = async (data) => {
-  // const tabla = Object.keys(data)[0];
-
-  // const values = data[tabla];
   const keys = Object.keys(data);
   const conditions = [];
   const values = [];

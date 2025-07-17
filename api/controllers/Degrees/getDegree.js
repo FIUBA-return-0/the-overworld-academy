@@ -1,9 +1,5 @@
 const db = require("../../db.js");
-/**
- * busca en la base de datos la carrera con el id enviado
- * @param {object} req
- * @returns devuelve un objeto con la carrera. si el objeto esta vacio, no se encontro la carrera
- */
+
 const getDegree = async ({ id }) => {
   const query = `
     select c.id,c.nombre as carrera,c.description,c.duracion,c.sede,c.foto, u.nombre,u.apellido,u.username from carreras c

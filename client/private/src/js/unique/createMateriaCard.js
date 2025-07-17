@@ -8,14 +8,6 @@ function createMateriaCard(
   parent,
   redLink
 ) {
-  // materia-card
-  // materia-card-img-wrapper
-  //      materia-card-img
-  // materia-card-text-wrapper
-  //      materia-card-title
-  //      materia-card-profesor
-  //      materia-card-description
-
   let link = document.createElement("a");
   link.href = `${redLink}${id}`;
   link.classList.add("materia-card-link");

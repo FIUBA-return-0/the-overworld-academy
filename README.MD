@@ -1,4 +1,4 @@
-# COMO CORRER LE PROYECTO?
+# COMO CORRER EL PROYECTO?
 
 _requerimientos_: debes tener instalado node y y docker
 
@@ -6,6 +6,7 @@ _requerimientos_: debes tener instalado node y y docker
 2. crear un archivo .env en la carpeta /api y completar con los datos requeridos. Podes tomar de referencia el archivo [.env.example](./api/.env.example)
 
 3. si queres correr localmente con docker, hace lo siguiente
+   > ❗️ la primera vez que corras necesitas correr docker compose up --build parado en api. Mismo cada vez que se actualice alguna dependencia.
 
 ```sh
 ## parado en ./the-overworld-academy
@@ -54,5 +55,3 @@ No, debes crearla por tu cuenta recordando el nombre de la db, la contraseña y 
 ### puedo usar cualquier base de datos?
 
 No, el codigo esta planteado para usar PostgreSQL
-
-###

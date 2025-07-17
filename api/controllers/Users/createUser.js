@@ -1,9 +1,5 @@
 const db = require("../../db.js");
-/**
- *  realiza la query a la base de datos para insertar un usuario con los datos brindados
- * @param {object} data debe contener nombre, apellido, rol,username,password,carrera
- * @returns devuelve un objeto con una key status, si es 1 el campo content tiene el mensaje de error y si es 0 tiene el id del usuario creado
- */
+
 const createUser = async ({
   nombre,
   apellido,

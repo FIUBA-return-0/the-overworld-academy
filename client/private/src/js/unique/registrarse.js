@@ -6,8 +6,6 @@ async function getCarreras() {
       },
     });
 
-    console.log(res);
-
     switch (res.status) {
       case 200:
         let ans = {};
@@ -154,22 +152,24 @@ async function postRegister(
         } catch (e) {
           await loginPOST(bodyLogin);
         }
-      break;
+        break;
 
       case 409:
-        document.getElementById("error-usuario-repetido").classList.remove("hidden");
+        document
+          .getElementById("error-usuario-repetido")
+          .classList.remove("hidden");
         try {
           sound5.play();
         } catch (e) {}
-      break;
+        break;
 
       case 500:
         soundAndRedirect("/500.html");
-      break;
+        break;
 
       default:
         soundAndRedirect("/error-inesperado.html");
-      break;
+        break;
     }
   } catch (e) {
     console.error(e);

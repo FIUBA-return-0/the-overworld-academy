@@ -1,9 +1,5 @@
 const db = require("../../db.js");
-/**
- * Inserta en la base de datos la carrera con los datos brindados
- * @param {object} body debe tener nombre,description,duracion,sede
- * @returns un objeto con la primer key "status" si esta es 1, el campo content es la informacion de la carrera, de lo contrario es el mensaje de error
- */
+
 const createDegree = async ({
   nombre,
   description,

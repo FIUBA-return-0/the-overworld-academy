@@ -15,5 +15,3 @@ router.use("/nota", gradesRouter);
 router.use("/login", loginRouter);
 
 module.exports = router;
-
-// log in  -> chqueas que username y contraseñea sean validos( con db ya estaria hasheado) -> creame un token y le devuelve al front
