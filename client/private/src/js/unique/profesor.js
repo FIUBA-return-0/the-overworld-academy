@@ -10,122 +10,136 @@ function truncarPromedio(n){
 async function cargarDatosProfesor(){
     const token = localStorage.getItem('token');
 
-    const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    try{
+        const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
-    switch(getSubjectURL.status){
-        case 200:
-            const infoMateria = await getSubjectURL.json();
-            
-            document.getElementById("materia-title").textContent = `${infoMateria[0].materia}`;
-            document.getElementById("cartelera").textContent = infoMateria[0].cartelera;
+        switch(getSubjectURL.status){
+            case 200:
+                const infoMateria = await getSubjectURL.json();
+                
+                document.getElementById("materia-title").textContent = `${infoMateria[0].materia}`;
+                document.getElementById("cartelera").textContent = infoMateria[0].cartelera;
 
-            teacherSubject = infoMateria[0].id;
-            localStorage.teacherSubject = teacherSubject;
+                teacherSubject = infoMateria[0].id;
+                localStorage.teacherSubject = teacherSubject;
 
-            let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+                let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-            switch(grades.status){
-                case 200:
-                    grades = await grades.json();
+                switch(grades.status){
+                    case 200:
+                        grades = await grades.json();
 
-                    let inscriptos = await fetch(`${API}/inscripcion/?materia=${teacherSubject}&condicion=cursando`, {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
+                        let inscriptos = await fetch(`${API}/inscripcion/?materia=${teacherSubject}&condicion=cursando`, {
+                            method: "GET",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${token}`,
+                            },
+                        });
 
-                    inscriptos = await inscriptos.json();
-                    
-                    let idsInscriptos = [];
-                    inscriptos.forEach((alumno) => {
-                        idsInscriptos.push(alumno.idalumno);
-                    });
+                        inscriptos = await inscriptos.json();
+                        
+                        let idsInscriptos = [];
+                        inscriptos.forEach((alumno) => {
+                            idsInscriptos.push(alumno.idalumno);
+                        });
 
-                    let finalGrades = [];
+                        let finalGrades = [];
 
-                    grades.forEach((n) => {
-                        idsInscriptos.includes(n.padron) && finalGrades.push(n);
-                    });
+                        grades.forEach((n) => {
+                            idsInscriptos.includes(n.padron) && finalGrades.push(n);
+                        });
 
-                    const sortedGrades = {};
+                        const sortedGrades = {};
 
-                    for (const g of finalGrades) {
-                        const alumnoId = g.padron;
+                        for (const g of finalGrades) {
+                            const alumnoId = g.padron;
 
-                        if (!sortedGrades[alumnoId]) {
-                            sortedGrades[alumnoId] = {
-                                id_alumno: alumnoId,
-                                nombre: g.nombre,
-                                apellido: g.apellido,
-                                notas: {},
-                                promedio: 0,
-                            };
+                            if (!sortedGrades[alumnoId]) {
+                                sortedGrades[alumnoId] = {
+                                    id_alumno: alumnoId,
+                                    nombre: g.nombre,
+                                    apellido: g.apellido,
+                                    notas: {},
+                                    promedio: 0,
+                                };
+                            }
+
+                            const claveNota = g.description.replace(/\s+/g, "");
+                            sortedGrades[alumnoId].notas[claveNota] = g.nota;
                         }
 
-                        const claveNota = g.description.replace(/\s+/g, "");
-                        sortedGrades[alumnoId].notas[claveNota] = g.nota;
-                    }
+                        for (const key in sortedGrades) {
+                            const notas = Object.values(sortedGrades[key].notas);
+                            const sum = notas.reduce((a, b) => a + b, 0);
 
-                    for (const key in sortedGrades) {
-                        const notas = Object.values(sortedGrades[key].notas);
-                        const sum = notas.reduce((a, b) => a + b, 0);
+                            sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
+                        }
 
-                        sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
-                    }
+                        for (const key in sortedGrades) {
+                            const alumno = sortedGrades[key]
+                            createNotaCard(alumno.id_alumno, `${alumno.apellido}, ${alumno.nombre}`, alumno.notas.TP1, alumno.notas.TP2, alumno.notas.P1, alumno.notas.P2);
+                        }
 
-                    for (const key in sortedGrades) {
-                        const alumno = sortedGrades[key]
-                        createNotaCard(alumno.id_alumno, `${alumno.apellido}, ${alumno.nombre}`, alumno.notas.TP1, alumno.notas.TP2, alumno.notas.P1, alumno.notas.P2);
-                    }
-                break;
+                        setTimeout(() => {
+                            document.getElementById("loader-container").classList.add("hidden");
+                        }, 1 * 1000);
+                    break;
 
-                case 404:
-                    let error = document.createElement("p");
-                    error.innerText = "Esta materia no tiene alumnos.";
-                    error.classList.add("minecraft-p");
-                    document.getElementById("notas-container").append(error);
-                    document.getElementsByClassName("nota-card-alumno")[0].classList.add("hidden");
-                break;
+                    case 404:
+                        let error = document.createElement("p");
+                        error.innerText = "Esta materia no tiene alumnos.";
+                        error.classList.add("minecraft-p");
+                        document.getElementById("notas-container").append(error);
+                        document.getElementsByClassName("nota-card-alumno")[0].classList.add("hidden");
 
-                case 401:
-                    soundAndRedirect("/401.html");
-                break;
+                        setTimeout(() => {
+                            document.getElementById("loader-container").classList.add("hidden");
+                        }, 1 * 1000);
+                    break;
 
-                case 500:
-                    soundAndRedirect("/500.html");
-                break;
+                    case 401:
+                        soundAndRedirect("/401.html");
+                    break;
 
-                default:
-                    soundAndRedirect("/error-inesperado.html");
-                break;
-            }
-        break;
+                    case 500:
+                        soundAndRedirect("/500.html");
+                    break;
 
-        case 401:
-            soundAndRedirect("/401.html");
-        break;
+                    default:
+                        soundAndRedirect("/error-inesperado.html");
+                    break;
+                }
+            break;
 
-        case 500:
-            soundAndRedirect("/500.html");
-        break;
+            case 401:
+                soundAndRedirect("/401.html");
+            break;
 
-        default:
-            soundAndRedirect("/error-inesperado.html");
-        break;
+            case 500:
+                soundAndRedirect("/500.html");
+            break;
+
+            default:
+                soundAndRedirect("/error-inesperado.html");
+            break;
+        }
+    }
+    catch(e){
+        console.log(e);
+        soundAndRedirect('/error-inesperado.html');
     }
 }
 
@@ -232,21 +246,48 @@ async function editarNotas(padron){
             promedioI.value="";
         }
 
-        const notas = {"TP1":tp1, "TP2":tp2, "P1":p1, "P2":p2};
-        for(const key in notas){
-            await fetch(`${API}/nota`, {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${localStorage.token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    alumno: padron,
-                    materia: localStorage.teacherSubject,
-                    description: key,
-                    nota: notas[key]
-                })
-            });
+        try{
+            const notas = {"TP1":tp1, "TP2":tp2, "P1":p1, "P2":p2};
+            for(const key in notas){
+                const res = await fetch(`${API}/nota`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        alumno: padron,
+                        materia: localStorage.teacherSubject,
+                        description: key,
+                        nota: notas[key]
+                    })
+                });
+
+                switch (res.status) {
+                    case 200:
+                    return;
+
+                    case 404:
+                        soundAndRedirect("/404.html");
+                        break;
+
+                    case 500:
+                        soundAndRedirect("/500.html");
+                    break;
+
+                    case 401:
+                        soundAndRedirect("/401.html");
+                    break;
+
+                    default:
+                        soundAndRedirect("/error-inesperado.html");
+                    break;
+                }
+            }
+        }
+        catch (e) {
+            console.error(e);
+            soundAndRedirect("/error-inesperado.html");
         }
     }
 }
@@ -298,11 +339,11 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     promedioI.type="number";
     promedioI.disabled=true;
     promedioI.id=`promedio-${padron}`;
-    if(p1!==null && p2!==null && tp1!==null && tp2!==null){
+    if(p1!=="" && p2!=="" && tp1!=="" && tp2!==""){
         promedioI.value=(((p1+p2)/2)+((tp1+tp2)/2))/2;
     }
     else{
-        promedioI.value=null;
+        promedioI.value="";
     }
     notaCardAlumno.append(promedioI);
 
