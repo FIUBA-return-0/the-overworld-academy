@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambiar contraseña · The Overworld Academy</title>
     
+    <link rel="shortcut icon" href="/img/favicon.webp" type="image/x-icon">
+
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/auth.css">
 </head>
@@ -13,7 +15,7 @@
     <img class="titulo-imagen" src="/img/the-overworld-academy-logo.webp" alt="Nuestro Logo">
     <div class="auth-wrapper">
         <p class="minecraft-p">Contrasenia nueva</p>
-        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required autocomplete="off">
         <p id="error-contrasenia" class="minecraft-p red-minecraft-p hidden">
             <span class="emoji-font">⛔</span> La contrasenia no es segura<br>
             ➟ Minimo 8 caracteres<br>
@@ -24,7 +26,7 @@
         </p>
 
         <p class="minecraft-p">Repetir contrasenia nueva</p>
-        <input id="rep-contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required>
+        <input id="rep-contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" required autocomplete="off">
         <p id="error-rep-contrasenia" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Las contrasenias no coinciden</p>
 
         <button id="change-button" class="large-button sound-button">Cambiar contrasenia</button>

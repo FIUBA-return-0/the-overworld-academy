@@ -12,7 +12,52 @@ function validarContrasenia(password1, password2){
 }
 
 async function cambiarContraseniaPATCH(contrasenia){
-    alert(contrasenia);
+    try{
+        const token = localStorage.getItem("token");
+        const res = await fetch(`${API}/usuario/`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                "password": contrasenia
+            })
+        });
+
+        switch (res.status) {
+            case 200:
+                try {
+                    sound32.play();
+                    sound32.onended = async () => {
+                        window.location.href = "/perfil.html";
+                    };
+                } catch (e) {
+                    window.location.href = "/perfil.html";
+                }
+            break;
+
+            case 404:
+                soundAndRedirect("/404.html");
+            break;
+
+            case 500:
+                soundAndRedirect("/500.html");
+            break;
+
+            case 401:
+                localStorage.clear();
+                soundAndRedirect("/401.html");
+            break;
+
+            default:
+                soundAndRedirect("/error-inesperado.html");
+            break;
+        }
+    }catch (e){
+        console.error(e);
+        soundAndRedirect("/error-inesperado.html");
+    }
 }
 
 async function cambiarContrasenia(){
