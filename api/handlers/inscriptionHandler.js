@@ -13,6 +13,7 @@ const {
 } = require("../validations/inscriptionValidations");
 const authMiddleware = require("../utils/authMiddleware");
 const { authProfesor } = require("../utils/authRoles");
+const postGrade = require("../controllers/Grades/postGrade");
 
 router.get("/", authMiddleware, validateQueryParamsI, async (req, res) => {
   const result = await getAllInscriptions(req.query);
@@ -50,9 +51,18 @@ router.post(
   validateEmptyEntriesI,
   async (req, res) => {
     const result = await postInscription(req.body);
+    const descriptions = ["P1","P2","TP1","TP2"]
+    const { alumno, materia } = req.body
 
     if (!result.status) {
       const created = await getInscription(result.content);
+      for (const description of descriptions) {
+        await postGrade({ 
+          alumno, 
+          materia, 
+          description 
+        });
+      }      
       res.status(200).json(created[0]);
     } else {
       res.status(400).json(result.content);
