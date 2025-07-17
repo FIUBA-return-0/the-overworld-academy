@@ -125,7 +125,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 async function editarMateria(nombre_materia, foto_materia, id_profesor, carga_horaria, descripcion, id_carrera) {
     const mensajeError = document.getElementById("error-contrasenia");
-    if (!mensajeError || !id_profesor || !carga_horaria || !id_carrera) {
+    if (!nombre_materia || !id_profesor || !carga_horaria || !id_carrera) {
         errorMsg.classList.remove("hidden");
         return;
     } else {
