@@ -73,6 +73,13 @@ router.patch(
   validateTeacherId,
   async (req, res) => {
     const { id } = req.params;
+    const { profesor } = req.body;
+
+    if (profesor) {
+      await deleteStudentData(req);
+      await promoteUser(req.body);
+    }
+
     const result = await updateSubject(req.body, id);
 
     if (!result) {
