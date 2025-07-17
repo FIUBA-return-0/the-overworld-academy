@@ -53,10 +53,14 @@ router.get("/:id", async (req, res) => {
 
 router.post(
   "/",
+  authMiddleware,
   validateEmptyBodyI,
   validateEmptyEntriesI,
   async (req, res) => {
+    req.body.alumno = req.user.id;
+
     const result = await postInscription(req.body);
+
     const descriptions = ["P1", "P2", "TP1", "TP2"];
     const { alumno, materia } = req.body;
 

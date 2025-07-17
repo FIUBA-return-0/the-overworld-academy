@@ -40,11 +40,11 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("cartelera").textContent = subjectInfo.cartelera;
 
   const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
-  const materiasAprobadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
+  const materiasAprobadas = JSON.parse(localStorage.getItem("aprobado")) || [];
 
   if (
-    !materiasInscripto.includes(idMateria) ||
-    !materiasAprobadas.includes(idMateria)
+    materiasInscripto.includes(parseInt(idMateria)) ||
+    materiasAprobadas.includes(parseInt(idMateria))
   ) {
     document.getElementById("notas").classList.remove("hidden");
     document.getElementById("notas-text").classList.remove("hidden");
@@ -86,6 +86,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   const botonInscripcion = document.getElementById("inscripcion");
   botonInscripcion.addEventListener("click", async () => {
+    console.log("apretasee el boton");
+
     try {
       const postInscripcion = await fetch(`${API}/inscripcion`, {
         method: "POST",
