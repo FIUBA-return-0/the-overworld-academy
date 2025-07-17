@@ -1,11 +1,46 @@
-# COMO CORRER EL PROYECTO?
+# The Overworld Academy
+**Desarrollamos un campus para una academia de videojuegos, con roles de director de carrera, profesor y alumno.**
+- Los directores de carrera pueda editar materias solo el nombre, descripción, foto y el profesor a cargo.
+- Los profesores pueden editar la cartelera de la materia y las notas de los alumnos.
+- Los alumnos pueden ver todas las materias de la carrera, pueden ver cuales están inscriptos e inscribirse a las que no están.
 
-_requerimientos_: debes tener instalado node y y docker
+## Índice
+- [Vistas](#vistas)
+- [Cómo correr el proyecto](#como-correr-el-proyecto)
+- [Mock db](#mock-db)
+- [FAQ](#faq)
 
-1. crear la base datos
-2. crear un archivo .env en la carpeta /api y completar con los datos requeridos. Podes tomar de referencia el archivo [.env.example](./api/.env.example)
+## Vistas
+- Vista Login:
+![](https://i.imgur.com/B43Frj7.png)
 
-3. si queres correr localmente con docker, hace lo siguiente
+- Vista perfil (compartido)
+![](https://i.imgur.com/0nVo0aQ.png)
+
+- Vista dashboard director de carrera:
+![](https://i.imgur.com/iAY5rre.png)
+
+- Vista crear materia (director):
+![](https://i.imgur.com/94XVMQq.png)
+
+- Vista dashboard profesor
+![](https://i.imgur.com/mvGjjfO.png)
+
+- Vista dashboard alumno
+![](https://i.imgur.com/lomVU20.png)
+
+- Vista materias alumno
+![](https://i.imgur.com/xtBHgMs.png)
+
+
+## COMO CORRER EL PROYECTO?
+
+⚠️ _Requerimientos_: debes tener instalado `node` y `docker`.
+
+1. Crear la base datos
+2. Crear un archivo .env en la carpeta /api y completar con los datos requeridos. Podes tomar de referencia el archivo [.env.example](./api/.env.example)
+
+3. Si queres correr localmente con docker, hace lo siguiente
    > ❗️ la primera vez que corras necesitas correr docker compose up --build parado en api. Mismo cada vez que se actualice alguna dependencia.
 
 ```sh
@@ -20,7 +55,7 @@ docker compose up
 
 si tu intencion es correrlo _sin usar docker_:
 
-### para el back end:
+### Para el back end:
 
 Primero, asegurate de estar con la base de datos levantada ( por el medio que elijas ) y luego vas a pararte en la carpeta api y correr los siguientes comandos
 
@@ -31,7 +66,7 @@ por ultimo, corre el archivo db.sql para crear las tablas.
 
 con esto estas instalando las dependencias necesarias, corriendo el servidor con _nodemon_ y creando las tablas en la db
 
-### para el front end:
+### Para el front end:
 
 1. vas a necesitar instalar gulp. Para esto, parado en /client/private corres `npm i`
 2. Para procesar todos los archivos en producción (para hostear), sobre la carpeta [/client/private/](/client/private/) ejecutar `npx gulp prod_build`. Tené en cuenta que puede tomar un tiempo ya que esta optimizando imagenes
@@ -46,7 +81,15 @@ con esto estas instalando las dependencias necesarias, corriendo el servidor con
 }
 ```
 
-# FAQ 🧐
+## Mock db
+También hay a tu disposición un archivo [mock.sql](/api/mock.sql) para que hagas pruebas sin tener que crear datos manualmente
+
+**Para probar podes usar:**
+- Cuenta director: `berbustamente`; `Default1$`
+- Cuenta profesor: `carlosmaulhardt`; `Default1$`
+- Cuenta alumno: `spreen`; `Default1$`
+
+## FAQ
 
 ### la base de datos se crea automaticamente?
 
