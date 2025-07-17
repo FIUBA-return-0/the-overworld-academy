@@ -21,6 +21,11 @@ async function inscripcionAlumno() {
 }
 
 async function fetchfillMateriasAlumno() {
+  if(localStorage.condicion == "profesor" || localStorage.condicion == "director"){
+    window.location.href = "/401.html";
+    return;
+  }
+
   try {
     await inscripcionAlumno();
     const idCarrera = localStorage.getItem("carreraID");
