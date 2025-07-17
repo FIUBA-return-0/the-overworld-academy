@@ -1,6 +1,6 @@
 async function inscripcionAlumno() {
   const token = localStorage.token;
-  let inscripciones = await fetch(`${API}/inscripcion/?usuario=1`, {
+  let inscripciones = await fetch(`${API}/inscripcion/?alumno=1`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

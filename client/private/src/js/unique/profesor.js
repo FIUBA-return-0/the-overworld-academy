@@ -8,7 +8,6 @@ function truncarPromedio(n){
 };
 
 async function cargarDatosProfesor(){
-    const sortedGrades = {};
     const token = localStorage.getItem('token');
 
     const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
@@ -29,7 +28,7 @@ async function cargarDatosProfesor(){
             teacherSubject = infoMateria[0].id;
             localStorage.teacherSubject = teacherSubject;
 
-            const grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
+            let grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -39,9 +38,32 @@ async function cargarDatosProfesor(){
 
             switch(grades.status){
                 case 200:
-                    const gradesData = await grades.json();
+                    grades = await grades.json();
 
-                    for (const g of gradesData) {
+                    let inscriptos = await fetch(`${API}/inscripcion/?materia=${teacherSubject}&condicion=cursando`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+
+                    inscriptos = await inscriptos.json();
+                    
+                    let idsInscriptos = [];
+                    inscriptos.forEach((alumno) => {
+                        idsInscriptos.push(alumno.idalumno);
+                    });
+
+                    let finalGrades = [];
+
+                    grades.forEach((n) => {
+                        idsInscriptos.includes(n.padron) && finalGrades.push(n);
+                    });
+
+                    const sortedGrades = {};
+
+                    for (const g of finalGrades) {
                         const alumnoId = g.padron;
 
                         if (!sortedGrades[alumnoId]) {
@@ -50,7 +72,7 @@ async function cargarDatosProfesor(){
                                 nombre: g.nombre,
                                 apellido: g.apellido,
                                 notas: {},
-                                prom: 0,
+                                promedio: 0,
                             };
                         }
 
@@ -61,7 +83,13 @@ async function cargarDatosProfesor(){
                     for (const key in sortedGrades) {
                         const notas = Object.values(sortedGrades[key].notas);
                         const sum = notas.reduce((a, b) => a + b, 0);
+
                         sortedGrades[key].promedio = truncarPromedio(sum / notas.length);
+                    }
+
+                    for (const key in sortedGrades) {
+                        const alumno = sortedGrades[key]
+                        createNotaCard(alumno.id_alumno, `${alumno.apellido}, ${alumno.nombre}`, alumno.notas.TP1, alumno.notas.TP2, alumno.notas.P1, alumno.notas.P2);
                     }
                 break;
 
@@ -222,7 +250,4 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     document.getElementById("notas-container").append(notaCardAlumno);
 }
 
-createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);
-createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);
-createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);
-createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);
+//createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);
