@@ -37,7 +37,7 @@ router.post(
   }
 );
 
-router.get("/", validateQueryParamsS, async (req, res) => {
+router.get("/", authMiddleware, validateQueryParamsS, async (req, res) => {
   let newQuery = { ...req.query };
 
   if ("profesor" in req.query) {
