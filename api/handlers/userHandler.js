@@ -111,6 +111,7 @@ router.patch(
   authMiddleware,
   validateUserValues,
   validateDegreeId,
+  validateEmptyEntriesU,
   async (req, res) => {
     if ("password" in req.body) {
       if (checkPasswordStrength(req.body.password)) {

@@ -62,9 +62,8 @@ router.delete("/:id", authMiddleware, authDirector, async (req, res) => {
 
 router.patch(
   "/:id",
-  authMiddleware,
-  authDirector,
   validateDegreeValues,
+  validateEmptyEntriesD,
   async (req, res) => {
     const { id } = req.params;
     const result = await updateDegree(req.body, id);

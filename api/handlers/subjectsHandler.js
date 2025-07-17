@@ -37,7 +37,7 @@ router.post(
   }
 );
 
-router.get("/", authMiddleware, validateQueryParamsS, async (req, res) => {
+router.get("/", validateQueryParamsS, async (req, res) => {
   let newQuery = { ...req.query };
 
   if ("profesor" in req.query) {
@@ -71,6 +71,7 @@ router.patch(
   authDirectorProfesor,
   validateSubjectValues,
   validateTeacherId,
+  validateEmptyEntriesS,
   async (req, res) => {
     const { id } = req.params;
     const { profesor } = req.body;
