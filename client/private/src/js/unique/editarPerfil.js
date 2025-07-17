@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           .setAttribute("src", userInfo.foto);
         await setSeleccionada();
 
+        if(localStorage.condicion === "profesor" || localStorage.condicion === "director"){
+          document.getElementById("bajarse-carrera").classList.add("hidden");
+        }
+
         setTimeout(() => {
           document.getElementById("loader-container").classList.add("hidden");
         }, 1 * 1000);
