@@ -7,8 +7,8 @@ const db = require("../../db.js");
  */
 
 const createSubject = async (body) => {
-  const { profesor, nombre, carga_horaria, carrera, foto } = body;
-  const values = [profesor, nombre, carga_horaria, carrera, foto];
+  const { profesor, nombre, carga_horaria, carrera, foto, descripcion, cartelera } = body;
+  const values = [profesor, nombre, carga_horaria, carrera, foto, descripcion, cartelera];
 
   const query = `
         INSERT INTO materias (profesor,nombre,carga_horaria,carrera,foto,descripcion,cartelera)
