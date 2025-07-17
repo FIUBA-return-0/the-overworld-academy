@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/auth.css">
     <link rel="stylesheet" href="/register.css">
+
+    <link rel="shortcut icon" href="/img/favicon.webp" type="image/x-icon">
 </head>
 
 <body class="auth-page register-page flex-c-c">
@@ -21,6 +23,7 @@
         <input id="usuario" class="large-input" type="text" maxlength="30" autocomplete="off">
         <p id="error-usuario" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Tu usuario no puede estar vacio</p>
         <p id="error-usuario-invalido" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Tu usuario contiene caracteres invalidos<br>➟ Solo minusculas<br>➟ Minimo 5 caracteres</p>
+        <p id="error-usuario-repetido" class="minecraft-p red-minecraft-p hidden"><span class="emoji-font">⛔</span> Este usuario ya existe</p>
 
         <p class="minecraft-p">Contrasenia</p>
         <input id="contrasenia" class="large-input" type="text" style="-webkit-text-security: square;" autocomplete="off">
