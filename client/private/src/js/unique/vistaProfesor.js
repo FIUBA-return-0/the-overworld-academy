@@ -8,7 +8,7 @@ const truncarPromedio = (n) => {
 };
 
 async function cargarInfoProfesor() {
-  const token = window.localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
     method: "GET",
@@ -136,6 +136,39 @@ async function cargarInfoProfesor() {
     }
 
     modoEdicion = !modoEdicion;
+  });
+
+  const textareaCartelera = document.getElementById("cartelera");
+  const botonEditarCartelera = document.getElementById("editar-cartelera");
+  let modoEdicionCartelera = false;
+
+  botonEditarCartelera.disabled = false;
+
+  textareaCartelera.value = infoMateria[0].descripcion || "";
+
+  botonEditarCartelera.addEventListener("click", async () => {
+    if (!modoEdicionCartelera) {
+      textareaCartelera.disabled = false;
+      botonEditarCartelera.textContent = "Guardar";
+    } else {
+      textareaCartelera.disabled = true;
+      botonEditarCartelera.textContent = "Editar";
+
+      const nuevoContenido = textareaCartelera.value;
+
+      await fetch(`${API}/materia/` + teacherSubject, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          descripcion: nuevoContenido,
+        }),
+      });
+    }
+
+    modoEdicionCartelera = !modoEdicionCartelera;
   });
 }
 
