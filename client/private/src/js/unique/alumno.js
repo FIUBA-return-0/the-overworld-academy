@@ -21,8 +21,13 @@ async function inscripcionAlumno() {
 }
 
 async function fetchfillMateriasAlumno() {
-  await inscripcionAlumno();
+  if(localStorage.condicion == "profesor" || localStorage.condicion == "director"){
+    window.location.href = "/401.html";
+    return;
+  }
+
   try {
+    await inscripcionAlumno();
     const idCarrera = localStorage.getItem("carreraID");
     const token = localStorage.getItem("token");
     const res = await fetch(`${API}/materia?carrera=${idCarrera}`, {

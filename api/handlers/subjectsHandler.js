@@ -13,7 +13,7 @@ const updateSubject = require("../controllers/Subjects/updateSubject.js");
 const authMiddleware = require("../utils/authMiddleware.js");
 const { authDirector, authDirectorProfesor } = require("../utils/authRoles");
 const promoteUser = require("../controllers/Degrees/promoteUser.js");
-const deleteStudentData = require("../controllers/Subjects/deleteStudentData.js")
+const deleteStudentData = require("../controllers/Subjects/deleteStudentData.js");
 
 router.post(
   "/",
@@ -23,7 +23,7 @@ router.post(
   validateEmptyEntriesS,
   validateTeacherId,
   async (req, res) => {
-    await deleteStudentData(req)
+    await deleteStudentData(req);
     const newProfesor = await promoteUser(req.body);
 
     if (!newProfesor.content.length) {
@@ -70,9 +70,7 @@ router.patch(
   authMiddleware,
   authDirectorProfesor,
   validateSubjectValues,
-  validateTeacherId,
   async (req, res) => {
-    const { id } = req.params;
     const { profesor } = req.body;
 
     if (profesor) {
@@ -80,7 +78,7 @@ router.patch(
       await promoteUser(req.body);
     }
 
-    const result = await updateSubject(req.body, id);
+    const result = await updateSubject(req.body, req.user.id);
 
     if (!result) {
       res.status(404).json({ error: "La materia no existe" });

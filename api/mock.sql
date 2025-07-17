@@ -56,14 +56,14 @@ VALUES
 INSERT INTO usuario (nombre, apellido, condicion, carrera, foto, bio, username, password)
 VALUES
 ('Ivan', 'Buhaje', 'alumno', 2, '/img/pp1.webp', '', 'spreen', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
-('Samuel', 'De Luque', 'alumno', 2, '/img/pp2.webp', '', 'vegetta777', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
+('Samuel', 'De Luque', 'alumno', 2, '/img/pp2.webp', '', 'vegetta', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Guillermo', 'Diaz Ibaniez', 'alumno', 2, '/img/pp1.webp', '', 'willyrex', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Oscar', 'Lobo', 'alumno', 2, '/img/pp2.webp', '', 'oscurlord', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'); -- Default1$
 
 --- Alumnos:  Tecnicatura en Lectura de Enemigos y Mindgames Avanzados
 INSERT INTO usuario (nombre, apellido, condicion, carrera, foto, bio, username, password)
 VALUES
-('Carolina', 'Pizzulini', 'alumno', 3, '/img/pp6.webp', '', 'Fluorescent', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
+('Carolina', 'Pizzulini', 'alumno', 3, '/img/pp6.webp', '', 'fluorescent', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Thiago', 'Lapp', 'alumno', 3, '/img/pp2.webp', '', 'kingone', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Simon', 'Alcaraz', 'alumno', 3, '/img/pp22.webp', '', 'mongraal', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Maria Gabriela', 'Martin', 'alumno', 3, '/img/pp23.webp', '', 'asannagura', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
