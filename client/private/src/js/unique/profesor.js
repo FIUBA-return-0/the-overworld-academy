@@ -24,8 +24,10 @@ async function cargarDatosProfesor(){
             const infoMateria = await getSubjectURL.json();
             
             document.getElementById("materia-title").textContent = `${infoMateria[0].materia}`;
+            document.getElementById("cartelera").textContent = infoMateria[0].cartelera;
 
             teacherSubject = infoMateria[0].id;
+            localStorage.teacherSubject = teacherSubject;
 
             const grades = await fetch(`${API}/nota?materia=${teacherSubject}`, {
                 method: "GET",
@@ -100,6 +102,66 @@ async function cargarDatosProfesor(){
 }
 
 document.addEventListener("DOMContentLoaded", cargarDatosProfesor);
+
+let estadoEditarCartelera = "disabled";
+async function editarCartelera(){
+    let cartelera = document.getElementById("cartelera");
+    
+    //enable
+    if(estadoEditarCartelera === "disabled"){
+        estadoEditarCartelera = "editar";
+        document.getElementById("editar-cartelera").innerText = "Guardar";
+        cartelera.disabled = false;
+    }
+    
+    //disable
+    else if(estadoEditarCartelera === "editar"){
+        estadoEditarCartelera = "disabled";
+        document.getElementById("editar-cartelera").innerText = "Editar";
+        cartelera.disabled = true;
+
+        try{
+            const token = localStorage.token;
+            const teacherSubject = localStorage.teacherSubject;
+            const res = await fetch(`${API}/materia/${teacherSubject}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    "cartelera": cartelera.value
+                }),
+            });
+
+            switch (res.status) {
+                case 200:
+                return;
+
+                case 404:
+                    soundAndRedirect("/404.html");
+                    break;
+
+                case 500:
+                    soundAndRedirect("/500.html");
+                break;
+
+                case 401:
+                    soundAndRedirect("/401.html");
+                break;
+
+                default:
+                    soundAndRedirect("/error-inesperado.html");
+                break;
+            }
+        } catch (e) {
+            console.error(e);
+            soundAndRedirect("/error-inesperado.html");
+        }
+    }
+}
+
+document.getElementById("editar-cartelera").addEventListener("click", editarCartelera);
 
 function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     let notaCardAlumno = document.createElement("div")
