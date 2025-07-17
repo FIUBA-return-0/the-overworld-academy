@@ -16,8 +16,13 @@ const { authProfesor } = require("../utils/authRoles");
 const postGrade = require("../controllers/Grades/postGrade");
 
 router.get("/", authMiddleware, validateQueryParamsI, async (req, res) => {
-  const result = await getAllInscriptions(req.query);
+  let newQuery = { ...req.query };
 
+  if ("usuario" in req.query) {
+    newQuery.usuario = req.user.id;
+  }
+
+  const result = await getAllInscriptions(newQuery);
   if (!result.length) {
     res.status(400).json({ error: "no se encontro la inscripcion" });
   } else {

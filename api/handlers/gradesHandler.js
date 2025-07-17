@@ -25,7 +25,7 @@ router.get("/", authMiddleware, validateQueryParamsG, async (req, res) => {
   const result = await getGrade(newQuery);
 
   if (!result.length) {
-    return res.status(400).json({ error: "no se encontró la nota" });
+    return res.status(404).json({ error: "no se encontró la nota" });
   }
 
   return res.status(200).json(result);
