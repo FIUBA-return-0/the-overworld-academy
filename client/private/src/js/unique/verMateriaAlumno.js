@@ -92,19 +92,32 @@ window.addEventListener("DOMContentLoaded", async () => {
          })
       });
 
-      if (postInscripcion.ok) {
-        const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
-        materiasInscripto.push(idMateria);
-        localStorage.setItem("inscripto", JSON.stringify(materiasInscripto));
+      switch(postInscripcion.status){
+        case 200:
+          const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
+          materiasInscripto.push(idMateria);
+          localStorage.setItem("inscripto", JSON.stringify(materiasInscripto));
+          location.reload();
+          break;
+        case 401:
+          soundAndRedirect("/401.html");
+          break;
 
-        location.reload();
-      } else {
-        const error = await postInscripcion.json();
-        alert("Error al inscribirse: " + error.message);
-      }
-    } catch (err) {
-      console.error("Fallo en la inscripción:", err);
-      alert("Hubo un problema al intentar inscribirse.");
+        case 404:
+          soundAndRedirect("/404.html");
+          break;
+
+        case 500:
+          soundAndRedirect("/500.html");
+          break;
+
+        default:
+          soundAndRedirect("/error-inesperado.html");
+          break;
+      } 
+    }catch(er) {
+      console.error(er);
+      soundAndRedirect("/error-inesperado.html");
     }
   });
 });
