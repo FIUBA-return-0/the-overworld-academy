@@ -21,9 +21,6 @@ const promedio = (notasParciales) => {
 
 window.addEventListener("DOMContentLoaded", async () => {
   let token = localStorage.getItem("token");
-  const payloadBase64 = token.split(".")[1];
-  const payload = JSON.parse(atob(payloadBase64));
-  const userId = payload.id;
 
   const params = new URLSearchParams(window.location.search);
   const idMateria = params.get('id');
@@ -87,7 +84,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         },
         body: JSON.stringify({ 
           materia:idMateria,
-          alumno:userId,
+          alumno:1,
           condicion:"cursando"
          })
       });
