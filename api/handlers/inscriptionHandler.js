@@ -15,11 +15,11 @@ const authMiddleware = require("../utils/authMiddleware");
 const { authProfesor } = require("../utils/authRoles");
 const postGrade = require("../controllers/Grades/postGrade");
 
-router.get("/", authMiddleware, validateQueryParamsI, async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   let newQuery = { ...req.query };
 
-  if ("usuario" in req.query) {
-    newQuery.usuario = req.user.id;
+  if ("alumno" in req.query) {
+    newQuery.alumno = req.user.id;
   }
 
   const result = await getAllInscriptions(newQuery);
