@@ -191,9 +191,70 @@ async function editarCartelera(){
 
 document.getElementById("editar-cartelera").addEventListener("click", editarCartelera);
 
+async function editarNotas(padron){
+    const state = document.getElementById(`tp1-${padron}`).disabled;
+    
+    if(state === true){
+        document.getElementById(`editar-${padron}`).innerText="Guardar";
+        document.getElementById(`tp1-${padron}`).disabled = false;
+        document.getElementById(`tp2-${padron}`).disabled = false;
+        document.getElementById(`p1-${padron}`).disabled = false;
+        document.getElementById(`p2-${padron}`).disabled = false;
+    }
+    
+    else{
+        document.getElementById(`editar-${padron}`).innerText="Editar";
+        
+        const tp1I = document.getElementById(`tp1-${padron}`);
+        const tp2I = document.getElementById(`tp2-${padron}`);
+        const p1I = document.getElementById(`p1-${padron}`);
+        const p2I = document.getElementById(`p2-${padron}`);
+        const promedioI = document.getElementById(`promedio-${padron}`);
+        
+        tp1I.disabled = true;
+        tp2I.disabled = true;
+        p1I.disabled = true;
+        p2I.disabled = true;
+        
+        const tp1 = tp1I.value;
+        const tp2 = tp2I.value;
+        const p1 = p1I.value;
+        const p2 = p2I.value;
+        
+        if(p1!=="" && p2!=="" && tp1!=="" && tp2!==""){
+            const ntp1=parseFloat(tp1);
+            const ntp2=parseFloat(tp2);
+            const np1=parseFloat(p1);
+            const np2=parseFloat(p2);
+            promedioI.value=(((np1+np2)/2)+((ntp1+ntp2)/2))/2;
+        }
+        else{
+            promedioI.value="";
+        }
+
+        const notas = {"TP1":tp1, "TP2":tp2, "P1":p1, "P2":p2};
+        for(const key in notas){
+            await fetch(`${API}/nota`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${localStorage.token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    alumno: padron,
+                    materia: localStorage.teacherSubject,
+                    description: key,
+                    nota: notas[key]
+                })
+            });
+        }
+    }
+}
+
 function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     let notaCardAlumno = document.createElement("div")
     notaCardAlumno.classList.add("nota-card-alumno");
+    notaCardAlumno.id=padron;
     
     let padronP = document.createElement("p");
     padronP.classList.add("nota-p");
@@ -209,30 +270,34 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     tp1I.type="number";
     tp1I.value=tp1;
     tp1I.disabled=true;
+    tp1I.id=`tp1-${padron}`;
     notaCardAlumno.append(tp1I);
-
+    
     let tp2I = document.createElement("input");
     tp2I.type="number";
     tp2I.value=tp2;
     tp2I.disabled=true;
+    tp2I.id=`tp2-${padron}`;
     notaCardAlumno.append(tp2I);
 
     let p1I = document.createElement("input");
     p1I.type="number";
     p1I.value=p1;
     p1I.disabled=true;
+    p1I.id=`p1-${padron}`;
     notaCardAlumno.append(p1I);
 
     let p2I = document.createElement("input");
     p2I.type="number";
     p2I.value=p2;
     p2I.disabled=true;
+    p2I.id=`p2-${padron}`;
     notaCardAlumno.append(p2I);
-    
     
     let promedioI = document.createElement("input");
     promedioI.type="number";
     promedioI.disabled=true;
+    promedioI.id=`promedio-${padron}`;
     if(p1!==null && p2!==null && tp1!==null && tp2!==null){
         promedioI.value=(((p1+p2)/2)+((tp1+tp2)/2))/2;
     }
@@ -244,10 +309,10 @@ function createNotaCard(padron, nombre, tp1, tp2, p1, p2){
     let editarB = document.createElement("button");
     editarB.innerText = "Editar";
     editarB.id=`editar-${padron}`;
-    // editarB.addEventListener("click", )
+    editarB.addEventListener("click", ()=>{
+        editarNotas(padron);
+    });
     notaCardAlumno.append(editarB);
     
     document.getElementById("notas-container").append(notaCardAlumno);
 }
-
-//createNotaCard(113931, "Lattandi, Facundo", 10, 9, 6, 9);

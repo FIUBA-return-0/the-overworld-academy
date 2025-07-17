@@ -6,7 +6,7 @@ const validateGradeValues = (req, res, next) => {
   }
 
   const { nota } = req.body;
-  if (nota === "-") {
+  if (nota === "") {
     req.body.nota = null;
     return next();
   }
