@@ -37,7 +37,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".materias-title").textContent = subjectInfo.materia;
   document.querySelector(".materia-catedra").textContent =
     "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
-  document.getElementById("cartelera").textContent = subjectInfo.descripcion;
+  document.getElementById("cartelera").textContent = subjectInfo.cartelera;
 
   const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
   const materiasAprobadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
