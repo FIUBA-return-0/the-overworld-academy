@@ -71,6 +71,7 @@ router.patch(
   authDirectorProfesor,
   validateSubjectValues,
   validateTeacherId,
+  validateEmptyEntriesS,
   async (req, res) => {
     const { id } = req.params;
     const { profesor } = req.body;
