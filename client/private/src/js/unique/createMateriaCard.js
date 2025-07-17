@@ -1,4 +1,13 @@
-function createMateriaCard(id, foto, nombre, profesor, descripcion, parent, redLink){
+function createMateriaCard(
+  id,
+  foto,
+  nombre,
+  profesor,
+  descripcion,
+  clase,
+  parent,
+  redLink
+) {
   // materia-card
   // materia-card-img-wrapper
   //      materia-card-img
@@ -13,6 +22,7 @@ function createMateriaCard(id, foto, nombre, profesor, descripcion, parent, redL
 
   let materiaCard = document.createElement("div");
   materiaCard.classList.add("materia-card");
+  clase && materiaCard.classList.add(clase);
   link.appendChild(materiaCard);
 
   let materiaCardImgWrapper = document.createElement("div");
