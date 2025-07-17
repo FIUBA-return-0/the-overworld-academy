@@ -1,10 +1,5 @@
 const db = require("../../db.js");
 
-/**
- *
- * @param {object} {id:int}
- * @returns devuelve un objeto que representa al usuario, un objeto vacio o undefined indica que no se encontro el usuario
- */
 const getUser = async ({ id }) => {
   const query = `
         select 	

@@ -23,7 +23,6 @@ async function loginPOST(body) {
           });
 
           const selfDataJSON = await selfData.json();
-          console.log(selfDataJSON);
 
           localStorage.setItem("condicion", selfDataJSON.condicion);
           localStorage.setItem("nombre", selfDataJSON.nombre);

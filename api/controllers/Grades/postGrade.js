@@ -15,7 +15,6 @@ const postGrade = async ({ alumno, materia, description, nota }) => {
 
   try {
     const result = await db.query(query, values);
-    console.log(result.rows[0])
     return { status: 0, content: result.rows[0] };
   } catch (error) {
     return { status: 1, content: error.detail };

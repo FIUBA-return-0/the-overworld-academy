@@ -1,9 +1,5 @@
 const db = require("../../db.js");
-/**
- * busca en la base de datos la materia con el id enviado
- * @param {object} req
- * @returns devuelve un objeto con la materia. si el objeto esta vacio, no se encontro la materia
- */
+
 const getSubject = async (data) => {
   const campo = Object.keys(data);
   const values = data[campo];
