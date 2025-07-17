@@ -5,7 +5,11 @@ const checkData = require("../controllers/login/checkdata.js");
 const tokenCreation = require("../utils/tokenCreate.js");
 
 router.post("/", async (req, res) => {
-  const { username, password, condicion, id } = await checkData(req);
+  const result = await checkData(req);
+  if (!result) {
+    return res.status(401).json({ error: "credenciales invalidas" });
+  }
+  const { username, password, condicion, id } = result;
 
   const access = await bcrypt.compare(req.body.password, password);
 
