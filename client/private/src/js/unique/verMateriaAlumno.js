@@ -22,8 +22,11 @@ const promedio = (notasParciales) => {
 
 window.addEventListener("DOMContentLoaded", async () => {
   let token = localStorage.token;
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+  const id = params.get('id')
 
-  const getSubjectURL = await fetch(`${API}/materia?id=1`, {
+  const getSubjectURL = await fetch(`${API}/materia?id=` + id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +40,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     "Cátedra: " + subjectInfo.nombprofesor + " " + subjectInfo.apeprofesor;
   document.getElementById("cartelera").textContent = subjectInfo.descripcion;
 
-  const getGradesURL = await fetch(`${API}/nota?materia=1`, {
+  const getGradesURL = await fetch(`${API}/nota?materia=` + id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
