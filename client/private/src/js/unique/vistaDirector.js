@@ -89,7 +89,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                                         materia.apeprofesor,
                                         materia.descripcion,
                                         "materias-wrapper",
-                                        "/editar-materia.html?id="
+                                        "/editar-materia.html?id=",
+                                        "",
                                     );
                                 }
                                 setTimeout(() => {
@@ -166,6 +167,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function editarCarrera(descripcion,nombre,foto) {
     try{
         const token = localStorage.token;
+        const mensajeError = document.getElementById("error-edicion");
+        if (!descripcion || !nombre || !foto) {
+            mensajeError.classList.remove("hidden");
+            return;
+        } else {
+            mensajeError.classList.add("hidden");
+        }
         const updateCarrera = await fetch(`${API}/carrera/` + degreeId, {
             method:"PATCH",
             headers: {
