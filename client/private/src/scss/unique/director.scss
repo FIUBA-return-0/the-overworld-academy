@@ -22,8 +22,17 @@
         .minecraft-p{
             margin-bottom: -1.5vh;
         }
+
         button{
             margin-top: -.5vh;
+        }
+
+        .materias-wrapper{
+            gap: 4vh;
+
+            p{
+                margin-block: 1vh;
+            }
         }
     }
 }
