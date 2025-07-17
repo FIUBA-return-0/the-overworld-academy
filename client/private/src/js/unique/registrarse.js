@@ -1,210 +1,239 @@
-async function getCarreras(){
-    try{
-        const res = await fetch(`${API}/carrera/`, {
-            headers: {
-                "Content-Type":"application/json"
-            },
+async function getCarreras() {
+  try {
+    const res = await fetch(`${API}/carrera`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(res);
+
+    switch (res.status) {
+      case 200:
+        let ans = {};
+        const data = await res.json();
+
+        data.forEach((carrera) => {
+          ans[carrera.carrera] = carrera.id;
         });
 
-        switch (res.status) {
-            case 201:
-                let ans = {};
-                const data = await res.json();
+        localStorage.setItem("dictCarreras", JSON.stringify(ans));
+        return ans;
 
-                data.forEach(carrera => {
-                    ans[carrera.carrera] = carrera.id;
-                });
+      case 500:
+        soundAndRedirect("/500.html");
+        break;
 
-                localStorage.setItem("dictCarreras", JSON.stringify(ans));
-            return ans;
-
-            case 500:
-                soundAndRedirect('/500.html');
-            break;
-
-            default:
-                soundAndRedirect('/error-inesperado.html');
-            break;
-        }
+      default:
+        soundAndRedirect("/error-inesperado.html");
+        break;
     }
-    catch(e){
-        console.error(e);
-        soundAndRedirect('/error-inesperado.html');
-    }
+  } catch (e) {
+    console.error(e);
+    soundAndRedirect("/error-inesperado.html");
+  }
 }
 
-async function fillData(){
-    const carreras = await getCarreras();
-    const dropdownCarreras = document.getElementById("carrera");
+async function fillData() {
+  const carreras = await getCarreras();
+  const dropdownCarreras = document.getElementById("carrera");
 
-    for (const [key, value] of Object.entries(carreras)) {
-        const option = document.createElement("option");
-        option.innerText = key;
-        dropdownCarreras.appendChild(option);
-    };
+  for (const [key, value] of Object.entries(carreras)) {
+    const option = document.createElement("option");
+    option.innerText = key;
+    dropdownCarreras.appendChild(option);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", fillData);
 
-function validarContrasenia(password1, password2){
-    if(password1 !== password2){
-        return 1;
-    }
-    
-    const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?^&#.$($)$-$_])[A-Za-z\d$@$!%*?^&#.$($)$-$_]{8,500}$/;
-    if(!password1.match(passwordRegEx)){
-        return 2;
-    }
+function validarContrasenia(password1, password2) {
+  if (password1 !== password2) {
+    return 1;
+  }
 
-    return true;
+  const passwordRegEx =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?^&#.$($)$-$_])[A-Za-z\d$@$!%*?^&#.$($)$-$_]{8,500}$/;
+  if (!password1.match(passwordRegEx)) {
+    return 2;
+  }
+
+  return true;
 }
 
-function validarUsuario(usuario){
-    const usuarioRegEx = /^[a-z]{5,}$/;
-    return usuario.match(usuarioRegEx) !== null;
+function validarUsuario(usuario) {
+  const usuarioRegEx = /^[a-z]{5,}$/;
+  return usuario.match(usuarioRegEx) !== null;
 }
 
-function ocultarErrores(){
-    document.getElementById("error-rep-contrasenia").classList.add("hidden");
-    document.getElementById("error-contrasenia").classList.add("hidden");
-    document.getElementById("error-usuario").classList.add("hidden");
-    document.getElementById("error-usuario-invalido").classList.add("hidden");
-    document.getElementById("error-apellido").classList.add("hidden");
-    document.getElementById("error-nombre").classList.add("hidden");
-    document.getElementById("error-carrera").classList.add("hidden");
+function ocultarErrores() {
+  document.getElementById("error-rep-contrasenia").classList.add("hidden");
+  document.getElementById("error-contrasenia").classList.add("hidden");
+  document.getElementById("error-usuario").classList.add("hidden");
+  document.getElementById("error-usuario-invalido").classList.add("hidden");
+  document.getElementById("error-apellido").classList.add("hidden");
+  document.getElementById("error-nombre").classList.add("hidden");
+  document.getElementById("error-carrera").classList.add("hidden");
 }
 
-function validarEmptyFields(usuario, contrasenia, repContrasenia, apellido, nombre, carrera){
-    let flag = true;
-    if(usuario.value === ""){
-        document.getElementById("error-usuario").classList.remove("hidden");
-        flag = false;
-    }
-    if(contrasenia.value === ""){
-        document.getElementById("error-contrasenia").classList.remove("hidden");
-        flag = false;
-    }
-    if(repContrasenia.value === ""){
-        document.getElementById("error-rep-contrasenia").classList.remove("hidden");
-        flag = false;
-    }
-    if(apellido.value === ""){
-        document.getElementById("error-apellido").classList.remove("hidden");
-        flag = false;
-    }
-    if(nombre.value === ""){
-        document.getElementById("error-nombre").classList.remove("hidden");
-        flag = false;
-    }
-    if(carrera.value === ""){
-        document.getElementById("error-carrera").classList.remove("hidden");
-        flag = false;
-    }
-    return flag;
+function validarEmptyFields(
+  usuario,
+  contrasenia,
+  repContrasenia,
+  apellido,
+  nombre,
+  carrera
+) {
+  let flag = true;
+  if (usuario.value === "") {
+    document.getElementById("error-usuario").classList.remove("hidden");
+    flag = false;
+  }
+  if (contrasenia.value === "") {
+    document.getElementById("error-contrasenia").classList.remove("hidden");
+    flag = false;
+  }
+  if (repContrasenia.value === "") {
+    document.getElementById("error-rep-contrasenia").classList.remove("hidden");
+    flag = false;
+  }
+  if (apellido.value === "") {
+    document.getElementById("error-apellido").classList.remove("hidden");
+    flag = false;
+  }
+  if (nombre.value === "") {
+    document.getElementById("error-nombre").classList.remove("hidden");
+    flag = false;
+  }
+  if (carrera.value === "") {
+    document.getElementById("error-carrera").classList.remove("hidden");
+    flag = false;
+  }
+  return flag;
 }
 
-async function postRegister(usuario, contrasenia, nombre, apellido, carrera, foto){
-    body = {
-        "nombre": nombre,
-        "apellido": apellido,
-        "username": usuario,
-        "password": contrasenia,
-        "carrera": carrera,
-        "foto": foto
-    };
+async function postRegister(
+  usuario,
+  contrasenia,
+  nombre,
+  apellido,
+  carrera,
+  foto
+) {
+  body = {
+    nombre: nombre,
+    apellido: apellido,
+    username: usuario,
+    password: contrasenia,
+    carrera: carrera,
+    foto: foto,
+  };
+  console.log(body);
 
-    try{
-        const res = await fetch(`${API}/usuario/`, {
-            method: "POST",
-            headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(body)
-        });
+  try {
+    let res = await fetch(`${API}/usuario/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
 
-        switch (res.status) {
-            case 201:
-                const bodyLogin={
-                    "username": usuario,
-                    "password": contrasenia
-                }
-                try{
-                    sound3.play();
-                    sound3.onended = async () =>{
-                        await loginPOST(bodyLogin);
-                    }
-                } catch(e){
-                    await loginPOST(bodyLogin);
-                }
-            break;
+    res = await res.json();
 
-            case 409:
-                //user already exists
-            break;
-
-            case 500:
-                soundAndRedirect('/500.html');
-            break;
-
-            default:
-                soundAndRedirect('/error-inesperado.html');
-            break;
+    switch (res.status) {
+      case 201:
+        const bodyLogin = {
+          username: usuario,
+          password: contrasenia,
+        };
+        try {
+          sound3.play();
+          sound3.onended = async () => {
+            await loginPOST(bodyLogin);
+          };
+        } catch (e) {
+          await loginPOST(bodyLogin);
         }
+        break;
+
+      case 409:
+        //user already exists
+        break;
+
+      case 500:
+        soundAndRedirect("/500.html");
+        break;
+
+      default:
+        soundAndRedirect("/error-inesperado.html");
+        break;
     }
-    catch(e){
-        console.error(e);
-        soundAndRedirect('/error-inesperado.html');
-    }
+  } catch (e) {
+    console.error(e);
+    soundAndRedirect("/error-inesperado.html");
+  }
 }
 
-async function register(){
-    ocultarErrores();
-    
-    const usuario = document.getElementById("usuario");
-    const contrasenia = document.getElementById("contrasenia");
-    const repContrasenia = document.getElementById("rep-contrasenia");
-    const apellido = document.getElementById("apellido");
-    const nombre = document.getElementById("nombre");
-    const carrera = document.getElementById("carrera");
+async function register() {
+  ocultarErrores();
 
-    let invalidFlag = false;
-    const valEmpty = validarEmptyFields(usuario, contrasenia, repContrasenia, apellido, nombre, carrera);
-    if(!valEmpty) invalidFlag = true;
+  const usuario = document.getElementById("usuario");
+  const contrasenia = document.getElementById("contrasenia");
+  const repContrasenia = document.getElementById("rep-contrasenia");
+  const apellido = document.getElementById("apellido");
+  const nombre = document.getElementById("nombre");
+  const carrera = document.getElementById("carrera");
 
-    const valContrasenia = validarContrasenia(contrasenia.value, repContrasenia.value);
-    if(valContrasenia === 1){
-        document.getElementById("error-rep-contrasenia").classList.remove("hidden");
-        invalidFlag = true;
-    }
-    else if(valContrasenia === 2){
-        document.getElementById("error-contrasenia").classList.remove("hidden");
-        invalidFlag = true;
-    }
-    
-    const valUsuario = validarUsuario(usuario.value);
-    if(!valUsuario && usuario.value !== ""){
-        document.getElementById("error-usuario-invalido").classList.remove("hidden");
-        invalidFlag = true;
-    }
+  let invalidFlag = false;
+  const valEmpty = validarEmptyFields(
+    usuario,
+    contrasenia,
+    repContrasenia,
+    apellido,
+    nombre,
+    carrera
+  );
+  if (!valEmpty) invalidFlag = true;
 
-    if(invalidFlag){
-        try{
-            sound5.play();
-        } catch(e){}
+  const valContrasenia = validarContrasenia(
+    contrasenia.value,
+    repContrasenia.value
+  );
+  if (valContrasenia === 1) {
+    document.getElementById("error-rep-contrasenia").classList.remove("hidden");
+    invalidFlag = true;
+  } else if (valContrasenia === 2) {
+    document.getElementById("error-contrasenia").classList.remove("hidden");
+    invalidFlag = true;
+  }
 
-        return;
-    }
+  const valUsuario = validarUsuario(usuario.value);
+  if (!valUsuario && usuario.value !== "") {
+    document
+      .getElementById("error-usuario-invalido")
+      .classList.remove("hidden");
+    invalidFlag = true;
+  }
 
-    const dictCarreras = JSON.parse(localStorage.getItem("dictCarreras"));
+  if (invalidFlag) {
+    try {
+      sound5.play();
+    } catch (e) {}
 
-    await postRegister(
-        usuario.value,
-        contrasenia.value,
-        nombre.value,
-        apellido.value,
-        dictCarreras[carrera.value],
-        `/img/pp${Math.floor(Math.random() * (35 - 1 + 1)) + 1}.webp`
-    );
+    return;
+  }
+
+  const dictCarreras = JSON.parse(localStorage.getItem("dictCarreras"));
+
+  await postRegister(
+    usuario.value,
+    contrasenia.value,
+    nombre.value,
+    apellido.value,
+    dictCarreras[carrera.value],
+    `/img/pp${Math.floor(Math.random() * (35 - 1 + 1)) + 1}.webp`
+  );
 }
 
 document.getElementById("registrarse").addEventListener("click", register);

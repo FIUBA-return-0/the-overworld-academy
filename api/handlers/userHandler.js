@@ -37,7 +37,7 @@ router.post(
       const { id, nombre, apellido, condicion, username, carrera, foto, bio } =
         await getUser(result.content);
 
-      res.status(201).json({
+      return res.status(201).json({
         id,
         nombre,
         apellido,
