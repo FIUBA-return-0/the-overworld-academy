@@ -8,7 +8,6 @@ async function inscripcionAlumno() {
     },
   });
   inscripciones = await inscripciones.json();
-  console.log(inscripciones);
 
   let inscripto = [];
   let aprobado = [];
@@ -45,8 +44,6 @@ async function fetchfillMateriasAlumno() {
         const aprobado = JSON.parse(localStorage.aprobado || "[]");
 
         for (const materia of materias) {
-          console.log(materia);
-
           if (materia.foto === null)
             materia.foto = "https://i.imgur.com/DJKWYUo.webp";
           if (materia.descripcion === null) materia.descripcion = "";
