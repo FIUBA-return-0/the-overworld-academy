@@ -38,7 +38,7 @@ ADD COLUMN director INT REFERENCES usuario(id);
 CREATE TABLE materias (
   id SERIAL PRIMARY KEY,
   profesor INT REFERENCES usuario(id),
-  nombre VARCHAR(50) NOT NULL,
+  nombre VARCHAR(75) NOT NULL,
   carga_horaria INT NOT NULL,
   carrera INT REFERENCES carreras(id),
   foto text,
