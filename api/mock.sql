@@ -93,11 +93,11 @@ VALUES
 (4 , 'Teoria del Encantamiento Probabilistico', 8, 2, 'https://i.imgur.com/7okdgcR.webp', 'Modelado estadistico de resultados de encantamientos en mesa y yunque. RNG, nivel requerido y eficiencia esperada.');
 
 -- Licenciatura en Glitcheo etico y Uso Creativo de Bugs 
-INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion)
+INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion, cartelera)
 VALUES
-(1 , 'Exploits Historicos y su Analisis', 8, 4, 'https://i.imgur.com/GXn1Y5s.webp', 'Exploits Historicos y su Analisis Revision de glitches iconicos y su impacto en la jugabilidad, desde duplicacion de items hasta clipping dimensional.'),
-(6 , 'Gestion de Tiempos de Respawn', 8, 4, 'https://i.imgur.com/vDFEB0w.webp', 'Sincronizacion de eventos, mobs o items con cronometros internos del juego. Casos practicos y optimizacion.'),
-(7 , 'Fisica del Body Block y Aggro Management', 8, 4, 'https://i.imgur.com/8RDzZI0.webp', 'Manipulacion del movimiento de mobs y jugadores mediante colisiones. Uso ofensivo y defensivo de aggro controlado.');
+(1 , 'Exploits Historicos y su Analisis', 8, 4, 'https://i.imgur.com/GXn1Y5s.webp', 'Exploits Historicos y su Analisis Revision de glitches iconicos y su impacto en la jugabilidad, desde duplicacion de items hasta clipping dimensional.', ''),
+(6 , 'Gestion de Tiempos de Respawn', 8, 4, 'https://i.imgur.com/vDFEB0w.webp', 'Sincronizacion de eventos, mobs o items con cronometros internos del juego. Casos practicos y optimizacion.', ''),
+(7 , 'Fisica del Body Block y Aggro Management', 8, 4, 'https://i.imgur.com/8RDzZI0.webp', 'Manipulacion del movimiento de mobs y jugadores mediante colisiones. Uso ofensivo y defensivo de aggro controlado.', '');
 
 -- Tecnicatura Universitaria en Tacticas de Rush
 INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion)

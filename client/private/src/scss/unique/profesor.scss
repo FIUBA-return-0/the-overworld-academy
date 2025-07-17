@@ -7,103 +7,100 @@
         margin-top: 3vh;
     }
 
-    .notas-table-wrapper{
-        //shared
-        .notas-table{
-            display: table;
-            border-collapse: collapse;
-
-            tr{
-                &:first-child{
-                    &:hover{
-                        th{
-                            background-color: #FFF;
-                        }
-                    }
-                    th{
-                        font-weight: 600;
-                    }
-                }
-                &:hover{
-                    th{
-                        background-color: $color-11;
-                    }
-                }
-            }
-
-            
-            tr, th{
-                background-color: white;
-                border: 1px solid gray;
-                color: black;
-
-                font-size: clamp(.7em, 1.2vw, 1.5em);
-                font-weight: 400;
-                font-family: Rubik;
-
-                transition: .25s;
-            }
+    .nota-card-alumno{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        gap: 1vw;
+        padding: 2vw;
+        
+        p{
+            color: black;
+            font-size: clamp(.8em, 1.5vw, 2em);
+            font-family: Rubik;
         }
-
+        input{
+            color: black;
+            font-size: clamp(.8em, 1.5vw, 2em);
+            font-family: Rubik;
+            text-align: center;
+        }
+        button{
+            color: black;
+            font-size: clamp(.8em, 1.5vw, 2em);
+            font-family: Rubik;
+        }
     }
 
     //PC only
     @media(min-width: 768px){
+        #content-wrapper{
+            min-height: calc((var(--vh, 1vh) * 62));
+        }
+
+        .nota-card-alumno{
+            p{
+                &:first-child{
+                    width: 10vw;
+                }
+                &:nth-child(2){
+                    width: 15vw;
+                }
+                &:last-child{
+                    width: 10vw;
+                }
+            }
+            button{
+                width: 10vw;
+            }
+            p, input{
+                width: 4vw;
+            }
+        }
+
         textarea{
-            width: 70vw;
+            width: 66vw;
             padding-top: 1vh;
             line-height: 1.25;
             min-height: 15vh;
             resize: vertical;
-        }
-        
-        .notas-table-wrapper{
-            margin-top: 3vh;
-
-            .notas-table{
-                width: 70vw;
-
-                th{
-                    width: calc(70vw - (4 * 5vw)); //default
-                    height: 4vh;
-                }
-
-                .table-nota{
-                    width: 5vw;
-                }
-            }
         }
     }
 
     //mobile only
     @media(max-width: 768px){
+        #content-wrapper{
+            min-height: calc((var(--vh, 1vh) * 54.5));
+        }
+
+        .nota-card-alumno{
+            p{
+                &:first-child{
+                    width: 15vw;
+                }
+                &:nth-child(2){
+                    width: 20vw;
+                }
+                &:last-child{
+                    width: 15vw;
+                }
+            }
+            button{
+                width: 15vw;
+            }
+            p, input{
+                width: 6.5vw;
+            }
+        }
+
         textarea{
             width: 70vw;
             padding-top: 1vh;
             line-height: 1.25;
             min-height: 15vh;
             resize: vertical;
-        }
-
-        .notas-table-wrapper{
-            margin-top: 3vh;
-
-            .notas-table{
-                width: 70vw;
-
-                th{
-                    width: 10vw; //default
-                    height: 4vh;
-                    
-                    &:first-child{
-                        width: calc(70vw - (5 * 10vw));
-                    }
-                }
-
-                .table-nota{
-                    width: 10vw;
-                }
-            }
         }
     }
 }
