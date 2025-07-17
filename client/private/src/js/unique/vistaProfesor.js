@@ -8,7 +8,7 @@ const truncarPromedio = (n) => {
 };
 
 async function cargarInfoProfesor() {
-  const token = window.localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const getSubjectURL = await fetch(`${API}/materia?profesor=1`, {
     method: "GET",
@@ -144,7 +144,7 @@ async function cargarInfoProfesor() {
 
   botonEditarCartelera.disabled = false;
 
-  textareaCartelera.value = infoMateria[0].cartelera || "";
+  textareaCartelera.value = infoMateria[0].descripcion || "";
 
   botonEditarCartelera.addEventListener("click", async () => {
     if (!modoEdicionCartelera) {
@@ -156,15 +156,14 @@ async function cargarInfoProfesor() {
 
       const nuevoContenido = textareaCartelera.value;
 
-      await fetch(`${API}/cartelera`, {
+      await fetch(`${API}/materia/` + teacherSubject, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          materia: teacherSubject,
-          contenido: nuevoContenido,
+          descripcion: nuevoContenido,
         }),
       });
     }
