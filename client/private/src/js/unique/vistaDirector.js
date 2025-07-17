@@ -98,9 +98,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                                         materia.materia,
                                         materia.apeprofesor,
                                         materia.descripcion,
-                                        "/editar-materia.html?id=",
-                                        "materias-wrapper",
                                         "",
+                                        "materias-wrapper",
+                                        "/editar-materia.html?id=",
                                     );
                                 }
                                 setTimeout(() => {
