@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   let token = localStorage.getItem("token");
 
   const params = new URLSearchParams(window.location.search);
-  const idMateria = params.get('id');
+  const idMateria = params.get("id");
 
   const getSubjectURL = await fetch(`${API}/materia?id=` + idMateria, {
     method: "GET",
@@ -42,10 +42,13 @@ window.addEventListener("DOMContentLoaded", async () => {
   const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
   const materiasAprobadas = JSON.parse(localStorage.getItem("aprobadas")) || [];
 
-  if (materiasInscripto.includes(idMateria) || materiasAprobadas.includes(idMateria)) {
+  if (
+    !materiasInscripto.includes(idMateria) ||
+    !materiasAprobadas.includes(idMateria)
+  ) {
     document.getElementById("notas").classList.remove("hidden");
     document.getElementById("notas-text").classList.remove("hidden");
-    document.getElementById("inscripcion").classList.add("hidden"); 
+    document.getElementById("inscripcion").classList.add("hidden");
     const getGradesURL = await fetch(`${API}/nota?materia=` + idMateria, {
       method: "GET",
       headers: {
@@ -61,16 +64,24 @@ window.addEventListener("DOMContentLoaded", async () => {
       const { description, nota } = notaObj;
       description.includes("TP") ? tps.push(nota) : parciales.push(nota);
 
-      document.getElementById(description).textContent = `Nota ${description}: ${nota ? nota : ""}`;
+      document.getElementById(
+        description
+      ).textContent = `Nota ${description}: ${nota ? nota : ""}`;
     });
 
     let promTp = promedio(tps);
     let promP = promedio(parciales);
     let promMateria = promedioMateria(promP, promTp);
 
-    document.getElementById("promedio-parciales").textContent = `Promedio parciales: ${promP}`;
-    document.getElementById("promedio-TPs").textContent = `Promedio TPs: ${promTp}`;
-    document.getElementById("promedio-materia").textContent = `Promedio materia: ${promMateria}`;
+    document.getElementById(
+      "promedio-parciales"
+    ).textContent = `Promedio parciales: ${promP}`;
+    document.getElementById(
+      "promedio-TPs"
+    ).textContent = `Promedio TPs: ${promTp}`;
+    document.getElementById(
+      "promedio-materia"
+    ).textContent = `Promedio materia: ${promMateria}`;
   }
 
   const botonInscripcion = document.getElementById("inscripcion");
@@ -82,16 +93,17 @@ window.addEventListener("DOMContentLoaded", async () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ 
-          materia:idMateria,
-          alumno:1,
-          condicion:"cursando"
-         })
+        body: JSON.stringify({
+          materia: idMateria,
+          alumno: 1,
+          condicion: "cursando",
+        }),
       });
 
-      switch(postInscripcion.status){
+      switch (postInscripcion.status) {
         case 200:
-          const materiasInscripto = JSON.parse(localStorage.getItem("inscripto")) || [];
+          const materiasInscripto =
+            JSON.parse(localStorage.getItem("inscripto")) || [];
           materiasInscripto.push(idMateria);
           localStorage.setItem("inscripto", JSON.stringify(materiasInscripto));
           location.reload();
@@ -111,8 +123,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         default:
           soundAndRedirect("/error-inesperado.html");
           break;
-      } 
-    }catch(er) {
+      }
+    } catch (er) {
       console.error(er);
       soundAndRedirect("/error-inesperado.html");
     }
