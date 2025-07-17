@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                                         materia.materia,
                                         materia.apeprofesor,
                                         materia.descripcion,
-                                        "materias-wrapper",
                                         "/editar-materia.html?id=",
+                                        "materias-wrapper",
                                         "",
                                     );
                                 }
