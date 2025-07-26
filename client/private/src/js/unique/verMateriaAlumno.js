@@ -111,7 +111,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         }),
       });
 
-      console.log(postInscripcion.status);
       switch (postInscripcion.status) {
         case 200:
           const materiasInscripto =
