@@ -78,8 +78,7 @@ router.patch(
       await promoteUser(req.body);
     }
 
-    const result = await updateSubject(req.body, req.user.id);
-
+    const result = await updateSubject(req.body, req.params.id);
     if (!result) {
       res.status(404).json({ error: "La materia no existe" });
     } else {
