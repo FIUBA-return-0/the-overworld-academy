@@ -5,6 +5,13 @@ async function validateLoggedIn(){
 }
 
 document.addEventListener("DOMContentLoaded", validateLoggedIn);
+document.addEventListener("DOMContentLoaded", ()=>{
+    document.getElementById("contrasenia").addEventListener("keypress", (e)=>{
+        if(e.key === "Enter"){
+            document.getElementById("login").click();
+        }
+    })
+});
 
 function validarUsuario(usuario){
     const usuarioRegEx = /^[a-z]{5,}$/;
