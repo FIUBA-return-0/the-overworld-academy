@@ -21,11 +21,11 @@ UPDATE carreras SET director=4 where id=4;
 -- Profesores
 INSERT INTO usuario (nombre, apellido, condicion, carrera, foto, bio, username, password)
 VALUES
-('Carlos', 'Maulhardt', 'profesor', 4, '/img/pp1.webp', 'Hola, soy martin, y voy a hacer un video de…', 'carlosmaulhardt', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
+('Carlos', 'Maulhardt', 'profesor', 2, '/img/pp1.webp', 'Hola, soy martin, y voy a hacer un video de…', 'carlosmaulhardt', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Ernesto', 'Morales', 'profesor', 2, '/img/pp2.webp', 'bio', 'moralesernesto', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Veronica', 'Bustos', 'profesor', 2, '/img/pp3.webp', 'bio', 'vbustos', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Daniel', 'Vargas', 'profesor', 2, '/img/pp4.webp', 'bio', 'vardaniel', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDav'), -- Default1$
-('ElRich', 'MC', 'profesor', 2, '/img/pp5.webp', '', 'elrichmc', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
+('ElRich', 'MC', 'profesor', 4, '/img/pp5.webp', '', 'elrichmc', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Lara', 'Bedrock', 'profesor', 4, '/img/pp12.webp', '', 'profbedrock', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Axel', 'Rushinsky', 'profesor', 4, '/img/pp23.webp', '', 'plantmasterrush', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
 ('Zoe', 'Stormwatch', 'profesor', 1, '/img/pp3.webp', '', 'zonastormwatch', '$2b$12$zpZKQP3bfI1RLXDMleE0E.UNu1W2H/T1s9bmCBQ3AvFOjH5UUvGDa'), -- Default1$
@@ -87,33 +87,33 @@ VALUES
 -- Ingenieria en granjas
 INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion)
 VALUES
-(2 , 'Analisis Geoestructural de Chunk', 8, 2, 'https://i.imgur.com/Bz6g8eP.webp', 'Estudio profundo de la topologia de chunks para optimizar mineria, generacion y estructuras subterraneas.'),
-(3 , 'Gestion de Picos y Encantamientos', 8, 2, 'https://i.imgur.com/m0qbCug.webp', 'Administracion eficiente de herramientas, encantamientos y durabilidad bajo condiciones de farmeo intensivo.'),
-(5 , 'Automatizacion de Granjas de Mobs', 8, 2, 'https://i.imgur.com/ekGvQwq.webp', 'Diseño y optimizacion de sistemas automaticos para drops y experiencia. Aplicaciones en redstone y pathfinding de mobs.'),
-(4 , 'Teoria del Encantamiento Probabilistico', 8, 2, 'https://i.imgur.com/7okdgcR.webp', 'Modelado estadistico de resultados de encantamientos en mesa y yunque. RNG, nivel requerido y eficiencia esperada.');
+(5 , 'Analisis Geoestructural de Chunk', 8, 2, 'https://i.imgur.com/Bz6g8eP.webp', 'Estudio profundo de la topologia de chunks para optimizar mineria, generacion y estructuras subterraneas.'),
+(6 , 'Gestion de Picos y Encantamientos', 8, 2, 'https://i.imgur.com/m0qbCug.webp', 'Administracion eficiente de herramientas, encantamientos y durabilidad bajo condiciones de farmeo intensivo.'),
+(7 , 'Automatizacion de Granjas de Mobs', 8, 2, 'https://i.imgur.com/ekGvQwq.webp', 'Diseño y optimizacion de sistemas automaticos para drops y experiencia. Aplicaciones en redstone y pathfinding de mobs.'),
+(8 , 'Teoria del Encantamiento Probabilistico', 8, 2, 'https://i.imgur.com/7okdgcR.webp', 'Modelado estadistico de resultados de encantamientos en mesa y yunque. RNG, nivel requerido y eficiencia esperada.');
 
 -- Licenciatura en Glitcheo etico y Uso Creativo de Bugs 
 INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion, cartelera)
 VALUES
-(1 , 'Exploits Historicos y su Analisis', 8, 4, 'https://i.imgur.com/GXn1Y5s.webp', 'Exploits Historicos y su Analisis Revision de glitches iconicos y su impacto en la jugabilidad, desde duplicacion de items hasta clipping dimensional.', ''),
-(6 , 'Gestion de Tiempos de Respawn', 8, 4, 'https://i.imgur.com/vDFEB0w.webp', 'Sincronizacion de eventos, mobs o items con cronometros internos del juego. Casos practicos y optimizacion.', ''),
-(7 , 'Fisica del Body Block y Aggro Management', 8, 4, 'https://i.imgur.com/8RDzZI0.webp', 'Manipulacion del movimiento de mobs y jugadores mediante colisiones. Uso ofensivo y defensivo de aggro controlado.', '');
+(9 , 'Exploits Historicos y su Analisis', 8, 4, 'https://i.imgur.com/GXn1Y5s.webp', 'Exploits Historicos y su Analisis Revision de glitches iconicos y su impacto en la jugabilidad, desde duplicacion de items hasta clipping dimensional.', ''),
+(10 , 'Gestion de Tiempos de Respawn', 8, 4, 'https://i.imgur.com/vDFEB0w.webp', 'Sincronizacion de eventos, mobs o items con cronometros internos del juego. Casos practicos y optimizacion.', ''),
+(11 , 'Fisica del Body Block y Aggro Management', 8, 4, 'https://i.imgur.com/8RDzZI0.webp', 'Manipulacion del movimiento de mobs y jugadores mediante colisiones. Uso ofensivo y defensivo de aggro controlado.', '');
 
 -- Tecnicatura Universitaria en Tacticas de Rush
 INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion)
 VALUES
-(8 , 'Balistica Aplicada y Control de Recoil I', 8, 1, 'https://i.imgur.com/xcuupb5.jpeg', 'Estudio de patrones de retroceso, spread y penetracion. Teoria y practica con AK-47, M4A1 y SMGs.'),
-(9 , 'Tacticas Psicologicas y Lectura de Rondas', 8, 1, 'https://i.imgur.com/PtdbEXH.webp', 'Lectura del rival, conditioning y toma de decisiones basada en economia, timings y patrones mentales.'),
-(10 , 'Geometria Tactica y Peekeo Angular', 8, 1, 'https://i.imgur.com/RkcHfSC.jpeg', 'Analisis de angulos favorables, shoulder peeks, preaims y uso del entorno para duelos efectivos.'),
-(11 , 'Economia y Gestion de Recursos en Partidas Competitivas', 8, 1, 'https://i.imgur.com/yRjquik.webp', 'Evaluacion de buys, ecos y utilidad. Control de economia de equipo para maximizar chances de victoria.'),
-(12 , 'Historia Belica de Inferno: Banana como Territorio Disputado', 8, 1, 'https://i.imgur.com/7DUWOlM.jpeg', 'Estudio historico-estrategico del mapa Inferno. Dominio de Banana y su impacto en el control de rondas.'),
-(13 , 'Introduccion a Setups Defensivos y Crossfires', 8, 1, 'https://i.imgur.com/OEbtx0w.webp', 'Coordinacion de defensas dobles, posicionamiento y sincronizacion de tiros cruzados en sitios criticos.');
+(12 , 'Balistica Aplicada y Control de Recoil I', 8, 1, 'https://i.imgur.com/xcuupb5.jpeg', 'Estudio de patrones de retroceso, spread y penetracion. Teoria y practica con AK-47, M4A1 y SMGs.'),
+(13 , 'Tacticas Psicologicas y Lectura de Rondas', 8, 1, 'https://i.imgur.com/PtdbEXH.webp', 'Lectura del rival, conditioning y toma de decisiones basada en economia, timings y patrones mentales.'),
+(14 , 'Geometria Tactica y Peekeo Angular', 8, 1, 'https://i.imgur.com/RkcHfSC.jpeg', 'Analisis de angulos favorables, shoulder peeks, preaims y uso del entorno para duelos efectivos.'),
+(15 , 'Economia y Gestion de Recursos en Partidas Competitivas', 8, 1, 'https://i.imgur.com/yRjquik.webp', 'Evaluacion de buys, ecos y utilidad. Control de economia de equipo para maximizar chances de victoria.'),
+(16 , 'Historia Belica de Inferno: Banana como Territorio Disputado', 8, 1, 'https://i.imgur.com/7DUWOlM.jpeg', 'Estudio historico-estrategico del mapa Inferno. Dominio de Banana y su impacto en el control de rondas.'),
+(17 , 'Introduccion a Setups Defensivos y Crossfires', 8, 1, 'https://i.imgur.com/OEbtx0w.webp', 'Coordinacion de defensas dobles, posicionamiento y sincronizacion de tiros cruzados en sitios criticos.');
 
 -- Tecnicatura Proplayer de Mundo Abierto y Estrategias Criminales
 INSERT INTO materias (profesor, nombre, carga_horaria, carrera, foto, descripcion)
 VALUES
-(14 , 'Fundamentos de Heists y Planificacion Multietapa', 8, 3, 'https://i.imgur.com/wFtKohQ.webp', 'Diseño de misiones coordinadas con multiples roles. Fases de preparacion, ejecucion y escape.'),
-(15 , 'Conduccion Tactica y Evitacion de Persecucion Policial', 8, 3, 'https://i.imgur.com/iEfq9Kh.webp', 'Estrategias evasivas ante 4 y 5 estrellas. Rutas secundarias, tuneles y distraccion de NPCs.'),
-(16 , 'Economia Ilegal y Lavado de Dinero', 8, 3, 'https://i.imgur.com/edoQUfJ.jpeg', 'Gestion de ingresos sucios y reconversion mediante negocios fachada y activos inmobiliarios.'),
-(17 , 'Hacking Aplicado al Crimen I', 8, 3, 'https://i.imgur.com/3p5e7bz.jpeg', 'Tecnicas avanzadas de intrusion en sistemas: circuitos, camaras, cajas fuertes y vigilancia.'),
-(18 , 'Pilotaje Aereo Avanzado: Drones, Helicopteros y Fugas', 8, 3, 'https://i.imgur.com/XHxTeld.webp', 'Control de aeronaves para reconocimiento, ataques coordinados y escapatorias imposibles.');
+(18 , 'Fundamentos de Heists y Planificacion Multietapa', 8, 3, 'https://i.imgur.com/wFtKohQ.webp', 'Diseño de misiones coordinadas con multiples roles. Fases de preparacion, ejecucion y escape.'),
+(19 , 'Conduccion Tactica y Evitacion de Persecucion Policial', 8, 3, 'https://i.imgur.com/iEfq9Kh.webp', 'Estrategias evasivas ante 4 y 5 estrellas. Rutas secundarias, tuneles y distraccion de NPCs.'),
+(20 , 'Economia Ilegal y Lavado de Dinero', 8, 3, 'https://i.imgur.com/edoQUfJ.jpeg', 'Gestion de ingresos sucios y reconversion mediante negocios fachada y activos inmobiliarios.'),
+(21 , 'Hacking Aplicado al Crimen I', 8, 3, 'https://i.imgur.com/3p5e7bz.jpeg', 'Tecnicas avanzadas de intrusion en sistemas: circuitos, camaras, cajas fuertes y vigilancia.'),
+(22 , 'Pilotaje Aereo Avanzado: Drones, Helicopteros y Fugas', 8, 3, 'https://i.imgur.com/XHxTeld.webp', 'Control de aeronaves para reconocimiento, ataques coordinados y escapatorias imposibles.');
