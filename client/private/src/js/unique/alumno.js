@@ -108,3 +108,9 @@ async function fetchfillMateriasAlumno() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchfillMateriasAlumno);
+window.addEventListener("pageshow", (event) => {
+  let backButton = event.persisted || ( performance.getEntriesByType("navigation")[0]?.type === "back_forward" );
+  if ( backButton ) {
+    window.location.reload(true); // el true ignora también el http cache
+  }
+});
