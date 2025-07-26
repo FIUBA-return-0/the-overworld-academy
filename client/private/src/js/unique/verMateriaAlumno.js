@@ -15,11 +15,22 @@ const promedioMateria = (promTp, promP) => {
 
 const promedio = (notasParciales) => {
   if (!notasParciales.length) return 0;
-  const sum = notasParciales.reduce((acc, cur) => acc + cur);
+  let sum = 0;
+  for(nota of notasParciales){
+    sum+=parseFloat(notasParciales);
+  }
   return truncarPromedio(sum / notasParciales.length);
 };
 
 window.addEventListener("DOMContentLoaded", async () => {
+  document.getElementById("continuar-inscripcion-correcta").addEventListener("click", ()=>{
+    document.getElementById("modal-inscripcion-correcta").classList.add("hidden");
+    document.getElementById("notas").classList.remove("hidden");
+    document.getElementById("notas-text").classList.remove("hidden");
+    document.getElementById("inscripcion").classList.add("hidden");
+    fixViewport();
+  });
+
   let token = localStorage.getItem("token");
 
   const params = new URLSearchParams(window.location.search);
@@ -86,8 +97,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
   const botonInscripcion = document.getElementById("inscripcion");
   botonInscripcion.addEventListener("click", async () => {
-    console.log("apretasee el boton");
-
     try {
       const postInscripcion = await fetch(`${API}/inscripcion`, {
         method: "POST",
@@ -102,13 +111,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         }),
       });
 
+      console.log(postInscripcion.status);
       switch (postInscripcion.status) {
         case 200:
           const materiasInscripto =
-            JSON.parse(localStorage.getItem("inscripto")) || [];
-          materiasInscripto.push(idMateria);
+            await JSON.parse(localStorage.getItem("inscripto")) || [];
+          await materiasInscripto.push(parseInt(idMateria));
           localStorage.setItem("inscripto", JSON.stringify(materiasInscripto));
-          location.reload();
+          document.getElementById("modal-inscripcion-correcta").classList.remove("hidden");
           break;
         case 401:
           soundAndRedirect("/401.html");
